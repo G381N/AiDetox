@@ -11,6 +11,6 @@ Yes — I let a little AI help write this README, but the practice is mine. 😉
 
 Simple goal: do one problem today. Repeat tomorrow. 🚀
 
-Hope this goes well ...🤞
+Hope this goes well ...🤞 will be solving problems from hacker rank, codedex and leet code.
 
 
