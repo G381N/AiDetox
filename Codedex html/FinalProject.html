@@ -3,11 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <title>Form Builder</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+   * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+/* Top bar */
+.topbar {
+  background: #fff;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar button {
+  padding: 5px 10px;
+  margin-left: 5px;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #fff;
+  padding: 15px;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar ul {
+  margin-top: 10px;
+}
+
+.sidebar li {
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.desc {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+/* Form */
+.form-box {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Rows */
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row .field {
+  flex: 1;
+}
+
+button[type="submit"] {
+  padding: 10px;
+  width: 100%;
+}
+
+</style>
 </head>
 <body>
 
-  <!-- Top bar -->
   <header class="topbar">
     <h3>Form Builder</h3>
     <div>
@@ -16,9 +113,9 @@
     </div>
   </header>
 
-  <main class="layout">
 
-    <!-- Sidebar -->
+
+  <main class="layout">
     <aside class="sidebar">
       <p><strong>Form Components</strong></p>
       <ul>
@@ -29,7 +126,6 @@
       </ul>
     </aside>
 
-    <!-- Form Area -->
     <section class="content">
       <h2>Form Name and Details</h2>
       <p class="desc">Write your form description here</p>
