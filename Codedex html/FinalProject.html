@@ -73,15 +73,17 @@
                  flex: 1;
             }
 
-             input,
-             textarea {
-                width: 100%;
-                padding: 8px;
+                 input,
+                 textarea {
+                     width: 100%;
+                     padding: 10px;
                      border-radius: 6px;
                      border: 1px solid #e6e6e6;
                      background: #fff;
                      box-shadow: none;
-            }
+                     box-sizing: border-box;
+                     font-size: 14px;
+                }
 
             .upload-box {
                 border: 2px dashed #d6d6d6;
@@ -94,7 +96,7 @@
             }
 
             .small-field {
-                max-width: 160px;
+                flex: 0 0 180px;
             }
 
             .controls {
@@ -122,7 +124,7 @@
 
             .field {
                 margin-bottom: 15px;
-                padding: 10px;
+                padding: 0;
             }
 
             button[type="submit"] {
