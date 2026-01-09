@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Task2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            .navbar{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding:2% 12%;
+                background: #fff;
+                border-bottom: 1px solid #eee;
+            }
+            nav.links{
+                font-family: Arial, sans-serif;
+                font-size: 17px;
+                color: #888;
+                display: flex;
+                gap: 30px;
+                align-items: center;
+            }
+
+            nav.links a{
+                color: #888 ;
+                text-decoration: none;
+                padding: 6px 0;
+            }
+
+            nav.links a:hover{ 
+                color: #f7b2cf;
+            }
+
+            nav.links a.active{ 
+                color:#ff2d84;
+            }
+
+            .brand{
+                font-family: 'Times New Roman', serif;
+                font-weight: 700;
+                font-size: 40px;
+                color: #111;
+                letter-spacing: -0.5px;
+            }
+
+            main{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8% 9%;
+                gap: 60px; 
+            }
+            @media(max-width:1176px) and (min-width:481px){
+                main{
+                   flex-direction: column;
+                    padding: 8% 4%;
+                }
+                
+            }
+            @media(max-width:594px){
+                main{
+                    flex-direction: column;
+                    padding: 8% 4%;
+                }
+                .navbar{
+                    flex-direction: column;
+                }
+               
+
+            }
+            .content{
+                flex:1; 
+                max-width:520px;
+                font-family: Arial, sans-serif;
+                color:#333;
+            }
+
+            footer{
+                display: flex;
+                gap: 20px;
+                justify-content: space-between;
+                padding:2% 12%;
+                border-top: 2px solid #b5b5b5;
+            }
+            .footer .button{
+                display: flex;
+                padding: 0%;
+                gap:10px;
+                flex-wrap: wrap;
+            }
+          </style>    
+    </head>    
+    <body>
+         <!-- This is the Nav bar portion -->
+         <header class="navbar">
+            <div class="brand">Splendid<span style="color: #ff2d84;">.</span></div>
+            <nav class="links">
+                <a href="#" class="active">home</a>
+                <a href="#">portfolio</a>
+                <a href="#">journal</a>
+                <a href="#">info</a>
+            </nav>
+         </header>    
+         <!-- This is the end of the Nav bar portion -->
+
+
+
+         <!--main portion starts here-->
+         <main> 
+            <div class="content">
+                <h1>Hello. My name is <span style="color:#ff2d84;">Gebin George</span></h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nemo quasi quod, ad deserunt enim pariatur. Id adipisci maxime asperiores at, incidunt minima cupiditate odit, nulla, possimus excepturi eius velit.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora blanditiis minima, ipsam suscipit quam nobis animi quas nisi rerum reiciendis cum dolore est vitae deserunt id accusantium quia quo molestias?</p>
+                <p><a href="#" style="color:#ff2d84; text-decoration:none; font-weight:600;">Get in touch</a></p>
+            </div>
+            <div class="Image"> 
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGHjEq7HmRjKXmLhrZLUaZ-6V4Y7zL4DXP9Q&s" alt="Placeholder Image" width="400px">
+            </div>
+         </main>
+         <!--main portion ends here-->
+
+         
+         
+         <!-- This is the Footer portion -->
+         <footer class="footer">
+            <div class="button">
+            <button>button1</button>
+            <button>button1</button>
+            <button>button1</button>
+            <button>button1</button>
+            <button>button1</button>
+            <button>button1</button>
+            </div>
+            <div class="text">
+                <div class="brand">Splendid<span style="color: #ff2d84;">.</span></div>
+                <p>
+                    Asking me what does splendid do is like asking a fish what is water. We just do what we do best. Which is nothing.
+                </p>
+            </div>
+         </footer>    
+         <!-- This is the end of the Nav bar portion --> 
+    </body>
+</html>
