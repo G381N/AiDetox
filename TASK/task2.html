@@ -4,6 +4,12 @@
     <title>Task2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
+            .Image2{
+                display: none;
+            }
+            .Image1{
+                display: block;
+            }
             .navbar{
                 display: flex;
                 justify-content: space-between;
@@ -54,8 +60,8 @@
                    flex-direction: column;
                     padding: 8% 4%;
                 }
-                
             }
+
             @media(max-width:594px){
                 main{
                     flex-direction: column;
@@ -64,8 +70,12 @@
                 .navbar{
                     flex-direction: column;
                 }
-               
-
+               .Image1{
+                display: none;
+               }
+                .Image2{
+                    display: block;
+                }
             }
             .content{
                 flex:1; 
@@ -84,14 +94,14 @@
             .footer .button{
                 display: flex;
                 padding: 0%;
-                gap:10px;
+                gap:20px;
                 flex-wrap: wrap;
             }
           </style>    
     </head>    
     <body>
          <!-- This is the Nav bar portion -->
-         <header class="navbar">
+         <header class="navbar" style="position:fixed; top:0; left:0; right:0; z-index:999;">
             <div class="brand">Splendid<span style="color: #ff2d84;">.</span></div>
             <nav class="links">
                 <a href="#" class="active">home</a>
@@ -105,15 +115,18 @@
 
 
          <!--main portion starts here-->
-         <main> 
+         <main style="padding-top:100px; padding-bottom:120px;"> 
             <div class="content">
                 <h1>Hello. My name is <span style="color:#ff2d84;">Gebin George</span></h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nemo quasi quod, ad deserunt enim pariatur. Id adipisci maxime asperiores at, incidunt minima cupiditate odit, nulla, possimus excepturi eius velit.</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora blanditiis minima, ipsam suscipit quam nobis animi quas nisi rerum reiciendis cum dolore est vitae deserunt id accusantium quia quo molestias?</p>
                 <p><a href="#" style="color:#ff2d84; text-decoration:none; font-weight:600;">Get in touch</a></p>
             </div>
-            <div class="Image"> 
+            <div class="Image1"> 
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGHjEq7HmRjKXmLhrZLUaZ-6V4Y7zL4DXP9Q&s" alt="Placeholder Image" width="400px">
+            </div>
+            <div class="Image2"> 
+                <img src="data:image/jpeg;base64,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" alt="Placeholder Image" width="400px">
             </div>
          </main>
          <!--main portion ends here-->
@@ -121,14 +134,14 @@
          
          
          <!-- This is the Footer portion -->
-         <footer class="footer">
+         <footer class="footer" style="position:fixed; bottom:0; left:0; right:0; z-index:999; background:#fff;">
             <div class="button">
-            <button>button1</button>
-            <button>button1</button>
-            <button>button1</button>
-            <button>button1</button>
-            <button>button1</button>
-            <button>button1</button>
+            <button>Social1</button>
+            <button>Social2</button>
+            <button>Social3</button>
+            <button>Social4</button>
+            <button>Social5</button>
+            <button>Social6 </button>
             </div>
             <div class="text">
                 <div class="brand">Splendid<span style="color: #ff2d84;">.</span></div>
