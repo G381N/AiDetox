@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Library</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+      }
+
+      header {
+        background-image: url("https://cdn.pixabay.com/photo/2020/07/23/01/29/books-5430104_1280.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 200px;
+      }
+
+      h1{
+      margin:0px 20px 20px 20px;
+      }
+
+      .nav-items{
+        width:33%;
+        display:inline-block;
+        border: 5px black;
+        border-radius:5px;
+        margin:10px;
+      }
+
+      main{
+        margin-top:20px;
+      }
+
+      section{
+        margin:10px 0px 10px 0px;
+      }
+
+      #welcome>p{
+        align-text:center;
+        margin:0em 5em 0em 5em;
+      }
+
+      #catalog-input,#form-btn{
+        text-align:center;
+        font-size:1.25rem;
+        font-weight:800;
+        padding:8px;
+      }
+
+      #catalog-input{
+        border:2px thick black;
+        width:37.5%;
+      }
+
+      #staff-pick{
+        align-text:center;
+      }
+
+      .staff-pick-img{
+        border:1px;
+        border-radius:0 7px 7px 0;
+        width: 10em;
+        height: 15em;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Welcome to the Library!</h1>
+        <a class="nav-item" href="#welcome">Home</a>
+        <a class="nav-item" href="#catalog-form">Search</a>
+        <a class="nav-item" href="#staff-picks">Staff Picks</a>
+      </nav>
+    </header>
+    <main>
+      <section id="welcome">
+        <p>
+          Guided by our dedication to literacy and learning and patron-focused services and programs, the Library is a fun space for using information and technology to
+          build knowledge and foster community, social connection.
+        </p>
+      </section>
+      <section id="catalog">
+        <form id="catalog-form">
+          <input id="catalog-input" type="text" placeholder="Search the Catalog..." />
+          <input id="form-btn" type="submit" value="Search" />
+        </form>
+      </section>
+      <section id="staff-picks">
+        <h2>Staff Picks</h2>
+        <div class="staff-pick-row">
+          <a
+            ><img
+              class="staff-pick-img"
+              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1442129426i/231804.jpg"
+              alt="The Outsiders by S.E. Hinton"
+          /></a>
+          <a
+            ><img
+              class="staff-pick-img"
+              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1457284880i/27220736.jpg"
+              alt="Shoe Dog by Phil Knight"
+          /></a>
+          <a
+            ><img
+              class="staff-pick-img"
+              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1444887454i/26451798.jpg"
+              alt="Make: Getting Started with p5.js by Lauren McCarthy, Casey Reas, & Ben Fry"
+          /></a>
+        </div>
+        <div class="staff-pick-row">
+          <a
+            ><img
+              class="staff-pick-img"
+              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1586529806i/43599070.jpg"
+              alt="The Courage to be Happy by Ichiro Kishimi & Fumitake Koga"
+          /></a>
+          <a
+            ><img
+              class="staff-pick-img"
+              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216i/5907.jpg"
+              alt="The Hobbit by J.R.R. Tolkien" />
+            <img
+              class="staff-pick-img"
+              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1386924362i/216088.jpg"
+              alt="Ripley's Believe It or Not!"
+          /></a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
