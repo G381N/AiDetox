@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Last Section</title>
+    <style>
+      * {
+        font-family: Lato, sans-serif;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      header {
+        position:sticky;
+        z-index:1;
+        width:100%;
+        background-color: #492b7c;
+        color: #fff;
+        border-bottom: 2px solid #313131;
+      }
+
+      header,
+      h2 {
+        text-align: center;
+      }
+
+      nav > ul {
+        margin: 5px 0;
+      }
+
+      nav li {
+        display:inline-block;
+        background-color: #c2c2ff;
+        padding: 7px;
+        margin: 1em auto;
+        width: 25%;
+        border: 2px solid;
+        border-radius: 5px;
+        list-style-type: none;
+      }
+
+      section {
+        min-height: 100vh;
+      }
+
+      footer > p {
+        width: 80%;
+        margin: auto;
+      }
+
+      section > h2 {
+        position:sticky;
+        top:133px;
+        border-bottom: 0.5px solid grey;
+      }
+
+      #story-section {
+        background-color: #fffbc4;
+      }
+
+      #story-section > h2 {
+        background-color: #c2ffff;
+      }
+
+      #story-image {
+        display:block;
+        margin:auto;
+        max-width: 100%;
+        max-height: 250px;
+        border-radius: 5px;
+      }
+
+      #services-section > h2 {
+        background-color: #88b3b3;
+      }
+
+      #services-section > ul {
+        list-style-position: inside;
+      }
+
+      #contact-section {
+        background-color: #492b7c;
+        color: #fff;
+      }
+
+      form {
+        width: max-content;
+        margin: auto;
+      }
+      #notification-div {
+        position:fixed;
+        top:80%;
+        z-index:1;
+        left:70%;
+        background-color: #ed8a0a;
+        color: #313131;
+        padding: 5px;
+        border: 2px solid darkred;
+        border-radius: 5px;
+        width: 25%;
+      }
+
+    
+    </style>
+  <head>
+    <body>
+      <header>
+        <h1 id="header-title">Rendezvous Tutoring</h1>
+        <p id="header-text">Top-notch 1:1 Instructors!</p>
+        <nav>
+          <ul>
+            <li><a href="#story-section">Story</a></li>
+            <li><a href="#services-section">Services</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        
+        <section id="story-section">
+          <h2>Our Story</h2>
+          <p>For over 15 years, we have provided an impactful, results-focused tutoring experience to all of our pupils!</p>
+          <p>
+            It all started as homework-help between two friends at the library. One friend needed the other's help with algebra and how they could apply it in everyday life.
+          </p>
+          <img id="story-image" src="https://cdn.pixabay.com/photo/2022/11/21/09/43/success-7606515_1280.jpg" alt="" />
+        </section>
+        <div id="notification-div">
+          <details>
+            <summary><strong>New Course Offering!</strong>🎥📓</summary>
+            <p>We've got a new 6-week course on video editing where you get to meet one-on-one with an industry professional each week! Join <u>here</u>!</p>
+          </details>
+        </div>
+        <section id="services-section">
+          <h2>Services</h2>
+          <p>We offer a multitude of tutoring services across many platforms, including:</p>
+          <ul>
+            <li>One-on-one tutoring sessions with seasoned industry professionals.</li>
+            <li>A vast tutoring network covering over 10 industries and over 50 skills, trades, and disciplines.</li>
+            <li>Chapter meetups for "lightning round-ezvous" events across 25 U.S. cities!</li>
+          </ul>
+        </section>
+        <footer id="contact-section">
+          <h2>Contact</h2>
+          <p>Interested in upskilling with Rendezvous Tutoring? Feel free to sign-up with your e-mail below to learn more!</p>
+          <form>
+            <input type="email" placeholder="e-mail here" required />
+            <input type="submit" value="Sign Up" />
+          </form>
+        </footer>
+      </main>
+    </body>  
+</html>
