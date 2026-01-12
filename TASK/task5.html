@@ -51,25 +51,25 @@
                 function validateForm() {
                     let isValid = true;
 
-                    // Clear previous errors
+                    
                     document.getElementById('nameError').innerText = '';
                     document.getElementById('emailError').innerText = '';
                     document.getElementById('passwordError').innerText = '';
                     document.getElementById('confirmPasswordError').innerText = '';
 
-                    // Get form values
+                    
                     const name = document.getElementById('name').value.trim();
                     const email = document.getElementById('email').value.trim();
                     const password = document.getElementById('password').value;
                     const confirmPassword = document.getElementById('confirmPassword').value;
 
-                    // Validate name
+
                     if (name === '') {
                         document.getElementById('nameError').innerText = 'Name is required.';
                         isValid = false;
                     }
 
-                    // Validate email
+                    
                     if (email === '') {
                         document.getElementById('emailError').innerText = 'Email is required.';
                         isValid = false;
@@ -77,7 +77,8 @@
                         document.getElementById('emailError').innerText = 'Email must contain "@" symbol.';
                         isValid = false;
                     }
-                    // Validate password
+                    
+
                     if (password === '') {
                         document.getElementById('passwordError').innerText = 'Password is required.';
                         isValid = false;
@@ -86,7 +87,7 @@
                         isValid = false;
                     }
 
-                    // Validate confirm password
+
                     if (confirmPassword === '') {
                         document.getElementById('confirmPasswordError').innerText = 'Please confirm your password.';
                         isValid = false;
