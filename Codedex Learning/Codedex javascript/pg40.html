@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hotline Bling</title>
+  <style>
+    body {
+      background-color: #d7ba19;
+    }
+
+    #wrapper {
+      width: 75%;
+      margin: auto;
+    }
+
+    div {
+      width: 75%;
+      margin: auto;
+    }
+
+    h1 {
+      display: inline;
+      position: relative;
+      bottom: 4em;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div>
+      <img width="450" id="drake-pic-1" src="https://i.imgur.com/1YQsiOq.png" />
+      <h1 id="heading-1">Watch and Learn</h1>
+    </div>
+    <div>
+      <img width="450" id="drake-pic-2" src="https://i.imgur.com/1YQsiOq.png" />
+      <h1 id="heading-2">Watch and Learn</h1>
+    </div>
+  </div>
+  <script>
+    let drakePicTwo = document.getElementById("drake-pic-2");
+    let heading = document.getElementById("heading-2"); 
+
+    drakePicTwo.src = "https://i.imgur.com/RGbh6zY.png";
+    heading.textContent = "Learn By Doing";
+  </script>
+</body>
+</html>
