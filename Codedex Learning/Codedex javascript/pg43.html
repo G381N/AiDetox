@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cap That</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #generator-button {
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+
+        #meme-wrapper {
+            border: 4px solid black;
+            width: 700px;
+            height: 500px;
+            padding: 5px;
+            margin: 15px auto;
+        }
+
+        #random-meme {
+            border-radius: 5px;
+        }
+
+        #random-caption {
+            margin: 0;
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <h1>Welcome to the Meme Machine</h1>
+    <button id="generator-button">Generate Meme</button>
+    <div id="meme-wrapper">
+        <img width="600" id="random-meme" src="" />
+        <h2 id="random-caption"></h2>
+    </div>
+    <script>
+        const memeArray = [
+            "https://i.imgur.com/bSi4xLb.png",
+            "https://i.imgur.com/6y0G7N0.png",
+            "https://i.imgur.com/LXnRao1.png",
+            "https://i.imgur.com/Qqoxh1N.png"
+        ];
+        const captionsArray = [
+            "When you realize it's Monday again...",
+            "That moment when the code finally works!",
+            "Me trying to explain my code to my friends.",
+            "When you find a bug at 3 AM."
+        ];
+        const memeImage = document.getElementById("random-meme");
+        const memeCaption = document.getElementById("random-caption");
+        const generateButton = document.getElementById("generator-button");
+        generateButton.addEventListener("click", function() {
+            const randomMemeIndex = Math.floor(Math.random() * memeArray.length);
+            const randomCaptionIndex = Math.floor(Math.random() * captionsArray.length);
+            memeImage.src = memeArray[randomMemeIndex];
+            memeCaption.innerText = captionsArray[randomCaptionIndex];
+        });
+         </script>
+</body>
+
+</html>
