@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Todo List</title>
+    <link rel="stylesheet" href="style.css" />          
+    </head>
+    <body>
+        <h1>Todo List</h1>
+        
+        <!-- Input Section -->
+        <div class="input-group">
+            <input type="text" id="task-input" placeholder="Enter a new task" />
+            <button id="addButton">Add Task</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+            <button onclick="setFilter('all')">All</button>
+            <button onclick="setFilter('active')">Active</button>
+            <button onclick="setFilter('completed')">Completed</button>
+        </div>
+
+        <!-- Counts -->
+        <div class="counts">
+            Total: <span id="total-count">0</span> | 
+            Completed: <span id="completed-count">0</span> | 
+            Pending: <span id="pending-count">0</span>
+        </div>
+
+        <!-- List -->
+        <ul id="task-list"></ul>
+
+        <!-- Clear All -->
+        <button id="clearButton" style="margin-top: 10px;">Clear All</button>
+        <script src="script.js"></script>
+    </body>
+</html>

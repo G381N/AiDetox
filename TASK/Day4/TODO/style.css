@@ -1,0 +1,155 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Main Container (simulating the body content wrapper since there isn't one in HTML) */
+body > * {
+    max-width: 500px;
+}
+
+/* Or better, wrap everything in a container if I could, but I can target elements directly */
+
+body {
+    flex-direction: column;
+}
+
+h1 {
+    color: orange;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Inputs & Forms */
+input[type="text"] {
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 6px;
+    width: 250px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+input[type="text"]:focus {
+    border-color: orange;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: orange;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    font-size: 0.9rem;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Filters & Counts */
+.filters, .counts {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Filter Buttons (Secondary style) */
+.filters button {
+    background-color: white;
+    color: black;
+    border: 1px solid  black;
+    font-size: 0.9rem;
+}
+
+.filters button:hover {
+    background-color: white;
+    border-color: orange;
+}
+
+/* Task List */
+ul#task-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+li {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+li span {
+    flex: 1;
+    font-size: 1.1rem;
+}
+
+/* Action Buttons in List */
+.complete-btn {
+    background-color: green;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+}
+
+.edit-btn {
+    background-color: #f59e0b; /* Amber */
+    font-size: 0.8rem;
+    padding: 6px 10px;
+}
+
+.delete-btn {
+    background-color: red;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+}
+
+/* Stats */
+#total-count, #completed-count, #pending-count {
+    font-weight: bold;
+    color: orange;
+}
+
+/* Clear Button */
+#clearButton {
+    background-color: transparent;
+    color: red;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    padding: 0;
+}
+#clearButton:hover {
+    background-color: transparent;
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
