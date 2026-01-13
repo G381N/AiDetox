@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Form Validations</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f8fafc;
+                --accent-color: #fca311; /* Retro yellow/orange */
+                --input-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 4px 4px 0px #000000;
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                font-family: 'Press Start 2P', cursive; /* 8-bit font */
+                display: flex;
+                flex-direction: row; /* Switch to row layout */
+                align-items: center;
+                justify-content: space-evenly;
+                min-height: 100vh;
+                margin: 0;
+                /* Background GIF */
+                background-image: url('bg.gif');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                /* Overlay */
+                box-shadow: inset 0 0 0 1000px rgba(15, 23, 42, 0.6); 
+                gap: 50px; /* Space between text and form */
+            }
+            
+            /* Main Title styling */
+            .main-title {
+                font-size: 80px;
+                color: #fff;
+                text-shadow: 6px 6px 0px #084d7f, 12px 12px 0px #000;
+                text-transform: uppercase;
+                line-height: 1.2;
+                font-weight: bold;
+                max-width: 400px;
+                animation: float 3s ease-in-out infinite;
+                z-index: 2;
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+
+            h1 {
+                font-size: 18px; /* Smaller title inside window */
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 0px #000;
+                text-transform: uppercase;
+                text-align: center;
+                line-height: 1.5;
+                color: #fff;
+            }
+
+            form {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            label {
+                display: block;
+                font-size: 10px;
+                margin-top: 10px; /* Reduced margin */
+                margin-bottom: 4px; /* Reduced margin */
+                color: #a5b4fc; /* Neon/Light Blue text */
+                text-shadow: 2px 2px 0px #000;
+                text-transform: uppercase;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px; /* Compact padding */
+                font-family: 'Press Start 2P', cursive;
+                font-size: 10px;
+                background-color: #0f172a;
+                border: 2px solid #334155; 
+                color: white;
+                box-sizing: border-box;
+                outline: none;
+                box-shadow: inset 4px 4px 0px rgba(0,0,0,0.2);
+            }
+
+            input::placeholder {
+                color: #475569;
+            }
+
+            input:focus {
+                border-color: #fca311; /* Gold focus */
+                background-color: #1e293b;
+            }
+
+            .error {
+                color: #ef4444;
+                font-size: 8px;
+                margin-top: 4px;
+                min-height: 10px;
+            }
+
+            /* Retro Panel Styles (Matching bg.gif) */
+            .retro-container {
+                position: relative;
+                background-color: #1e293b; 
+                /* Custom Border Style: Double border effect for 'nice' look */
+                border: 4px solid #fff;
+                outline: 4px solid #000;
+                box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
+                width: 100%;
+                max-width: 380px; 
+                image-rendering: pixelated;
+                padding: 0;
+                z-index: 2;
+            }
+            
+            /* Window Title Bar */
+            .retro-header {
+                height: 32px;
+                background: #000;
+                border-bottom: 4px solid #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 10px;
+            }
+            
+            .header-text {
+                font-size: 10px;
+                color: #fff;
+            }
+
+            /* decorative window controls */
+            .controls span {
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border: 2px solid #fff;
+                margin-left: 4px;
+                background: #000;
+            }
+            .controls span:hover { background: #fff; }
+
+            .retro-content {
+                padding: 24px;
+                background: repeating-linear-gradient(
+                    45deg,
+                    #1e293b,
+                    #1e293b 10px,
+                    #17202f 10px,
+                    #17202f 20px
+                );
+            }
+
+            /* Retro Button */
+            button {
+                width: 100%;
+                margin-top: 20px;
+                padding: 14px;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 10px;
+                text-transform: uppercase;
+                color: #000;
+                background-color: #fca311; 
+                border: 4px solid #000;
+                box-shadow: 4px 4px 0px #fff;
+                cursor: pointer;
+                transition: transform 0.1s;
+                position: relative;
+            }
+
+            button:active {
+                transform: translate(4px, 4px);
+                box-shadow: none;
+            }
+            
+            @media (max-width: 900px) {
+                body {
+                    flex-direction: column;
+                    gap: 30px;
+                    padding: 20px;
+                }
+                .main-title {
+                    font-size: 32px;
+                    text-align: center;
+                }
+            }
+
+            /* Hide default BRs to rely on block display */
+            br { display: none; }
+        </style>
+        </head>
+        <body>
+            <div class="main-title">Gebin's <br>Form</div>
+            <div class="retro-container">
+                <div class="retro-header">
+                    <span class="header-text">REGISTER.EXE</span>
+                    <div class="controls">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="retro-content">
+                    <h1>Register</h1>
+                    <form id="registrationForm" onsubmit="return validateForm()">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Enter your name"><br>
+                <div id="nameError" class="error"></div>
+
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email" placeholder="Enter your email"><br>
+                <div id="emailError" class="error"></div>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+                <div id="passwordError" class="error"></div>
+
+                <label for="confirmPassword">Confirm Password:</label><br>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"><br>
+                <div id="confirmPasswordError" class="error"></div>
+
+                <button type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                function validateForm() {
+                    let isValid = true;
+
+                    
+                    document.getElementById('nameError').innerText = '';
+                    document.getElementById('emailError').innerText = '';
+                    document.getElementById('passwordError').innerText = '';
+                    document.getElementById('confirmPasswordError').innerText = '';
+
+                    
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+
+
+                    if (name === '') {
+                        document.getElementById('nameError').innerText = 'Name is required.';
+                        isValid = false;
+                    }
+
+                    
+                    if (email === '') {
+                        document.getElementById('emailError').innerText = 'Email is required.';
+                        isValid = false;
+                    } else if (!email.includes('@')) {
+                        document.getElementById('emailError').innerText = 'Email must contain "@" symbol.';
+                        isValid = false;
+                    }
+                    
+
+                    if (password === '') {
+                        document.getElementById('passwordError').innerText = 'Password is required.';
+                        isValid = false;
+                    } else if (password.length < 6) {
+                        document.getElementById('passwordError').innerText = 'Password must be at least 6 characters long.';
+                        isValid = false;
+                    }
+
+
+                    if (confirmPassword === '') {
+                        document.getElementById('confirmPasswordError').innerText = 'Please confirm your password.';
+                        isValid = false;
+                    } else if (password !== confirmPassword) {
+                        document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+                        isValid = false;
+                    }
+
+                    return isValid;
+                }   
+            </script>
+        </body>
+</html>
