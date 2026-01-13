@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+            
+            * { box-sizing: border-box; }
+
+            :root {
+                --bg-color: #0f172a;
+                --text-color: #f8fafc;
+                --accent-color: #fca311; /* Retro yellow/orange */
+                --input-bg: #1e293b;
+                --border-color: #334155;
+                --shadow: 4px 4px 0px #000000;
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                font-family: 'Press Start 2P', cursive; /* 8-bit font */
+                display: flex;
+                flex-direction: row; /* Switch to row layout */
+                align-items: center;
+                justify-content: space-evenly;
+                min-height: 100vh;
+                margin: 0;
+                /* Background GIF */
+                background-image: url('bg.gif');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                /* Overlay */
+                box-shadow: inset 0 0 0 1000px rgba(15, 23, 42, 0.6); 
+                gap: 50px; /* Space between text and form */
+            }
+            
+            /* Main Title styling */
+            .main-title {
+                font-size: 50px;
+                color: #fff;
+                text-shadow: 6px 6px 0px #084d7f, 12px 12px 0px #000;
+                text-transform: uppercase;
+                line-height: 1.2;
+                font-weight: bold;
+                max-width: 400px;
+                animation: float 3s ease-in-out infinite;
+                z-index: 2;
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+
+            h1 {
+                font-size: 18px; /* Smaller title inside window */
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 0px #000;
+                text-transform: uppercase;
+                text-align: center;
+                line-height: 1.5;
+                color: #fff;
+            }
+
+            form {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                /* NEW: Form takes remaining space and pushes button down */
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            label {
+                display: block;
+                font-size: 10px;
+                margin-top: 10px; /* Reduced margin */
+                margin-bottom: 4px; /* Reduced margin */
+                color: #a5b4fc; /* Neon/Light Blue text */
+                text-shadow: 2px 2px 0px #000;
+                text-transform: uppercase;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px; /* Compact padding */
+                font-family: 'Press Start 2P', cursive;
+                font-size: 10px;
+                background-color: #0f172a;
+                border: 2px solid #334155; 
+                color: white;
+                box-sizing: border-box;
+                outline: none;
+                box-shadow: inset 4px 4px 0px rgba(0,0,0,0.2);
+            }
+
+            input::placeholder {
+                color: #475569;
+            }
+
+            input:focus {
+                border-color: #fca311; /* Gold focus */
+                background-color: #1e293b;
+            }
+
+            .error {
+                color: #ef4444;
+                font-size: 8px;
+                margin-top: 4px;
+                min-height: 10px;
+            }
+
+            /* Retro Panel Styles (Matching bg.gif) */
+            .retro-container {
+                position: relative;
+                background-color: #1e293b; 
+                /* Custom Border Style: Double border effect for 'nice' look */
+                border: 4px solid #fff;
+                outline: 4px solid #000;
+                box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
+                width: 100%;
+                max-width: 480px;  /* Increased size */
+                min-height: 620px; /* Fixed height so it doesn't shrink */
+                image-rendering: pixelated;
+                padding: 0;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .retro-content {
+                flex: 1; /* ensure content fills space */
+                padding: 24px;
+                background: repeating-linear-gradient(
+                    45deg,
+                    #1e293b,
+                    #1e293b 10px,
+                    #17202f 10px,
+                    #17202f 20px
+                );
+                display: flex; /* NEW: Content is flex container */
+                flex-direction: column; 
+            }
+
+            /* Main Title styling */
+            .tabs {
+                display: flex;
+                gap: 15px; /* Spacing between buttons */
+                margin-bottom: 25px;
+            }
+
+            .tab-btn {
+                flex: 1;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 10px;
+                text-transform: uppercase;
+                padding: 12px;
+                cursor: pointer;
+                transition: all 0.1s;
+                
+                /* Yellow Button Style for ALL tabs */
+                color: #000;
+                background-color: #fca311; 
+                border: 4px solid #000;
+                box-shadow: 4px 4px 0px #fff;
+            }
+
+            /* Inactive state (optional styling to differentiate) */
+            .tab-btn:not(.active) {
+                background-color: #252525; /* Darker orange/brown for inactive */
+                color: #e2e8f0;
+                box-shadow: 4px 4px 0px #94a3b8;
+            }
+
+            .tab-btn:hover {
+                transform: translate(-1px, -1px);
+                box-shadow: 6px 6px 0px #fff;
+            }
+
+            .tab-btn.active {
+                /* "Pressed" look for active tab */
+                transform: translate(4px, 4px);
+                box-shadow: none;
+                background-color: #fca311;
+                color: #000;
+            }
+
+            /* Window Title Bar */
+            .retro-header {
+                height: 32px;
+                background: #000;
+                border-bottom: 4px solid #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 10px;
+            }
+            
+            .header-text {
+                font-size: 10px;
+                color: #fff;
+            }
+
+            /* decorative window controls */
+            .controls {
+                display: flex;
+                gap: 6px;
+            }
+
+            .controls span {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 16px;
+                height: 16px;
+                border: 2px solid #fff;
+                background: #000;
+                cursor: pointer;
+                position: relative;
+                transition: background 0.2s;
+            }
+            .controls span:hover { background: #333; }
+
+            /* Close Button (X) */
+            .controls .close {
+                background: #ff5555; /* Optional: Make close red like Mac? Or keep B&W? User asked for 8-bit style. */
+                background: #000; /* Keeping it consistent with theme */
+            }
+            .controls .close:hover { background: #ef4444; } /* Red on hover */
+
+            .controls .close::before, .controls .close::after {
+                content: "";
+                position: absolute;
+                width: 10px;
+                height: 2px;
+                background: #fff;
+            }
+            .controls .close::before { transform: rotate(45deg); }
+            .controls .close::after { transform: rotate(-45deg); }
+
+            /* Minimize Button (_) */
+            .controls .min::after {
+                content: "";
+                width: 8px;
+                height: 2px;
+                background: #fff;
+                position: absolute;
+                bottom: 3px;
+            }
+
+            /* Maximize Button ([]) */
+            .controls .max::after {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border: 2px solid #fff;
+                border-top-width: 4px; /* Title bar looks thicker */
+            }
+
+            /* Retro Button */
+            button {
+                width: 100%;
+                margin-top: auto; /* Push to bottom */
+                padding: 14px;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 10px;
+                text-transform: uppercase;
+                color: #000;
+                background-color: #fca311; 
+                border: 4px solid #000;
+                box-shadow: 4px 4px 0px #fff;
+                cursor: pointer;
+                transition: transform 0.1s;
+                position: relative;
+            }
+
+            button:active {
+                transform: translate(4px, 4px);
+                box-shadow: none;
+            }
+            
+            /* Social Login Styling */
+            .social-group {
+                margin: 20px 0;
+            }
+
+            .divider {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #64748b;
+                font-size: 8px;
+                margin-bottom: 20px;
+            }
+
+            .divider::before, .divider::after {
+                content: "";
+                flex: 1;
+                border-bottom: 2px solid #334155;
+            }
+            .divider::before { margin-right: 10px; }
+            .divider::after { margin-left: 10px; }
+
+            .social-btn-container {
+                display: flex;
+                gap: 10px;
+            }
+
+            .social-btn {
+                flex: 1;
+                margin-top: 0 !important; /* Override default button margin */
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                font-size: 8px;
+            }
+
+            .google-btn {
+                background-color: #ef4444; /* Red */
+                color: #fff;
+            }
+            
+            .github-btn {
+                background-color: #1e293b;
+                color: #fff;
+            }
+
+            .github-btn svg, .google-btn svg {
+                width: 14px;
+                height: 14px;
+                fill: currentColor;
+            }
+
+            /* Tablet / iPad (Portrait) */
+            @media (max-width: 800px) {
+                body {
+                    flex-direction: column;
+                    gap: 60px; /* More separation like valid apps */
+                    padding: 60px;
+                    justify-content: center; /* Center everything vertically */
+                    padding-top: 0; 
+                }
+                .main-title {
+                    font-size: 60px; /* Big title for Tablet */
+                    text-align: center;
+                    width: 100%;
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+                .retro-container {
+                    max-width: 600px; 
+                    width: 100%;
+                    margin: 0 auto;
+                    box-shadow: 10px 10px 0px rgba(0,0,0,0.5); 
+                }
+                label {
+                    font-size: 14px;
+                }
+                input {
+                    padding: 18px; /* Touch friendly */
+                    font-size: 16px;
+                }
+                button {
+                    font-size: 16px;
+                    padding: 18px;
+                }
+            }
+
+            /* Mobile Devices */
+            @media (max-width: 500px) {
+                body {
+                    padding: 20px;
+                    gap: 0;
+                    justify-content: space-between; /* Title top, Form bottom - Pushed apart */
+                    padding-top: 40px; 
+                    padding-bottom: 20px; 
+                }
+                .main-title {
+                    font-size: 32px; /* Readable but small enough to fit top */
+                    text-shadow: 3px 3px 0px #084d7f, 6px 6px 0px #000;
+                    margin-top: 0;
+                    flex: 0 0 auto;
+                    width: 100%;
+                    text-align: center;
+                }
+                .retro-container {
+                    width: 100%;
+                    max-width: 100%;
+                    box-shadow: 4px 4px 0px rgba(0,0,0,0.5); 
+                    border-width: 3px;
+                    margin-top: auto; /* Force to bottom */
+                }
+                .retro-content { 
+                    padding: 24px 20px; 
+                }
+                .retro-header {
+                    height: 44px; 
+                    padding: 0 14px;
+                }
+                .header-text {
+                    font-size: 14px;
+                }
+                .controls span {
+                    width: 22px;
+                    height: 22px; 
+                }
+                input {
+                    font-size: 16px; 
+                    padding: 14px;
+                    margin-bottom: 2px;
+                }
+                label {
+                    margin-top: 12px;
+                    font-size: 12px;
+                }
+                button {
+                    padding: 18px;
+                    font-size: 14px;
+                    margin-top: 24px;
+                }
+            }
+
+            /* Hide default BRs to rely on block display */
+            br { display: none; }
+        
