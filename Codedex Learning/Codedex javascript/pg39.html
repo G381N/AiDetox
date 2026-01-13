@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Green Light Go!</title>
+    <style>
+        #traffic-light-div {
+            border: 7px solid;
+            width: 150px;
+            height: 400px;
+            background-color: grey;
+        }
+
+        .light {
+            border: 3px solid;
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body onClick="changeLight()">
+    <h1>Click Anywhere!</h1>
+    <div id="traffic-light-div">
+        <div id="red" class="light"></div>
+        <div id="yellow" class="light"></div>
+        <div id="green" class="light"></div>
+    </div>
+    <script>
+        let lightIndex = 0;
+
+        function changeLight() {
+            const redLight = document.getElementById("red");
+            const yellowLight = document.getElementById("yellow");
+            const greenLight = document.getElementById("green");
+
+            if (lightIndex === 0) {
+                redLight.style.backgroundColor = "#ff0000";
+                yellowLight.style.backgroundColor = "";
+                greenLight.style.backgroundColor = "";
+            } else if (lightIndex === 1) {
+                yellowLight.style.backgroundColor = "#ffff00";
+                redLight.style.backgroundColor = "";
+                greenLight.style.backgroundColor = "";
+            } else {
+                greenLight.style.backgroundColor = "#00ff00";
+                redLight.style.backgroundColor = "";
+                yellowLight.style.backgroundColor = "";
+            }
+
+            lightIndex = (lightIndex + 1) % 3;
+        }
+    </script>
+</body>
+
+</html>
