@@ -13,14 +13,14 @@ let currentFilter = 'all';
 
 // 1. Add Task
 addButton.addEventListener("click", function () {
-    const title = taskInput.value.trim(); 
+    const title = taskInput.value.trim();
 
-    // Empty validation
+    // Validation to check if the input is empty
     if (title === "") {
         alert("Task required");
         return;
     }
-
+    //structure of the Object
     const newTask = {
         id: Date.now(),
         title: title,
@@ -28,41 +28,63 @@ addButton.addEventListener("click", function () {
     };
 
     Array.push(newTask);
-    taskInput.value = ""; // Clear input
-    renderTasks();
+    taskInput.value = ""; // make sure input field is cleared
+    renderTasks();// Update the screen
 });
 
-// 2. Clear All
+// what the clear button does
 clearButton.addEventListener("click", function () {
     Array = [];
     renderTasks();
 });
 
-// 3. Filter Logic
+//what the filter buttons do
 function setFilter(filterType) {
     currentFilter = filterType;
     renderTasks();
 }
 
-// 4. Render Function (Updates List & Counts)
+// how the tasks are displayed on the screen
 function renderTasks() {
     taskList.innerHTML = ""; // Clear current list
 
-    // Calculate Counts
+    // how counts are calculated
     const total = Array.length;
-    const completed = Array.filter(t => t.completed).length;
+    
+    let completed = 0;
+    for(let i=0; i < Array.length; i++) {
+        if(Array[i].completed === true) {
+            completed++;
+        }
+    }
+    
     const pending = total - completed;
 
     totalCountSpan.innerText = total;
     completedCountSpan.innerText = completed;
     pendingCountSpan.innerText = pending;
 
-    // Apply Filter
-    let filteredTasks = Array;
-    if (currentFilter === 'active') {
-        filteredTasks = Array.filter(t => !t.completed);
-    } else if (currentFilter === 'completed') {
-        filteredTasks = Array.filter(t => t.completed);
+    // how we are actually filtering the tasks
+
+    let filteredTasks = [];// new array to hold filtered tasks
+    if (currentFilter === 'all') 
+        {
+        filteredTasks = Array;
+        } 
+    else 
+        {
+        for (let i = 0; i < Array.length; i++) 
+            {
+            const task = Array[i];
+            if (currentFilter === 'active' && !task.completed) 
+            {
+                filteredTasks.push(task);
+            }
+            else if (currentFilter === 'completed' && task.completed) 
+            {
+                filteredTasks.push(task);
+            }
+        }
     }
 
     // Create List Items
@@ -72,7 +94,6 @@ function renderTasks() {
         // Strikethrough style if completed
         const titleStyle = task.completed ? "text-decoration: line-through;" : "";
 
-        // Using simple innerHTML for the row content
         li.innerHTML = `
                         <span style="${titleStyle}">${task.title}</span>
                         <button class="complete-btn" data-id="${task.id}">
@@ -86,7 +107,7 @@ function renderTasks() {
     });
 }
 
-// 5. Event Delegation (Handle clicks on List)
+// Event Delegation for Task Actions
 taskList.addEventListener("click", function (event) {
     const target = event.target;
     const id = Number(target.getAttribute("data-id"));
