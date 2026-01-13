@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <head><title>Form Validations</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Validations</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
             
@@ -37,7 +40,7 @@
             
             /* Main Title styling */
             .main-title {
-                font-size: 80px;
+                font-size: 50px;
                 color: #fff;
                 text-shadow: 6px 6px 0px #084d7f, 12px 12px 0px #000;
                 text-transform: uppercase;
@@ -229,81 +232,91 @@
             }
             
             /* Tablet / iPad (Portrait) */
-            @media (max-width: 900px) {
+            @media (max-width: 800px) {
                 body {
                     flex-direction: column;
-                    gap: 20px;
-                    padding: 40px;
-                    justify-content: flex-start; /* Move content to top */
-                    padding-top: 80px; /* Space from top */
+                    gap: 60px; /* More separation like valid apps */
+                    padding: 60px;
+                    justify-content: center; /* Center everything vertically */
+                    padding-top: 0; 
                 }
                 .main-title {
-                    font-size: 40px; /* Smaller text as requested */
+                    font-size: 60px; /* Big title for Tablet */
                     text-align: center;
-                    max-width: 100%;
-                    margin-bottom: 20px;
+                    width: 100%;
+                    max-width: 600px;
+                    margin: 0 auto;
                 }
                 .retro-container {
-                    max-width: 700px; /* Much larger box on screen */
-                    width: 90%;
+                    max-width: 600px; 
+                    width: 100%;
+                    margin: 0 auto;
+                    box-shadow: 10px 10px 0px rgba(0,0,0,0.5); 
                 }
                 label {
                     font-size: 14px;
                 }
                 input {
-                    padding: 16px;
-                    font-size: 14px;
+                    padding: 18px; /* Touch friendly */
+                    font-size: 16px;
                 }
                 button {
                     font-size: 16px;
+                    padding: 18px;
                 }
             }
 
             /* Mobile Devices */
-            @media (max-width: 600px) {
+            @media (max-width: 500px) {
                 body {
-                    padding: 16px;
-                    gap: 10px;
-                    justify-content: space-between; /* Spread them out: Title top, Form bottom */
-                    padding-bottom: 30px; /* Padding at bottom for safe area */
+                    padding: 20px;
+                    gap: 0;
+                    justify-content: space-between; /* Title top, Form bottom - Pushed apart */
+                    padding-top: 40px; 
+                    padding-bottom: 20px; 
                 }
                 .main-title {
-                    font-size: 24px; /* Small text on top */
-                    text-shadow: 2px 2px 0px #084d7f, 4px 4px 0px #000;
-                    margin-top: 10px;
-                    flex: 0 0 auto; /* Don't grow */
+                    font-size: 32px; /* Readable but small enough to fit top */
+                    text-shadow: 3px 3px 0px #084d7f, 6px 6px 0px #000;
+                    margin-top: 0;
+                    flex: 0 0 auto;
+                    width: 100%;
+                    text-align: center;
                 }
                 .retro-container {
                     width: 100%;
                     max-width: 100%;
-                    box-shadow: 6px 6px 0px rgba(0,0,0,0.5); 
-                    border-width: 2px;
-                    margin-top: auto; /* Push to bottom if space permits */
+                    box-shadow: 4px 4px 0px rgba(0,0,0,0.5); 
+                    border-width: 3px;
+                    margin-top: auto; /* Force to bottom */
                 }
                 .retro-content { 
-                    padding: 16px; 
+                    padding: 24px 20px; 
                 }
                 .retro-header {
-                    height: 40px; 
-                    padding: 0 12px;
+                    height: 44px; 
+                    padding: 0 14px;
                 }
                 .header-text {
-                    font-size: 12px;
+                    font-size: 14px;
                 }
                 .controls span {
-                    width: 20px;
-                    height: 20px; 
+                    width: 22px;
+                    height: 22px; 
                 }
                 input {
-                    font-size: 16px; /* Better size */
-                    padding: 12px;
-                }
-                button {
-                    padding: 16px;
-                    font-size: 12px;
+                    font-size: 16px; 
+                    padding: 14px;
+                    margin-bottom: 2px;
                 }
                 label {
-                    font-size: 10px;
+                    margin-top: 12px;
+                    font-size: 12px;
+                }
+                button {
+                    padding: 18px;
+                    font-size: 14px;
+                    margin-top: 24px;
                 }
             }
 

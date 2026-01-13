@@ -59,13 +59,13 @@
         const memeImage = document.getElementById("random-meme");
         const memeCaption = document.getElementById("random-caption");
         const generateButton = document.getElementById("generator-button");
-        generateButton.addEventListener("click", function() {
+        generateButton.addEventListener("click", function () {
             const randomMemeIndex = Math.floor(Math.random() * memeArray.length);
             const randomCaptionIndex = Math.floor(Math.random() * captionsArray.length);
             memeImage.src = memeArray[randomMemeIndex];
             memeCaption.innerText = captionsArray[randomCaptionIndex];
         });
-         </script>
+    </script>
 </body>
 
 </html>
