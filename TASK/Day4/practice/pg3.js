@@ -1,8 +1,8 @@
 // Write a function that checks whether a given key exists in an object.
 let sampleObject = {
-    name: "John",
+    name: "gebin",
     age: 30,
-    city: "New York"
+    city: "banhalore"
 };
 function keyExists(obj, key) {
     return obj.hasOwnProperty(key);
