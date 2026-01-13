@@ -24,3 +24,7 @@ const dog = {
 dog.makeSound = function() {
     return console.log( this.name + " is a " + this.age + " year old " + this.type + " that goes woof!");
 }
+
+pig.makeSound();
+sheep.makeSound();
+dog.makeSound();
