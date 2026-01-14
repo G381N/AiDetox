@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* { 
-    box-sizing: border-box; 
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -31,10 +31,11 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
     margin: 0;
     padding: 40px;
-    background-image: url('bg.gif');
+    background-image: url('/public/gif/g1.gif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -55,7 +56,7 @@ body::before {
 }
 
 /* Ensure all content is above overlay */
-body > * {
+body>* {
     position: relative;
     z-index: 1;
 }
@@ -64,8 +65,8 @@ body > * {
 .main-title {
     font-size: clamp(28px, 5vw, 55px);
     color: #fff;
-    text-shadow: 
-        4px 4px 0px #084d7f, 
+    text-shadow:
+        4px 4px 0px #084d7f,
         8px 8px 0px #000,
         0 0 30px rgba(252, 163, 17, 0.3);
     text-transform: uppercase;
@@ -78,8 +79,15 @@ body > * {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* Form Title */
@@ -125,7 +133,7 @@ input {
     color: white;
     box-sizing: border-box;
     outline: none;
-    box-shadow: inset 4px 4px 0px rgba(0,0,0,0.2);
+    box-shadow: inset 4px 4px 0px rgba(0, 0, 0, 0.2);
     transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
     appearance: none;
@@ -139,8 +147,8 @@ input::placeholder {
 input:focus {
     border-color: var(--accent-color);
     background-color: #1e293b;
-    box-shadow: 
-        inset 4px 4px 0px rgba(0,0,0,0.2),
+    box-shadow:
+        inset 4px 4px 0px rgba(0, 0, 0, 0.2),
         0 0 15px rgba(252, 163, 17, 0.2);
 }
 
@@ -170,8 +178,15 @@ input:focus {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
 }
 
 /* Retro Panel Container */
@@ -180,9 +195,9 @@ input:focus {
     background-color: #1e293b;
     border: 4px solid #fff;
     outline: 4px solid #000;
-    box-shadow: 
-        12px 12px 0px rgba(0,0,0,0.5),
-        0 0 40px rgba(0,0,0,0.3);
+    box-shadow:
+        12px 12px 0px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 440px;
     min-height: 500px;
@@ -196,13 +211,11 @@ input:focus {
 .retro-content {
     flex: 1;
     padding: clamp(16px, 3vw, 28px);
-    background: repeating-linear-gradient(
-        45deg,
-        #1e293b,
-        #1e293b 10px,
-        #17202f 10px,
-        #17202f 20px
-    );
+    background: repeating-linear-gradient(45deg,
+            #1e293b,
+            #1e293b 10px,
+            #17202f 10px,
+            #17202f 20px);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -289,8 +302,8 @@ input:focus {
     transition: background 0.2s;
 }
 
-.controls span:hover { 
-    background: #333; 
+.controls span:hover {
+    background: #333;
 }
 
 /* Close Button (X) */
@@ -298,11 +311,11 @@ input:focus {
     background: #000;
 }
 
-.controls .close:hover { 
-    background: #ef4444; 
+.controls .close:hover {
+    background: #ef4444;
 }
 
-.controls .close::before, 
+.controls .close::before,
 .controls .close::after {
     content: "";
     position: absolute;
@@ -311,12 +324,12 @@ input:focus {
     background: #fff;
 }
 
-.controls .close::before { 
-    transform: rotate(45deg); 
+.controls .close::before {
+    transform: rotate(45deg);
 }
 
-.controls .close::after { 
-    transform: rotate(-45deg); 
+.controls .close::after {
+    transform: rotate(-45deg);
 }
 
 /* Minimize Button (_) */
@@ -388,19 +401,19 @@ button[type="submit"]:disabled,
     margin-bottom: 20px;
 }
 
-.divider::before, 
+.divider::before,
 .divider::after {
     content: "";
     flex: 1;
     border-bottom: 2px solid #334155;
 }
 
-.divider::before { 
-    margin-right: 10px; 
+.divider::before {
+    margin-right: 10px;
 }
 
-.divider::after { 
-    margin-left: 10px; 
+.divider::after {
+    margin-left: 10px;
 }
 
 .social-btn-container {
@@ -447,7 +460,7 @@ button[type="submit"]:disabled,
     color: #fff;
 }
 
-.github-btn svg, 
+.github-btn svg,
 .google-btn svg {
     width: clamp(12px, 2vw, 16px);
     height: clamp(12px, 2vw, 16px);
@@ -456,8 +469,8 @@ button[type="submit"]:disabled,
 }
 
 /* Hide default BRs */
-br { 
-    display: none; 
+br {
+    display: none;
 }
 
 /* ============================================
@@ -471,48 +484,48 @@ br {
         justify-content: center;
         align-items: center;
     }
-    
+
     .main-title {
         font-size: clamp(36px, 6vw, 50px);
         text-align: center;
         max-width: 90%;
         margin: 0 auto;
     }
-    
+
     .retro-container {
         max-width: 520px;
         width: 90%;
         margin: 0 auto;
     }
-    
+
     .retro-content {
         padding: 24px;
     }
-    
+
     label {
         font-size: 11px;
     }
-    
+
     input {
         padding: 14px;
         font-size: 12px;
     }
-    
+
     input::placeholder {
         font-size: 10px;
     }
-    
+
     .tab-btn {
         font-size: 10px;
         padding: 12px 10px;
     }
-    
+
     button[type="submit"],
     #submitBtn {
         font-size: 11px;
         padding: 14px;
     }
-    
+
     .social-btn {
         padding: 12px;
         font-size: 9px;
@@ -534,96 +547,98 @@ br {
         min-height: 100vh;
         min-height: 100dvh;
     }
-    
+
     .main-title {
         font-size: clamp(24px, 8vw, 36px);
         text-align: center;
-        text-shadow: 
-            3px 3px 0px #084d7f, 
+        text-shadow:
+            3px 3px 0px #084d7f,
             6px 6px 0px #000;
         max-width: 100%;
         margin: 0 auto 10px;
-        animation: none; /* Disable floating animation on mobile for performance */
+        animation: none;
+        /* Disable floating animation on mobile for performance */
     }
-    
+
     .retro-container {
         width: 100%;
         max-width: 100%;
         min-height: auto;
-        box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.5);
         border-width: 3px;
         outline-width: 3px;
         flex: 1;
         max-height: none;
     }
-    
+
     .retro-content {
         padding: 20px 16px;
         flex: 1;
     }
-    
+
     .retro-header {
         height: 38px;
         padding: 0 12px;
         border-bottom-width: 3px;
     }
-    
+
     .header-text {
         font-size: 9px;
     }
-    
+
     .controls span {
         width: 18px;
         height: 18px;
     }
-    
+
     .controls .close::before,
     .controls .close::after {
         width: 8px;
     }
-    
+
     .tabs {
         gap: 8px;
         margin-bottom: 16px;
     }
-    
+
     .tab-btn {
         font-size: 9px;
         padding: 10px 8px;
         border-width: 2px;
         box-shadow: 3px 3px 0px #fff;
     }
-    
+
     .tab-btn.active {
         transform: translate(3px, 3px);
     }
-    
+
     h1 {
         font-size: 14px;
         margin-bottom: 14px;
     }
-    
+
     label {
         font-size: 9px;
         margin-top: 10px;
         margin-bottom: 4px;
     }
-    
+
     input {
         padding: 12px;
-        font-size: 14px; /* Larger for easier touch input */
+        font-size: 14px;
+        /* Larger for easier touch input */
         border-width: 2px;
     }
-    
+
     input::placeholder {
         font-size: 9px;
     }
-    
+
     .error {
         font-size: 8px;
         min-height: 12px;
     }
-    
+
     button[type="submit"],
     #submitBtn {
         padding: 14px;
@@ -632,21 +647,21 @@ br {
         border-width: 3px;
         box-shadow: 3px 3px 0px #fff;
     }
-    
+
     .social-group {
         margin: 14px 0;
     }
-    
+
     .divider {
         font-size: 8px;
         margin-bottom: 14px;
     }
-    
+
     .social-btn-container {
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .social-btn {
         min-width: 100%;
         padding: 12px;
@@ -654,7 +669,7 @@ br {
         border-width: 2px;
         box-shadow: 3px 3px 0px #fff;
     }
-    
+
     .social-btn svg {
         width: 14px;
         height: 14px;
@@ -670,60 +685,60 @@ br {
         padding-top: 20px;
         gap: 14px;
     }
-    
+
     .main-title {
         font-size: 22px;
     }
-    
+
     .retro-header {
         height: 34px;
         padding: 0 8px;
     }
-    
+
     .header-text {
         font-size: 8px;
     }
-    
+
     .retro-content {
         padding: 14px 12px;
     }
-    
+
     .tabs {
         gap: 6px;
         margin-bottom: 12px;
     }
-    
+
     .tab-btn {
         font-size: 8px;
         padding: 8px 6px;
     }
-    
+
     h1 {
         font-size: 12px;
         margin-bottom: 12px;
     }
-    
+
     label {
         font-size: 8px;
         margin-top: 8px;
     }
-    
+
     input {
         padding: 10px;
         font-size: 12px;
     }
-    
+
     input::placeholder {
         font-size: 8px;
     }
-    
+
     button[type="submit"],
     #submitBtn {
         padding: 12px;
         font-size: 9px;
         margin-top: 16px;
     }
-    
+
     .social-btn {
         padding: 10px;
         font-size: 7px;
@@ -741,59 +756,59 @@ br {
         justify-content: center;
         align-items: center;
     }
-    
+
     .main-title {
         font-size: 28px;
         max-width: 200px;
         text-align: left;
         animation: none;
     }
-    
+
     .retro-container {
         max-width: 400px;
         min-height: auto;
         max-height: 95vh;
     }
-    
+
     .retro-content {
         padding: 12px 16px;
         overflow-y: auto;
     }
-    
+
     .tabs {
         margin-bottom: 10px;
     }
-    
+
     h1 {
         font-size: 12px;
         margin-bottom: 8px;
     }
-    
+
     label {
         margin-top: 6px;
         font-size: 8px;
     }
-    
+
     input {
         padding: 8px;
         font-size: 10px;
     }
-    
+
     button[type="submit"],
     #submitBtn {
         padding: 10px;
         font-size: 9px;
         margin-top: 12px;
     }
-    
+
     .social-group {
         margin: 8px 0;
     }
-    
+
     .social-btn-container {
         flex-direction: row;
     }
-    
+
     .social-btn {
         padding: 8px;
         font-size: 7px;
@@ -807,30 +822,30 @@ br {
     body {
         gap: 100px;
     }
-    
+
     .main-title {
         font-size: 60px;
         max-width: 500px;
     }
-    
+
     .retro-container {
         max-width: 500px;
         min-height: 580px;
     }
-    
+
     .retro-content {
         padding: 32px;
     }
-    
+
     label {
         font-size: 11px;
     }
-    
+
     input {
         padding: 16px;
         font-size: 13px;
     }
-    
+
     button[type="submit"],
     #submitBtn {
         padding: 18px;
@@ -845,7 +860,7 @@ br {
     .main-title {
         animation: none;
     }
-    
+
     * {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
@@ -870,7 +885,7 @@ input:focus-visible,
     input {
         border-width: 3px;
     }
-    
+
     .error {
         font-weight: bold;
     }
