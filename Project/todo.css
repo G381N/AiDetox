@@ -288,7 +288,7 @@ body::before {
 /* Power LED */
 .monitor-power {
     position: absolute;
-    bottom: 36px;
+    bottom: 11px;
     right: 40px;
     z-index: 5;
 }
