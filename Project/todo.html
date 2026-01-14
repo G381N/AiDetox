@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>Todo List - AiDetox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="todo.css">
+</head>
+
+<body>
+    <!-- Scanline overlay for CRT effect -->
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">[TODO.EXE]</div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge" id="userBadge">GUEST</div>
+                <button class="logout-btn" id="logoutBtn" onclick="logout()">EXIT</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 8-BIT MONITOR FRAME -->
+            <div class="monitor-frame">
+                <!-- Monitor bezel -->
+                <div class="monitor-bezel">
+                    <!-- Sticky Note -->
+                    <div class="sticky-note">
+                        <div class="sticky-pin"></div>
+                        <div class="sticky-content">
+                            <span class="sticky-title">TASKS</span>
+                            <span class="sticky-text">Don't forget!</span>
+                        </div>
+                    </div>
+
+                    <!-- Monitor Screen (CRT) -->
+                    <div class="monitor-screen">
+                        <!-- The Todo Panel goes inside the screen -->
+                        <div class="todo-panel">
+                            <div class="panel-header">
+                                <span class="panel-title">
+                                    <span class="blink">_</span> MY TASKS
+                                </span>
+                                <div class="controls">
+                                    <span class="min"></span>
+                                    <span class="max"></span>
+                                    <span class="close"></span>
+                                </div>
+                            </div>
+
+                            <div class="panel-content">
+                                <!-- Progress Section -->
+                                <div class="progress-section">
+                                    <div class="progress-label">PROGRESS</div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progressBar"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Stats Section with Emojis -->
+                                <div class="stats-section">
+                                    <div class="stat-box">
+                                        <span class="stat-icon">📋</span>
+                                        <span class="stat-value" id="totalCount">0</span>
+                                        <span class="stat-label">TOTAL</span>
+                                    </div>
+                                    <div class="stat-box completed-stat">
+                                        <span class="stat-icon">✅</span>
+                                        <span class="stat-value" id="completedCount">0</span>
+                                        <span class="stat-label">DONE</span>
+                                    </div>
+                                    <div class="stat-box pending-stat">
+                                        <span class="stat-icon">⏳</span>
+                                        <span class="stat-value" id="pendingCount">0</span>
+                                        <span class="stat-label">PENDING</span>
+                                    </div>
+                                </div>
+
+                                <!-- Add Task Section -->
+                                <div class="add-task-section">
+                                    <div class="input-wrapper">
+                                        <input type="text" id="taskInput" placeholder="Enter new task..."
+                                            maxlength="100" autocomplete="off">
+                                    </div>
+                                    <button id="addTaskBtn" onclick="addTask()">+ ADD</button>
+                                </div>
+                                <div id="inputError" class="input-error"></div>
+
+                                <!-- Filter Section -->
+                                <div class="filter-section">
+                                    <div class="filter-group">
+                                        <button class="filter-btn active" data-filter="all"
+                                            onclick="filterTasks('all')">* ALL</button>
+                                        <button class="filter-btn" data-filter="active"
+                                            onclick="filterTasks('active')">o ACTIVE</button>
+                                        <button class="filter-btn" data-filter="completed"
+                                            onclick="filterTasks('completed')">x DONE</button>
+                                    </div>
+                                    <div class="action-group">
+                                        <button class="clear-btn" onclick="clearCompleted()">CLEAR DONE</button>
+                                        <button class="clear-all-btn" onclick="clearAll()">CLEAR ALL</button>
+                                    </div>
+                                </div>
+
+                                <!-- Task List -->
+                                <ul class="task-list" id="taskList"></ul>
+
+                                <!-- Empty State -->
+                                <div class="empty-state" id="emptyState">
+                                    <div class="empty-icon">📝</div>
+                                    <p>No tasks yet!</p>
+                                    <span>Add your first task above</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monitor Stand -->
+                    <div class="monitor-stand">
+                        <div class="stand-neck"></div>
+                        <div class="stand-base"></div>
+                    </div>
+
+                    <!-- Monitor Power Button -->
+                    <div class="monitor-power">
+                        <div class="power-led"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>* 2026 Gebin's AiDetox Project *</p>
+            <div class="footer-hint">Press ENTER to add task</div>
+        </footer>
+    </div>
+
+    <script src="todo.js"></script>
+</body>
+
+</html>
