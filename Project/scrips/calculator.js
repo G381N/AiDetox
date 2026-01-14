@@ -47,11 +47,16 @@ function updateDisplay() {
 /**
  * Input a digit
  */
+const MAX_DIGITS = 12;
+
 function inputDigit(digit) {
     if (waitingForOperand) {
         currentValue = digit;
         waitingForOperand = false;
     } else {
+        if (currentValue.replace('.', '').length >= MAX_DIGITS) {
+            return;
+        }
         currentValue = currentValue === '0' ? digit : currentValue + digit;
     }
     updateDisplay();
@@ -193,13 +198,74 @@ function calculateResult() {
         '/': '÷'
     };
 
-    expression = `${previousValue} ${operatorSymbols[operator]} ${currentValue} =`;
+    const fullExpression = `${previousValue} ${operatorSymbols[operator]} ${currentValue}`;
+    expression = `${fullExpression} =`;
     const result = performCalculation();
+
+    // Add to history
+    addToHistory(fullExpression, String(result));
+
     currentValue = String(result);
     previousValue = '';
     operator = null;
     waitingForOperand = false;
     updateDisplay();
+}
+
+/**
+ * History management
+ */
+let calculationHistory = [];
+
+function addToHistory(expr, result) {
+    calculationHistory.unshift({ expr, result });
+    if (calculationHistory.length > 10) {
+        calculationHistory.pop();
+    }
+    renderHistory();
+}
+
+function renderHistory() {
+    const historyList = document.getElementById('historyList');
+    if (!historyList) return;
+
+    if (calculationHistory.length === 0) {
+        historyList.innerHTML = `
+            <div class="history-empty">
+                <span class="empty-icon">📝</span>
+                <span class="empty-text">No calculations yet</span>
+            </div>
+        `;
+        return;
+    }
+
+    historyList.innerHTML = calculationHistory.map((item, index) => `
+        <div class="history-item" data-index="${index}">
+            <div class="expr">${item.expr}</div>
+            <div class="result">= ${item.result}</div>
+        </div>
+    `).join('');
+
+    // Add click listeners
+    historyList.querySelectorAll('.history-item').forEach(item => {
+        item.addEventListener('click', function () {
+            const index = parseInt(this.dataset.index);
+            const historyItem = calculationHistory[index];
+            if (historyItem) {
+                currentValue = historyItem.result;
+                expression = '';
+                previousValue = '';
+                operator = null;
+                waitingForOperand = false;
+                updateDisplay();
+            }
+        });
+    });
+}
+
+function clearHistory() {
+    calculationHistory = [];
+    renderHistory();
 }
 
 /**
@@ -408,6 +474,15 @@ function init() {
 
     // Initialize mascot
     initMascot();
+
+    // Initialize history
+    renderHistory();
+
+    // Clear history button
+    const clearHistoryBtn = document.getElementById('clearHistory');
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener('click', clearHistory);
+    }
 }
 
 // Initialize when DOM is ready

@@ -28,48 +28,84 @@
         </header>
 
         <main class="main-content">
-            <div class="calculator-container">
-                <!-- Calculator Device Body -->
-                <div class="calc-device">
-                    <!-- Brand -->
-                    <div class="calc-brand">GEBIN</div>
-                    <!-- Display -->
-                    <div class="calc-display">
-                        <div class="display-expression" id="expression"></div>
-                        <div class="display-result" id="result">0</div>
+            <div class="calculator-layout">
+                <!-- Left Panel - Keyboard Shortcuts -->
+                <div class="side-panel shortcuts-panel">
+                    <div class="panel-header-mini">
+                        <span class="blink">_</span> SHORTCUTS
                     </div>
-
-                    <!-- Calculator Buttons -->
-                    <div class="calc-buttons">
-                        <!-- Row 1 -->
-                        <button class="calc-btn func-btn" data-action="clear">C</button>
-                        <button class="calc-btn func-btn" data-action="backspace">⌫</button>
-                        <button class="calc-btn func-btn" data-action="percent">%</button>
-                        <button class="calc-btn operator-btn" data-action="divide">÷</button>
-
-                        <!-- Row 2 -->
-                        <button class="calc-btn number-btn" data-value="7">7</button>
-                        <button class="calc-btn number-btn" data-value="8">8</button>
-                        <button class="calc-btn number-btn" data-value="9">9</button>
-                        <button class="calc-btn operator-btn" data-action="multiply">×</button>
-
-                        <!-- Row 3 -->
-                        <button class="calc-btn number-btn" data-value="4">4</button>
-                        <button class="calc-btn number-btn" data-value="5">5</button>
-                        <button class="calc-btn number-btn" data-value="6">6</button>
-                        <button class="calc-btn operator-btn" data-action="subtract">−</button>
-
-                        <!-- Row 4 -->
-                        <button class="calc-btn number-btn" data-value="1">1</button>
-                        <button class="calc-btn number-btn" data-value="2">2</button>
-                        <button class="calc-btn number-btn" data-value="3">3</button>
-                        <button class="calc-btn operator-btn" data-action="add">+</button>
-
-                        <!-- Row 5 -->
-                        <button class="calc-btn number-btn zero-btn" data-value="0">0</button>
-                        <button class="calc-btn number-btn decimal-btn" data-value=".">.</button>
-                        <button class="calc-btn equals-btn" data-action="equals">=</button>
+                    <div class="panel-body">
+                        <div class="shortcut-item">
+                            <span class="key">0-9</span>
+                            <span class="desc">Numbers</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="key">+ - * /</span>
+                            <span class="desc">Operators</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="key">Enter</span>
+                            <span class="desc">Calculate</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="key">Esc</span>
+                            <span class="desc">Clear</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="key">←</span>
+                            <span class="desc">Backspace</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span class="key">%</span>
+                            <span class="desc">Percent</span>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Center - Calculator -->
+                <div class="calculator-container">
+                    <div class="calc-device">
+                        <div class="calc-brand">GEBIN</div>
+                        <div class="calc-display">
+                            <div class="display-expression" id="expression"></div>
+                            <div class="display-result" id="result">0</div>
+                        </div>
+                        <div class="calc-buttons">
+                            <button class="calc-btn func-btn" data-action="clear">C</button>
+                            <button class="calc-btn func-btn" data-action="backspace">⌫</button>
+                            <button class="calc-btn func-btn" data-action="percent">%</button>
+                            <button class="calc-btn operator-btn" data-action="divide">÷</button>
+                            <button class="calc-btn number-btn" data-value="7">7</button>
+                            <button class="calc-btn number-btn" data-value="8">8</button>
+                            <button class="calc-btn number-btn" data-value="9">9</button>
+                            <button class="calc-btn operator-btn" data-action="multiply">×</button>
+                            <button class="calc-btn number-btn" data-value="4">4</button>
+                            <button class="calc-btn number-btn" data-value="5">5</button>
+                            <button class="calc-btn number-btn" data-value="6">6</button>
+                            <button class="calc-btn operator-btn" data-action="subtract">−</button>
+                            <button class="calc-btn number-btn" data-value="1">1</button>
+                            <button class="calc-btn number-btn" data-value="2">2</button>
+                            <button class="calc-btn number-btn" data-value="3">3</button>
+                            <button class="calc-btn operator-btn" data-action="add">+</button>
+                            <button class="calc-btn number-btn zero-btn" data-value="0">0</button>
+                            <button class="calc-btn number-btn decimal-btn" data-value=".">.</button>
+                            <button class="calc-btn equals-btn" data-action="equals">=</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - History -->
+                <div class="side-panel history-panel">
+                    <div class="panel-header-mini">
+                        <span class="blink">_</span> HISTORY
+                    </div>
+                    <div class="panel-body history-list" id="historyList">
+                        <div class="history-empty">
+                            <span class="empty-icon">📝</span>
+                            <span class="empty-text">No calculations yet</span>
+                        </div>
+                    </div>
+                    <button class="clear-history-btn" id="clearHistory">CLEAR</button>
                 </div>
             </div>
         </main>
