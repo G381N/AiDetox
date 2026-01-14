@@ -5,3 +5,15 @@ async function getUser() {
 }
 
 getUser();
+
+
+async function createUser() {
+  saveToDB();
+  sendEmail();
+}
+
+
+async function createUser() {
+  await saveToDB();
+  await sendEmail();
+}
