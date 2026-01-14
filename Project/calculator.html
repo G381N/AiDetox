@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>Calculator - AiDetox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/calculator.css">
+</head>
+
+<body>
+    <!-- Scanline overlay for CRT effect -->
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">[CALC.EXE]</div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge" id="userBadge">GUEST</div>
+                <button class="logout-btn" id="logoutBtn" onclick="logout()">EXIT</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="calculator-container">
+                <!-- Calculator Device Body -->
+                <div class="calc-device">
+                    <!-- Brand -->
+                    <div class="calc-brand">GEBIN</div>
+                    <!-- Display -->
+                    <div class="calc-display">
+                        <div class="display-expression" id="expression"></div>
+                        <div class="display-result" id="result">0</div>
+                    </div>
+
+                    <!-- Calculator Buttons -->
+                    <div class="calc-buttons">
+                        <!-- Row 1 -->
+                        <button class="calc-btn func-btn" data-action="clear">C</button>
+                        <button class="calc-btn func-btn" data-action="backspace">⌫</button>
+                        <button class="calc-btn func-btn" data-action="percent">%</button>
+                        <button class="calc-btn operator-btn" data-action="divide">÷</button>
+
+                        <!-- Row 2 -->
+                        <button class="calc-btn number-btn" data-value="7">7</button>
+                        <button class="calc-btn number-btn" data-value="8">8</button>
+                        <button class="calc-btn number-btn" data-value="9">9</button>
+                        <button class="calc-btn operator-btn" data-action="multiply">×</button>
+
+                        <!-- Row 3 -->
+                        <button class="calc-btn number-btn" data-value="4">4</button>
+                        <button class="calc-btn number-btn" data-value="5">5</button>
+                        <button class="calc-btn number-btn" data-value="6">6</button>
+                        <button class="calc-btn operator-btn" data-action="subtract">−</button>
+
+                        <!-- Row 4 -->
+                        <button class="calc-btn number-btn" data-value="1">1</button>
+                        <button class="calc-btn number-btn" data-value="2">2</button>
+                        <button class="calc-btn number-btn" data-value="3">3</button>
+                        <button class="calc-btn operator-btn" data-action="add">+</button>
+
+                        <!-- Row 5 -->
+                        <button class="calc-btn number-btn zero-btn" data-value="0">0</button>
+                        <button class="calc-btn number-btn decimal-btn" data-value=".">.</button>
+                        <button class="calc-btn equals-btn" data-action="equals">=</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>* 2026 Gebin's AiDetox Project *</p>
+            <div class="footer-hint">Press ENTER to calculate</div>
+        </footer>
+
+        <!-- Boy Mascot with Speech Bubble -->
+        <div class="mascot-container" id="mascotContainer">
+            <!-- Small Yellow CTA Bubble -->
+            <div class="cta-bubble" id="ctaBubble">
+                <span class="cta-text" id="ctaText">Click me!</span>
+                <div class="cta-bubble-tail"></div>
+            </div>
+            <!-- Main Speech Bubble -->
+            <div class="speech-bubble" id="speechBubble">
+                <div class="speech-bubble-header">
+                    <span class="speech-bubble-title">PROJECTS</span>
+                    <button class="speech-bubble-close" id="closeBubble">X</button>
+                </div>
+                <div class="speech-bubble-content">
+                    <a href="todo.html" class="project-link">
+                        <span class="project-icon">📋</span>
+                        <span class="project-name">TODO LIST</span>
+                    </a>
+                    <a href="userDir.html" class="project-link">
+                        <span class="project-icon">📁</span>
+                        <span class="project-name">USER DIRECTORY</span>
+                    </a>
+                    <!-- See More Link -->
+                    <a href="https://gebin.net" target="_blank" rel="noopener noreferrer"
+                        class="project-link see-more-link">
+                        <span class="project-icon">🌐</span>
+                        <span class="project-name">SEE MORE...</span>
+                    </a>
+                </div>
+                <div class="speech-bubble-tail"></div>
+            </div>
+            <!-- Boy GIF -->
+            <img src="/public/gif/boy.gif" alt="Mascot" class="mascot-boy" id="mascotBoy">
+        </div>
+    </div>
+
+    <script src="/scrips/calculator.js"></script>
+</body>
+
+</html>
