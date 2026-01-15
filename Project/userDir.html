@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>User Directory - AiDetox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/userDir.css">
+</head>
+
+<body>
+    <!-- Scanline overlay for CRT effect -->
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <a href="dashboard.html" class="nav-crumb">MAIN</a> > [USER.DIR]
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge" id="userBadge">GUEST</div>
+                <button class="logout-btn" id="logoutBtn" onclick="logout()">EXIT</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 8-BIT MONITOR FRAME -->
+            <div class="monitor-frame">
+                <!-- Monitor bezel -->
+                <div class="monitor-bezel">
+                    <!-- Sticky Note -->
+                    <div class="sticky-note">
+                        <div class="sticky-pin"></div>
+                        <div class="sticky-content">
+                            <span class="sticky-title">SEARCH</span>
+                            <span class="sticky-text">DB Online</span>
+                        </div>
+                    </div>
+
+                    <!-- Monitor Screen (CRT) -->
+                    <div class="monitor-screen">
+                        <div class="app-panel">
+                            <!-- App Toolbar -->
+                            <div class="app-toolbar">
+                                <div class="search-container">
+                                    <span class="search-icon">🔍</span>
+                                    <input type="text" id="search" placeholder="SEARCH USERS...">
+                                </div>
+                                <div class="window-controls">
+                                    <div class="win-btn min">-</div>
+                                    <div class="win-btn max">□</div>
+                                    <div class="win-btn close">x</div>
+                                </div>
+                            </div>
+
+                            <!-- User Grid Area -->
+                            <div class="user-content-area">
+                                <div id="loading" class="status-msg">
+                                    <span class="blink">> ACCESSING DATABASE...</span>
+                                </div>
+                                <div id="error" class="status-msg error-msg" style="display: none;"></div>
+
+                                <div id="user-list" class="pokemon-card-grid">
+                                    <!-- Cards will be injected here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monitor Stand & Power -->
+                    <div class="monitor-stand">
+                        <div class="stand-neck"></div>
+                        <div class="stand-base"></div>
+                    </div>
+                    <div class="monitor-power">
+                        <div class="power-led"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>* 2026 Gebin's AiDetox Project *</p>
+            <div class="footer-hint">Press ENTER to select...</div>
+        </footer>
+
+        <!-- Boy Mascot with Speech Bubble -->
+        <div class="mascot-container" id="mascotContainer">
+            <div class="cta-bubble" id="ctaBubble">
+                <span class="cta-text" id="ctaText">Click me!</span>
+                <div class="cta-bubble-tail"></div>
+            </div>
+            <div class="speech-bubble" id="speechBubble">
+                <div class="speech-bubble-header">
+                    <span class="speech-bubble-title">PROJECTS</span>
+                    <button class="speech-bubble-close" id="closeBubble">X</button>
+                </div>
+                <div class="speech-bubble-content">
+                    <a href="todo.html" class="project-link">
+                        <span class="project-icon">📋</span>
+                        <span class="project-name">TODO LIST</span>
+                    </a>
+                    <a href="calculator.html" class="project-link">
+                        <span class="project-icon">🧮</span>
+                        <span class="project-name">CALCULATOR</span>
+                    </a>
+                    <a href="dashboard.html" class="project-link">
+                        <span class="project-icon">💻</span>
+                        <span class="project-name">DASHBOARD</span>
+                    </a>
+                    <a href="https://gebin.net" target="_blank" rel="noopener noreferrer"
+                        class="project-link see-more-link">
+                        <span class="project-icon">🌐</span>
+                        <span class="project-name">SEE MORE...</span>
+                    </a>
+                </div>
+                <div class="speech-bubble-tail"></div>
+            </div>
+            <img src="/public/gif/boy.gif" alt="Mascot" class="mascot-boy" id="mascotBoy">
+        </div>
+    </div>
+
+    <script src="/scrips/userDir.js"></script>
+</body>
+
+</html>
