@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>Dashboard - AiDetox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Added Vt323 for handwritten notes effect -->
+    <link href="https://fonts.googleapis.com/css2?family=Vt323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+    <!-- Scanline overlay for CRT effect (kept subtle) -->
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">[DASHBOARD.EXE]</div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge" id="userBadge">GUEST</div>
+                <button class="logout-btn" id="logoutBtn" onclick="logout()">EXIT</button>
+            </div>
+        </header>
+
+        <!-- Main Content: Notice Board -->
+        <main class="main-content">
+            <div class="notice-board-frame">
+                <!-- Header Tape Note -->
+                <div class="board-header">
+                    <h1 class="board-title">PROJECT BOARD</h1>
+                </div>
+
+                <!-- Polaroids Grid -->
+                <div class="polaroid-grid">
+
+                    <!-- Todo List Polaroid -->
+                    <a href="todo.html" class="polaroid">
+                        <div class="pin"></div>
+                        <div class="photo-area">
+                            <span class="photo-icon">📋</span>
+                        </div>
+                        <div class="caption">
+                            <span class="caption-title">To-Do List</span>
+                            <span class="caption-subtitle">Stay tracked!</span>
+                        </div>
+                    </a>
+
+                    <!-- Calculator Polaroid -->
+                    <a href="calculator.html" class="polaroid">
+                        <div class="pin"></div>
+                        <div class="photo-area">
+                            <span class="photo-icon">🧮</span>
+                        </div>
+                        <div class="caption">
+                            <span class="caption-title">Calculator</span>
+                            <span class="caption-subtitle">Do Math!</span>
+                        </div>
+                    </a>
+
+                    <!-- User Directory Polaroid -->
+                    <a href="userDir.html" class="polaroid">
+                        <div class="pin"></div>
+                        <div class="photo-area">
+                            <span class="photo-icon">📁</span>
+                        </div>
+                        <div class="caption">
+                            <span class="caption-title">User Dir</span>
+                            <span class="caption-subtitle">System Users</span>
+                        </div>
+                    </a>
+
+                    <!-- Post-it Note for Website -->
+                    <a href="https://gebin.net" target="_blank" class="post-it">
+                        <div class="tape"></div>
+                        <div class="post-it-title">VISIT WEB</div>
+                        <div class="post-it-text">gebin.net</div>
+                        <div style="margin-top: 10px; font-size: 14px;">(Click Here!)</div>
+                    </a>
+
+                </div>
+
+                <!-- Decorative Elements -->
+                <div class="sticky-decor pink">
+                    <div class="pin"></div>
+                    <span>KEEP<br>IT<br>8-BIT</span>
+                </div>
+
+                <div class="sticky-decor blue">
+                    <div class="tape-corner"></div>
+                    <span>v1.0</span>
+                </div>
+
+                <div class="pixel-sticker star-1">★</div>
+                <div class="pixel-sticker star-2">★</div>
+
+            </div>
+        </main>
+
+        <!-- Footer (Consistent with Calc/Todo) -->
+        <footer class="app-footer">
+            <p>* 2026 Gebin's AiDetox Project *</p>
+            <div class="footer-hint">Select a project...</div>
+        </footer>
+
+        <!-- Boy Mascot with Speech Bubble (Retained) -->
+        <div class="mascot-container" id="mascotContainer">
+            <div class="cta-bubble" id="ctaBubble">
+                <span class="cta-text" id="ctaText">Click me!</span>
+                <div class="cta-bubble-tail"></div>
+            </div>
+            <div class="speech-bubble" id="speechBubble">
+                <div class="speech-bubble-header">
+                    <span class="speech-bubble-title">PROJECTS</span>
+                    <button class="speech-bubble-close" id="closeBubble">X</button>
+                </div>
+                <div class="speech-bubble-content">
+                    <a href="todo.html" class="project-link">
+                        <span class="project-icon">📋</span>
+                        <span class="project-name">TODO LIST</span>
+                    </a>
+                    <a href="calculator.html" class="project-link">
+                        <span class="project-icon">🧮</span>
+                        <span class="project-name">CALCULATOR</span>
+                    </a>
+                    <a href="userDir.html" class="project-link">
+                        <span class="project-icon">📁</span>
+                        <span class="project-name">USER DIRECTORY</span>
+                    </a>
+                    <a href="https://gebin.net" target="_blank" rel="noopener noreferrer"
+                        class="project-link see-more-link">
+                        <span class="project-icon">🌐</span>
+                        <span class="project-name">SEE MORE...</span>
+                    </a>
+                </div>
+                <div class="speech-bubble-tail"></div>
+            </div>
+            <img src="/public/gif/boy.gif" alt="Mascot" class="mascot-boy" id="mascotBoy">
+        </div>
+    </div>
+
+    <script src="/scrips/dashboard.js"></script>
+</body>
+
+</html>

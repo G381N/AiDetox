@@ -63,7 +63,7 @@ function switchTab(mode) {
         socialGroup.style.display = 'block';
         formTitle.innerText = 'System Login';
         submitBtn.innerText = 'Login';
-        
+
         // Change email label to Username for login
         emailLabel.innerText = 'Username:';
         emailInput.placeholder = 'Enter your username';
@@ -77,7 +77,7 @@ function switchTab(mode) {
         socialGroup.style.display = 'none';
         formTitle.innerText = 'New User';
         submitBtn.innerText = 'Register';
-        
+
         // Reset to email for registration
         emailLabel.innerText = 'Email:';
         emailInput.placeholder = 'Enter your email';
@@ -200,41 +200,41 @@ function handleLogin(username, password) {
         // Store login state
         sessionStorage.setItem('isLoggedIn', 'true');
         sessionStorage.setItem('currentUser', username);
-        
+
         // Show success and redirect
         showSuccessMessage('Login successful! Redirecting...');
-        
+
         // Disable submit button during redirect
         document.getElementById('submitBtn').disabled = true;
-        
+
         // Redirect to todo page after brief delay
         setTimeout(() => {
-            window.location.href = 'todo.html';
+            window.location.href = 'dashboard.html';
         }, 1000);
-        
+
         return false; // Prevent form submission
     } else {
         // Check registered users
         const users = getRegisteredUsers();
-        const user = users.find(u => 
-            (u.email.toLowerCase() === username.toLowerCase() || u.name.toLowerCase() === username.toLowerCase()) 
+        const user = users.find(u =>
+            (u.email.toLowerCase() === username.toLowerCase() || u.name.toLowerCase() === username.toLowerCase())
             && u.password === password
         );
-        
+
         if (user) {
             sessionStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('currentUser', user.name);
-            
+
             showSuccessMessage('Login successful! Redirecting...');
             document.getElementById('submitBtn').disabled = true;
-            
+
             setTimeout(() => {
-                window.location.href = 'todo.html';
+                window.location.href = 'dashboard.html';
             }, 1000);
-            
+
             return false;
         }
-        
+
         document.getElementById('emailError').innerText = 'Invalid username or password.';
         return false;
     }
@@ -251,17 +251,17 @@ function handleRegistration(name, email, password) {
         password: password,
         createdAt: new Date().toISOString()
     };
-    
+
     saveUser(newUser);
-    
+
     // Show success message
     showSuccessMessage('Registration successful! Please login.');
-    
+
     // Switch to login tab after delay
     setTimeout(() => {
         switchTab('login');
     }, 1500);
-    
+
     return false; // Prevent form submission
 }
 
@@ -277,15 +277,15 @@ function init() {
         successDiv.className = 'success-message';
         form.insertBefore(successDiv, form.firstChild);
     }
-    
+
     // Add enter key support for form submission
-    document.getElementById('registrationForm').addEventListener('keypress', function(e) {
+    document.getElementById('registrationForm').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();
             validateForm();
         }
     });
-    
+
     // Set initial state
     switchTab('register');
 }

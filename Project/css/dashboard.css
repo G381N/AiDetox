@@ -1,0 +1,1436 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vt323&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --accent-color: #fca311;
+    --wood-light: #a0522d;
+    --wood-dark: #5d2906;
+    --cork-light: #d7c9a3;
+    --cork-dark: #ccbf9b;
+    --polaroid-bg: #fdfdfd;
+    --pin-red: #ef4444;
+    --pin-blue: #3b82f6;
+    --pin-green: #22c55e;
+    --pin-yellow: #eab308;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --border-color: #334155;
+    /* Added for consistency w/ footer links */
+}
+
+html {
+    font-size: 16px;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent page scroll */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Press Start 2P', cursive;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    background-image: url('/public/gif/g1.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 0;
+}
+
+/* CRT Scanlines */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.1) 0px,
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px,
+            transparent 3px);
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.2;
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.app-container {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== HEADER ========== */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #0a0a14;
+    border-bottom: 4px solid var(--accent-color);
+    flex-shrink: 0;
+    height: 60px;
+    /* Fixed height */
+}
+
+.logo {
+    font-size: clamp(12px, 1.6vw, 15px);
+    color: var(--accent-color);
+    text-shadow: 2px 2px 0 #000;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-badge {
+    font-size: clamp(8px, 1vw, 10px);
+    background: #1a1a2e;
+    padding: 8px 12px;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.logout-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(7px, 0.9vw, 9px);
+    padding: 8px 14px;
+    background: #dc2626;
+    color: #fff;
+    border: 4px solid #000;
+    box-shadow: 4px 4px 0 #7f1d1d;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.logout-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #7f1d1d;
+}
+
+.logout-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* ========== MAIN CONTENT (Centered, No Scroll) ========== */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    /* Ensure content stays inside */
+}
+
+/* Fixed Size Board - 8-Bit Wood Style */
+.notice-board-frame {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 80%;
+    /* Takes up 80% of remaining space */
+    max-height: 600px;
+    /* Cap height to ensure it fits comfortably */
+    background-color: var(--cork-light);
+    /* Pixelated Cork Pattern */
+    background-image:
+        linear-gradient(45deg, var(--cork-dark) 25%, transparent 25%, transparent 75%, var(--cork-dark) 75%, var(--cork-dark)),
+        linear-gradient(45deg, var(--cork-dark) 25%, transparent 25%, transparent 75%, var(--cork-dark) 75%, var(--cork-dark));
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+
+    /* Pixel Art Wood Frame using Box Shadows */
+    border: 8px solid #8b4513;
+    box-shadow:
+        /* Inner Shadow (Bezel) */
+        inset 8px 8px 0 rgba(0, 0, 0, 0.2),
+        inset -8px -8px 0 rgba(0, 0, 0, 0.1),
+        /* Outer Wood Border (3D Effect) */
+        -8px -8px 0 var(--wood-light),
+        8px 8px 0 var(--wood-dark),
+        /* Final Outline */
+        0 0 0 8px #000,
+        /* Drop Shadow */
+        20px 20px 0 rgba(0, 0, 0, 0.5);
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    image-rendering: pixelated;
+}
+
+.board-header {
+    background: #fff;
+    padding: 8px 16px;
+    transform: rotate(0deg);
+    /* No rotation for pixel perfection */
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    border: 4px solid #000;
+    /* Thicker border */
+    position: relative;
+    z-index: 20;
+}
+
+/* Pixel Tape Effect */
+.board-header::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent page scroll */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Press Start 2P', cursive;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    background-image: url('/public/gif/g1.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 0;
+}
+
+/* CRT Scanlines */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.1) 0px,
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px,
+            transparent 3px);
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.2;
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.app-container {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== HEADER ========== */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #0a0a14;
+    border-bottom: 4px solid var(--accent-color);
+    flex-shrink: 0;
+    height: 60px;
+    /* Fixed height */
+}
+
+.logo {
+    font-size: clamp(12px, 1.6vw, 15px);
+    color: var(--accent-color);
+    text-shadow: 2px 2px 0 #000;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-badge {
+    font-size: clamp(8px, 1vw, 10px);
+    background: #1a1a2e;
+    padding: 8px 12px;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.logout-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(7px, 0.9vw, 9px);
+    padding: 8px 14px;
+    background: #dc2626;
+    color: #fff;
+    border: 4px solid #000;
+    box-shadow: 4px 4px 0 #7f1d1d;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.logout-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #7f1d1d;
+}
+
+.logout-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* ========== MAIN CONTENT (Centered, No Scroll) ========== */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    /* Ensure content stays inside */
+}
+
+/* Fixed Size Board - 8-Bit Wood Style */
+.notice-board-frame {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 80%;
+    /* Takes up 80% of remaining space */
+    max-height: 600px;
+    /* Cap height to ensure it fits comfortably */
+    background-color: var(--cork-light);
+    /* Pixelated Cork Pattern */
+    background-image:
+        linear-gradient(45deg, var(--cork-dark) 25%, transparent 25%, transparent 75%, var(--cork-dark) 75%, var(--cork-dark)),
+        linear-gradient(45deg, var(--cork-dark) 25%, transparent 25%, transparent 75%, var(--cork-dark) 75%, var(--cork-dark));
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+
+    /* Pixel Art Wood Frame using Box Shadows */
+    border: 8px solid #8b4513;
+    box-shadow:
+        /* Inner Shadow (Bezel) */
+        inset 8px 8px 0 rgba(0, 0, 0, 0.2),
+        inset -8px -8px 0 rgba(0, 0, 0, 0.1),
+        /* Outer Wood Border (3D Effect) */
+        -8px -8px 0 var(--wood-light),
+        8px 8px 0 var(--wood-dark),
+        /* Final Outline */
+        0 0 0 8px #000,
+        /* Drop Shadow */
+        20px 20px 0 rgba(0, 0, 0, 0.5);
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    image-rendering: pixelated;
+}
+
+.board-header {
+    background: #fff;
+    padding: 8px 16px;
+    transform: rotate(0deg);
+    /* No rotation for pixel perfection */
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    border: 4px solid #000;
+    /* Thicker border */
+    position: relative;
+    z-index: 20;
+}
+
+/* Pixel Tape Effect */
+.board-header::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Board Title - 8-Bit Font */
+.board-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    /* Reduced from 24px */
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.5;
+}
+
+/* Polaroids Container - Flex to fit */
+.polaroid-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* No scroll inside board */
+}
+
+/* Polaroid Items - Smaller Size & Pixel Style */
+.polaroid {
+    background: var(--polaroid-bg);
+    padding: 8px 8px 40px 8px;
+    /* Reduced padding */
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+    /* Hard box shadow */
+    transition: all 0.1s steps(2);
+    /* Stepped animation for retro feel */
+    text-decoration: none;
+    position: relative;
+    width: 140px;
+    /* Reduced width */
+    height: 170px;
+    /* Reduced height */
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    /* Subtle border */
+}
+
+/* Stepped Rotations (Pixel Art friendly) */
+.polaroid:nth-child(2n) {
+    transform: rotate(2deg);
+}
+
+.polaroid:nth-child(2n+1) {
+    transform: rotate(-2deg);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    border-color: #000;
+}
+
+/* Pin - Square Pixel */
+.pin {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    /* Square for pixel art */
+    background: var(--pin-red);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    border: 2px solid #000;
+    /* Black outline for pin */
+}
+
+/* Pin Highlight (Pixel) */
+.pin::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 0;
+    /* Square highlight */
+}
+
+.polaroid:nth-child(2n) .pin {
+    background: var(--pin-blue);
+}
+
+.polaroid:nth-child(3n) .pin {
+    background: var(--pin-green);
+}
+
+.polaroid:nth-child(4n) .pin {
+    background: var(--pin-yellow);
+}
+
+/* Photo Area - Enhanced 8-Bit Style */
+.photo-area {
+    background: #1a1a1a;
+    /* Checkerboard Pattern for Photo Background */
+    background-image:
+        linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222),
+        linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 4px solid #000;
+    /* Thicker border for screen */
+}
+
+.photo-icon {
+    font-size: 42px;
+    /* Nicely sized icon */
+    filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 1));
+    /* Hard shadow */
+    transition: transform 0.1s;
+}
+
+.polaroid:hover .photo-icon {
+    transform: scale(1.1);
+}
+
+/* Caption - 8-Bit Font */
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.caption-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+    /* Reduced from 16px */
+    color: #333;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.caption-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    /* Reduced from 12px */
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* Post-it - 8-Bit Font */
+.post-it {
+    background: #ffff88;
+    width: 130px;
+    height: 130px;
+    padding: 10px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+    transform: rotate(4deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s;
+    font-family: 'Press Start 2P', cursive;
+    /* Swapped font */
+    color: #333;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+.post-it:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    border: 2px solid #000;
+}
+
+.post-it-title {
+    font-size: 10px;
+    /* Reduced from 18px */
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+
+.post-it-text {
+    font-size: 8px;
+    /* Reduced from 14px */
+}
+
+.tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 50px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ========== FOOTER (Restored to match Todo Page) ========== */
+.app-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+    /* Compact padding */
+    font-size: 10px;
+    color: #64748b;
+    gap: 8px;
+    height: 50px;
+    background: #0a0a14;
+    /* Dark background restored */
+    border-top: 4px solid var(--accent-color);
+    /* Accent border restored */
+    width: 100%;
+    z-index: 10;
+    /* Ensure it sits above background elements */
+}
+
+.footer-hint {
+    color: var(--accent-color);
+    animation: blink 2s infinite;
+}
+
+
+
+/* ========================================
+   MASCOT & SPEECH BUBBLE - 8-BIT STYLE (DIRECT COPY FROM TODO)
+   ======================================== */
+.mascot-container {
+    position: fixed;
+    bottom: 46px;
+    right: 20px;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* The Boy Mascot */
+.mascot-boy {
+    width: 80px;
+    height: auto;
+    image-rendering: pixelated;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.5));
+    position: relative;
+    z-index: 501;
+}
+
+.mascot-boy:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.mascot-boy:active {
+    transform: scale(0.95);
+}
+
+/* Speech Bubble - Matches Page Aesthetic */
+.speech-bubble {
+    position: absolute;
+    bottom: 90px;
+    right: -10px;
+    min-width: 280px;
+    background: #1e293b;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8) translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 502;
+    border: 6px solid #000;
+    box-shadow:
+        inset 4px 4px 0 rgba(255, 255, 255, 0.05),
+        inset -4px -4px 0 rgba(0, 0, 0, 0.3),
+        8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.speech-bubble.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+}
+
+/* Speech bubble header */
+.speech-bubble-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2e 100%);
+    border-bottom: 4px solid var(--accent-color);
+}
+
+.speech-bubble-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* Close button - styled like EXIT button */
+.speech-bubble-close {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+    padding: 6px 10px;
+    background: #dc2626;
+    color: #fff;
+    border: 4px solid #000;
+    box-shadow: 4px 4px 0 #7f1d1d;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.speech-bubble-close:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #7f1d1d;
+}
+
+.speech-bubble-close:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* Speech bubble content */
+.speech-bubble-content {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(180deg, #1e293b 0%, #151d2e 100%);
+}
+
+/* Project Links */
+.project-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 4px solid var(--border-color);
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.project-link::before {
+    content: '>';
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: var(--accent-color);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.15s ease;
+}
+
+.project-link:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.project-link:hover {
+    border-color: var(--accent-color);
+    background: rgba(252, 163, 17, 0.1);
+    padding-left: 28px;
+}
+
+.project-link:active {
+    transform: scale(0.98);
+}
+
+.project-icon {
+    font-size: 20px;
+}
+
+.project-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+/* Speech Bubble Tail */
+.speech-bubble-tail {
+    position: absolute;
+    bottom: -18px;
+    right: 30px;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 18px solid #000;
+}
+
+.speech-bubble-tail::before {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 14px solid #151d2e;
+}
+
+/* See More Link - Special Styling */
+.see-more-link {
+    background: linear-gradient(135deg, rgba(252, 163, 17, 0.2) 0%, rgba(241, 196, 15, 0.2) 100%);
+    border-color: #fca311;
+}
+
+.see-more-link:hover {
+    background: linear-gradient(135deg, rgba(252, 163, 17, 0.4) 0%, rgba(241, 196, 15, 0.4) 100%);
+    border-color: #f1c40f;
+}
+
+.see-more-link .project-name {
+    color: #fca311;
+}
+
+/* ========================================
+   SMALL YELLOW CTA BUBBLE
+   ======================================== */
+.cta-bubble {
+    position: absolute;
+    bottom: 85px;
+    right: 50%;
+    transform: translateX(50%);
+    background: #fca311;
+    padding: 8px 14px;
+    border: 4px solid #000;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    z-index: 503;
+    animation: ctaBounce 2s ease-in-out infinite;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.cta-bubble::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.cta-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: #000;
+    text-shadow: none;
+    display: block;
+    text-align: center;
+}
+
+/* CTA Bubble Tail */
+.cta-bubble-tail {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #000;
+}
+
+.cta-bubble-tail::before {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #fca311;
+}
+
+/* CTA Bounce Animation */
+@keyframes ctaBounce {
+
+    0%,
+    100% {
+        transform: translateX(50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(50%) translateY(-8px);
+    }
+}
+
+/* Hide CTA when speech bubble is open */
+.cta-bubble.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(50%) scale(0.8);
+    transition: all 0.2s ease;
+}
+
+/* Navigation Breadcrumb */
+.nav-crumb {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px dashed transparent;
+    transition: all 0.2s;
+}
+
+.nav-crumb:hover {
+    border-bottom-color: var(--accent-color);
+    opacity: 0.8;
+}
+
+/* ========================================
+   DECORATIONS
+   ======================================== */
+
+.sticky-decor {
+    position: absolute;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    /* Swapped font */
+    font-size: 8px;
+    /* Reduced size */
+    text-align: center;
+    color: #333;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: 2px solid #000;
+    /* Added border for definition */
+    transition: transform 0.2s;
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+.sticky-decor:hover {
+    transform: scale(1.1);
+    z-index: 100;
+}
+
+.sticky-decor.pink {
+    background: #ff9ff3;
+    width: 80px;
+    height: 80px;
+    top: 30px;
+    left: 30px;
+    transform: rotate(-5deg);
+}
+
+.sticky-decor.blue {
+    background: #54a0ff;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    transform: rotate(3deg);
+    color: #fff;
+}
+
+/* Tape on blue sticky */
+.tape-corner {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 25px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    transform: rotate(45deg);
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Pixel Stickers */
+.pixel-sticker {
+    position: absolute;
+    font-family: 'Press Start 2P', cursive;
+    z-index: 5;
+    pointer-events: none;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-sticker.star-1 {
+    top: 15%;
+    left: 10%;
+    color: #f1c40f;
+    font-size: 24px;
+    transform: rotate(15deg);
+}
+
+.pixel-sticker.star-2 {
+    bottom: 20%;
+    left: 20%;
+    border-right: 10px solid transparent;
+    border-top: 14px solid #151d2e;
+}
+
+/* See More Link - Special Styling */
+.see-more-link {
+    background: linear-gradient(135deg, rgba(252, 163, 17, 0.2) 0%, rgba(241, 196, 15, 0.2) 100%);
+    border-color: #fca311;
+}
+
+.see-more-link:hover {
+    background: linear-gradient(135deg, rgba(252, 163, 17, 0.4) 0%, rgba(241, 196, 15, 0.4) 100%);
+    border-color: #f1c40f;
+}
+
+.see-more-link .project-name {
+    color: #fca311;
+}
+
+/* ========================================
+   SMALL YELLOW CTA BUBBLE
+   ======================================== */
+.cta-bubble {
+    position: absolute;
+    bottom: 85px;
+    right: 50%;
+    transform: translateX(50%);
+    background: #fca311;
+    padding: 8px 14px;
+    border: 4px solid #000;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    z-index: 503;
+    animation: ctaBounce 2s ease-in-out infinite;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.cta-bubble::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.cta-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: #000;
+    text-shadow: none;
+    display: block;
+    text-align: center;
+}
+
+/* CTA Bubble Tail */
+.cta-bubble-tail {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #000;
+}
+
+.cta-bubble-tail::before {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #fca311;
+}
+
+/* CTA Bounce Animation */
+@keyframes ctaBounce {
+
+    0%,
+    100% {
+        transform: translateX(50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(50%) translateY(-8px);
+    }
+}
+
+/* Hide CTA when speech bubble is open */
+.cta-bubble.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(50%) scale(0.8);
+    transition: all 0.2s ease;
+}
+
+/* Navigation Breadcrumb */
+.nav-crumb {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px dashed transparent;
+    transition: all 0.2s;
+}
+
+.nav-crumb:hover {
+    border-bottom-color: var(--accent-color);
+    opacity: 0.8;
+}
+
+/* ========================================
+   DECORATIONS
+   ======================================== */
+
+.sticky-decor {
+    position: absolute;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    /* Swapped font */
+    font-size: 8px;
+    /* Reduced size */
+    text-align: center;
+    color: #333;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: 2px solid #000;
+    /* Added border for definition */
+    transition: transform 0.2s;
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+.sticky-decor:hover {
+    transform: scale(1.1);
+    z-index: 100;
+}
+
+.sticky-decor.pink {
+    background: #ff9ff3;
+    width: 80px;
+    height: 80px;
+    top: 30px;
+    left: 30px;
+    transform: rotate(-5deg);
+}
+
+.sticky-decor.blue {
+    background: #54a0ff;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    transform: rotate(3deg);
+    color: #fff;
+}
+
+/* Tape on blue sticky */
+.tape-corner {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 25px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    transform: rotate(45deg);
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Pixel Stickers */
+.pixel-sticker {
+    position: absolute;
+    font-family: 'Press Start 2P', cursive;
+    z-index: 5;
+    pointer-events: none;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-sticker.star-1 {
+    top: 15%;
+    left: 10%;
+    color: #f1c40f;
+    font-size: 24px;
+    transform: rotate(15deg);
+}
+
+.pixel-sticker.star-2 {
+    bottom: 20%;
+    left: 20%;
+    color: #e74c3c;
+    font-size: 18px;
+    transform: rotate(-10deg);
+}
+
+/* ========================================
+   COOLER ELEMENTS & EASTER EGGS
+   ======================================== */
+
+/* Coin Sticker */
+.coin {
+    top: 35px;
+    right: 120px;
+    width: 30px;
+    height: 30px;
+    background: #f1c40f;
+    border-radius: 50%;
+    border: 3px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s;
+}
+
+.coin:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.coin-inner {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    color: #000;
+}
+
+/* Hearts (Lives) */
+.hearts {
+    top: 40px;
+    right: 25px;
+    display: flex;
+    gap: 5px;
+}
+
+.heart {
+    color: #ff4757;
+    font-size: 16px;
+    text-shadow: 2px 2px 0 #000;
+    animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    5% {
+        transform: scale(1.2);
+    }
+
+    10% {
+        transform: scale(1);
+    }
+}
+
+/* Hidden Ghost */
+.pixel-ghost {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    /* Ghost Shape using mask or clip-path is hard in 8-bit CSS, sticking to boxy ghost */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    /* Hidden by default */
+    visibility: hidden;
+    transition: opacity 0.5s;
+    z-index: 5;
+    border: 3px solid #000;
+}
+
+.pixel-ghost.revealed {
+    opacity: 1;
+    visibility: visible;
+    animation: ghostFloat 3s infinite ease-in-out;
+}
+
+.pixel-ghost .eyes {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    width: 8px;
+    height: 8px;
+    background: #000;
+    box-shadow: 14px 0 0 #000;
+    /* Second eye */
+}
+
+@keyframes ghostFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Music Player (Cassette) */
+.music-player {
+    position: absolute;
+    bottom: 30px;
+    right: 170px;
+    width: 120px;
+    height: 80px;
+    background: #333;
+    border: 4px solid #111;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotate(5deg);
+    z-index: 15;
+}
+
+.cassette-tape {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    border: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.tape-label {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    margin-bottom: 4px;
+}
+
+.tape-spools {
+    display: flex;
+    gap: 20px;
+}
+
+.spool {
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+.spool.spinning {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.control-btn {
+    width: 100%;
+    background: #e74c3c;
+    border: 2px solid #000;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.control-btn:hover {
+    background: #ff7675;
+}
+
+.control-btn.playing {
+    background: #2ecc71;
+}
