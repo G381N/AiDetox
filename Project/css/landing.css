@@ -1,0 +1,310 @@
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --accent-color: #fca311;
+    --retro-blue: #00f0ff;
+    --terminal-green: #22c55e;
+    --terminal-dim: #1e293b;
+    --border-color: #334155;
+    --shadow: 4px 4px 0px #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: url('../public/gif/index.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    font-family: 'VT323', monospace;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+}
+
+/* Overlay to darken bg for readability */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    /* Dark blue overlay */
+    z-index: 1;
+}
+
+/* CRT Effects */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(32, 32, 32, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    animation: scanline 0.2s linear infinite;
+    pointer-events: none;
+    z-index: 11;
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+/* Header / Logo */
+header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    /* Moved to left */
+    z-index: 5;
+}
+
+.logo {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    text-shadow: 2px 2px var(--accent-color);
+    opacity: 1;
+}
+
+/* Main Content */
+.landing-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
+
+/* Character & Speech */
+.character-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    /* Interactive */
+    transition: transform 0.1s;
+}
+
+.character-wrapper:active {
+    transform: scale(0.95);
+}
+
+.pixel-char {
+    width: 140px;
+    /* Slightly larger */
+    image-rendering: pixelated;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(252, 163, 17, 0.4));
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -50px;
+    right: -120px;
+    background: var(--text-color);
+    color: #000;
+    padding: 12px;
+    border-radius: 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    border: 3px solid #000;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    width: 180px;
+    z-index: 20;
+}
+
+/* Show bubble with animation class */
+.speech-bubble.visible {
+    opacity: 1;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -14px;
+    border-width: 10px 14px 0;
+    border-style: solid;
+    border-color: var(--text-color) transparent;
+    transform: rotate(90deg);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Title */
+.main-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-shadow: 4px 4px 0px #000;
+    letter-spacing: -2px;
+    position: relative;
+}
+
+.version {
+    font-size: 1rem;
+    color: var(--text-color);
+    vertical-align: super;
+    text-shadow: none;
+}
+
+.glitch {
+    position: relative;
+}
+
+/* Description Box */
+.description-box {
+    background: rgba(30, 41, 59, 0.9);
+    border: 2px solid var(--border-color);
+    padding: 20px;
+    margin-bottom: 40px;
+    text-align: left;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+}
+
+.status-ok {
+    color: var(--terminal-green);
+    float: right;
+}
+
+/* Start Button */
+.retro-btn {
+    background: var(--accent-color);
+    border: 3px solid #000;
+    color: #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    padding: 20px 40px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    box-shadow: var(--shadow);
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+.retro-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.retro-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000;
+}
+
+.retro-btn:hover::before {
+    left: 0;
+}
+
+.retro-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: var(--border-color);
+    font-size: 0.8rem;
+    z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .speech-bubble {
+        right: -60px;
+        top: -60px;
+        font-size: 0.6rem;
+        width: 140px;
+    }
+
+    .retro-btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+}
