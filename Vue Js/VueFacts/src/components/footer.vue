@@ -2,12 +2,13 @@
 import { ref } from "vue";
 const name = ref("Gebin George");
 const year = ref("2026");
+const href = ref("https://vuejs.org/");
 </script>
 
 <template>
   <footer>
     <p>
-      Learn more about me at <a target="_blank" href="https://vuejs.org/">vuejs.org</a>
+      Learn more about me at <a target="_blank" :href >vuejs.org</a>
     </p>
   </footer>
 </template>
