@@ -786,3 +786,102 @@ body::before {
     background: var(--accent-color);
     border: 2px solid #000;
 }
+
+/* Info Icon */
+.info-icon-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #fca311;
+    border: 4px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2000;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    transition: transform 0.1s;
+}
+
+.info-icon-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.info-icon-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Yellow Modal */
+.info-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2001;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-modal {
+    background-color: #fca311;
+    padding: 20px;
+    border: 6px solid #000;
+    width: 300px;
+    max-width: 80%;
+    position: relative;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    color: #000;
+    image-rendering: pixelated;
+}
+
+.info-modal h2 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 4px solid #000;
+    padding-bottom: 10px;
+}
+
+.info-modal p {
+    font-size: 10px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.info-modal-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 30px;
+    height: 30px;
+    background: #FF0000;
+    border: 4px solid #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.info-modal-close:hover {
+    transform: scale(1.1);
+}
+
+.info-modal-overlay.active {
+    display: flex;
+}

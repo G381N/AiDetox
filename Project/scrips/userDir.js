@@ -205,9 +205,33 @@ function initMascot() {
     });
 }
 
+// Info Modal Logic
+function initInfoModal() {
+    const infoBtn = document.getElementById('infoIcon');
+    const infoModal = document.getElementById('infoModal');
+    const closeInfoBtn = document.getElementById('closeInfoModal');
+
+    if (infoBtn && infoModal && closeInfoBtn) {
+        infoBtn.addEventListener('click', () => {
+            infoModal.classList.add('active');
+        });
+
+        closeInfoBtn.addEventListener('click', () => {
+            infoModal.classList.remove('active');
+        });
+
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                infoModal.classList.remove('active');
+            }
+        });
+    }
+}
+
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
     fetchUsers();
     initMascot();
+    initInfoModal();
 });

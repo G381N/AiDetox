@@ -570,4 +570,32 @@ function initMascot() {
 }
 
 // Initialize when DOM is ready
+// Info Modal Logic
+function initInfoModal() {
+    const infoBtn = document.getElementById('infoIcon');
+    const infoModal = document.getElementById('infoModal');
+    const closeInfoBtn = document.getElementById('closeInfoModal');
+
+    if (infoBtn && infoModal && closeInfoBtn) {
+        infoBtn.addEventListener('click', () => {
+            infoModal.classList.add('active');
+        });
+
+        closeInfoBtn.addEventListener('click', () => {
+            infoModal.classList.remove('active');
+        });
+
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                infoModal.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
+// Extend init to include info modal
+const originalInit = init;
+// Overwrite listener not needed as we can just add the call to the end of file which runs after definition
+document.addEventListener('DOMContentLoaded', initInfoModal);

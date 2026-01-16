@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>Flappy Bird - AiDetox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/flappy.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <a href="dashboard.html" class="nav-crumb">MAIN</a> > [BIRD.EXE]
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge" id="userBadge">GUEST</div>
+                <button class="logout-btn" id="logoutBtn" onclick="logout()">EXIT</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="monitor-frame">
+                <div class="monitor-bezel">
+                    <div class="sticky-note">
+                        <div class="sticky-pin"></div>
+                        <div class="sticky-content">
+                            <span class="sticky-title">GAME</span>
+                            <span class="sticky-text">Don't Crash!</span>
+                        </div>
+                    </div>
+
+                    <div class="monitor-screen">
+                        <div class="game-container">
+                            <canvas id="gameCanvas"></canvas>
+
+                            <div id="startScreen" class="screen-overlay">
+                                <h1>FLAPPY BIRD</h1>
+                                <p>PRESS SPACE OR TAP TO START</p>
+                                <div class="high-score-display">HIGH SCORE: <span id="highScoreDisplay">0</span></div>
+                            </div>
+
+                            <div id="gameOverScreen" class="screen-overlay hidden">
+                                <h1>GAME OVER</h1>
+                                <div class="score-card">
+                                    <p>SCORE: <span id="currentScore">0</span></p>
+                                    <p>BEST: <span id="bestScore">0</span></p>
+                                </div>
+                                <button id="restartBtn">TRY AGAIN</button>
+                            </div>
+
+                            <div class="score-hud">
+                                <span id="gameScore">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="monitor-stand">
+                        <div class="stand-neck"></div>
+                        <div class="stand-base"></div>
+                    </div>
+                    <div class="monitor-power">
+                        <div class="power-led"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>* 2026 Gebin's AiDetox Project *</p>
+            <div class="footer-hint">Space / Click to Jump</div>
+        </footer>
+
+        <!-- Mascot -->
+        <div class="mascot-container" id="mascotContainer">
+            <div class="cta-bubble" id="ctaBubble">
+                <span class="cta-text" id="ctaText">Play!</span>
+                <div class="cta-bubble-tail"></div>
+            </div>
+            <div class="speech-bubble" id="speechBubble">
+                <div class="speech-bubble-header">
+                    <span class="speech-bubble-title">PROJECTS</span>
+                    <button class="speech-bubble-close" id="closeBubble">X</button>
+                </div>
+                <div class="speech-bubble-content">
+                    <a href="todo.html" class="project-link">
+                        <span class="project-icon">📋</span>
+                        <span class="project-name">TODO LIST</span>
+                    </a>
+                    <a href="calculator.html" class="project-link">
+                        <span class="project-icon">🧮</span>
+                        <span class="project-name">CALCULATOR</span>
+                    </a>
+                    <a href="userDir.html" class="project-link">
+                        <span class="project-icon">📁</span>
+                        <span class="project-name">USER DIRECTORY</span>
+                    </a>
+                    <a href="https://gebin.net" target="_blank" class="project-link see-more-link">
+                        <span class="project-icon">🌐</span>
+                        <span class="project-name">SEE MORE...</span>
+                    </a>
+                </div>
+                <div class="speech-bubble-tail"></div>
+            </div>
+            <img src="/public/gif/boy.gif" alt="Mascot" class="mascot-boy" id="mascotBoy">
+        </div>
+    </div>
+
+    <script src="/scrips/flappy.js"></script>
+
+    <!-- Info Icon & Modal -->
+    <div class="info-icon-btn" id="infoIcon">i</div>
+    <div class="info-modal-overlay" id="infoModal">
+        <div class="info-modal">
+            <div class="info-modal-close" id="closeInfoModal">X</div>
+            <h2>INFO</h2>
+            <p>A classic flappy bird clone to practice game loops and canvas rendering.</p>
+        </div>
+    </div>
+</body>
+
+</html>

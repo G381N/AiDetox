@@ -2129,6 +2129,7 @@ input:focus-visible,
         font-size: 14px;
     }
 }
+
 /* Navigation Breadcrumb */
 .nav-crumb {
     color: inherit;
@@ -2136,6 +2137,7 @@ input:focus-visible,
     border-bottom: 2px dashed transparent;
     transition: all 0.2s;
 }
+
 .nav-crumb:hover {
     border-bottom-color: var(--accent-color);
     opacity: 0.8;
