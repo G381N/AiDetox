@@ -1,28 +1,42 @@
+<script>
+import HeaderComp from "./components/HeaderComp.vue";
+import UserForm from "./components/UserForm.vue";
+import UserList from "./components/UserList.vue";
+
+export default {
+  name: "App",
+  components: { HeaderComp, UserForm, UserList },
+  data: () => ({ users: [] }),
+  methods: {
+    addUser(user) {
+      this.users.push(user);
+    },
+    deleteUser(idx) {
+      this.users.splice(idx, 1);
+    },
+  },
+  mounted() {
+    console.log("User Manager App Loaded");
+    this.users = [];
+  },
+};
+</script>
+
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container">
+    <HeaderComp :count="users.length" />
+    <UserForm @add-user="addUser" />
+    <UserList :users="users" @delete-user="deleteUser" />
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 }
 </style>
