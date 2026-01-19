@@ -15,6 +15,9 @@ export default {
       this.users.splice(idx, 1);
     },
   },
+  created() {
+    console.log("User Manager App Loaded, created hook");
+  },
   mounted() {
     console.log("User Manager App Loaded");
     this.users = [];

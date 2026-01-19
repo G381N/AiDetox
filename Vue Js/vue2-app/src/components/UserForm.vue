@@ -21,36 +21,46 @@
 
 <script>
 export default {
-  name: 'UserForm',
-  data: () => ({ form: { name: '', email: '', age: null } }),
+  name: "UserForm",
+  data: () => ({ form: { name: "", email: "", age: null } }),
   computed: {
-    isInvalid () { return !this.form.name || !this.form.email || !this.form.age || this.form.age <= 0 }
+    isInvalid() {
+      return !this.form.name || !this.form.email || !this.form.age || this.form.age <= 0;
+    },
   },
   methods: {
-    submit () {
-      if (this.isInvalid) return
-      this.$emit('add-user', { name: this.form.name, email: this.form.email, age: this.form.age })
-      this.form.name = ''
-      this.form.email = ''
-      this.form.age = null
-    }
-  }
-}
+    submit() {
+      if (this.isInvalid) return;
+      this.$emit("add-user", {
+        name: this.form.name,
+        email: this.form.email,
+        age: this.form.age,
+      });
+      this.form.name = "";
+      this.form.email = "";
+      this.form.age = null;
+    },
+  },
+};
 </script>
 
 <style scoped>
-.form { display: grid;
-        gap: 8px;
-        margin-bottom: 16px 
+.form {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
 }
-.form label { display: flex;
-              flex-direction: column;
-              align-items: flex-start 
+.form label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-input { padding: 6px;
-        width: 100%;
-        box-sizing: border-box 
+input {
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
-button[disabled] { opacity: 0.5 
+button[disabled] {
+  opacity: 0.5;
 }
 </style>
