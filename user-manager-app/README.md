@@ -1,24 +1,19 @@
-# user-manager-app
+# User Manager App
 
-## Project setup
-```
-npm install
-```
+A Vue.js learning project focused on understanding core Vue concepts.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Purpose
 
-### Compiles and minifies for production
-```
-npm run build
-```
+This project was created to learn and practice:
 
-### Lints and fixes files
-```
-npm run lint
-```
+- **Vue.js fundamentals**
+- **Props** - Passing data from parent to child components
+- **$emit** - Sending events from child to parent components
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Key Concepts Covered
+
+### Props
+Props allow parent components to pass data down to child components.
+
+### $emit
+The `$emit` method allows child components to communicate back to parent components by emitting custom events.
