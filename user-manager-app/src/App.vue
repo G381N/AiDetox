@@ -48,6 +48,15 @@ export default
     },
   },
   
+  watch: {
+    users: {
+      handler(newUsers) { // Runs whenever users array changes
+        console.log("Users changed! Count:", newUsers.length);
+      },
+      deep: true,
+    },
+  },
+  
   
   mounted() // Called after the component first appears on the page 
   { 

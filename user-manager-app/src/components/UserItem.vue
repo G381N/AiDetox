@@ -1,5 +1,6 @@
 <template>
-  <li class="user-item">
+  <li class="user-item" v-bind:class="{ 'highlight': user.age > 40 }">
+    
     <span>{{ user.name }} - {{ user.email }} (Age: {{ user.age }})</span>
     
     <button v-on:click="$emit('delete-user', index)">Delete</button>
@@ -50,4 +51,10 @@ button {
 button:hover {
   background-color: #cc0000;
 }
+
+.highlight {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+}
+/* highlight class applied when user.age > 40 */
 </style>
