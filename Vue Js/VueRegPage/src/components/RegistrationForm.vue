@@ -39,6 +39,7 @@
               </div>
 
               <!-- Email Field -->
+              <!-- prop: :class, v-model | event: @blur -->
               <div class="form-group">
                 <label for="email">Email</label>
                 <input
@@ -57,6 +58,7 @@
               </div>
 
               <!-- Password Field -->
+              <!-- prop: :class, v-model | event: @blur -->
               <div class="form-group">
                 <label for="password">Password</label>
                 <input
@@ -78,6 +80,7 @@
               </div>
 
               <!-- Confirm Password Field -->
+              <!-- prop: :class, v-model | event: @blur -->
               <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
                 <input
@@ -133,6 +136,7 @@
               </div>
 
               <!-- Submit Button -->
+              <!-- prop: :disabled -->
               <button
                 type="submit"
                 class="btn btn-primary btn-block mt-4"
