@@ -258,7 +258,6 @@ export default {
         // Reset validations
         this.$v.$reset()
 
-        // Hide success message after 3 seconds
         setTimeout(() => {
           this.successMessage = ''
         }, 3000)
