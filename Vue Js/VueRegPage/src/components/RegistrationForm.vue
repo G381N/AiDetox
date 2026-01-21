@@ -7,12 +7,18 @@
             <h3>User Registration</h3>
           </div>
           <div class="card-body">
-            <!-- Success Message -->
+
+
+            <!-- Success Message Div -->
             <div v-if="successMessage" class="alert alert-success">
               {{ successMessage }}
             </div>
-
+            
+          
+          
             <form @submit.prevent="submitForm">
+            <!-- basically overriding normal Submit to use Vue's submitForm method -->
+
               <!-- Username Field -->
               <div class="form-group">
                 <label for="username">Username</label>
