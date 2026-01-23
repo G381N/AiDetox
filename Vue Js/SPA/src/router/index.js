@@ -17,12 +17,8 @@ import NotFoundPage from '../views/NotFoundPage.vue'
 // Tell Vue to use the router plugin
 Vue.use(VueRouter)
 
-// ============================================
-// ROUTE DEFINITIONS
-// ============================================
 const routes = [
   {
-    // PUBLIC ROUTE - Login page
     path: '/login',
     name: 'Login',
     component: LoginPage,
@@ -30,23 +26,19 @@ const routes = [
     meta: { requiresAuth: false }
   },
   {
-    // PROTECTED ROUTE - Dashboard page
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardPage,
-    // meta.requiresAuth = true means user must be logged in
+    // meta.requiresAuth = true means user must be logged in to access
     meta: { requiresAuth: true }
   },
   {
-    // PROTECTED ROUTE - Users list page
     path: '/users',
     name: 'UsersList',
     component: UsersListPage,
     meta: { requiresAuth: true }
   },
   {
-    // PROTECTED ROUTE - User details page (dynamic route)
-    // :id is a route parameter that will be passed to the component
     path: '/users/:id',
     name: 'UserDetails',
     component: UserDetailsPage,
@@ -54,23 +46,20 @@ const routes = [
     props: true,
     meta: { requiresAuth: true }
   },
-  {
-    // REDIRECT - Default route goes to dashboard
+  {//Default route redirects to dashboard
     path: '/',
     redirect: '/dashboard'
   },
+
   {
-    // 404 PAGE - Catch all unmatched routes
-    // The * wildcard matches any path not defined above
     path: '*',
     name: 'NotFound',
     component: NotFoundPage
   }
-]u
+]
 
 // Create the router instance
 const router = new VueRouter({
-  // Use hash mode for compatibility (URLs will have #)
   mode: 'hash',
   routes
 })
@@ -79,26 +68,29 @@ const router = new VueRouter({
 // NAVIGATION GUARD (Global Before Each)
 // Runs before every route navigation
 // ============================================
-router.beforeEach((to, from, next) => {
-  // Check if the route requires authentication
-  const routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth)
+router.beforeEach((destinationRoute, sourceRoute, proceedNavigation) => {
+
+
+  const destinationRequiresAuthentication = destinationRoute.matched.some(
+    record => record.meta.requiresAuth
+  )
   
   // Check if user is currently authenticated (from Vuex store)
-  const userIsAuthenticated = store.getters.isAuthenticated
+  const isUserAuthenticated = store.getters.isAuthenticated
+  const destinationRouteName = destinationRoute.name
 
-  // CASE 1: Route needs auth but user is NOT logged in
-  if (routeRequiresAuth && !userIsAuthenticated) {
+  //Route needs auth but user is NOT logged in
+  if (destinationRequiresAuthentication && !isUserAuthenticated) {
     // Redirect to login page
-    next({ name: 'Login' })
+    proceedNavigation({ name: 'Login' })
   }
-  // CASE 2: User is logged in but trying to access login page
-  else if (to.name === 'Login' && userIsAuthenticated) {
-    // Redirect to dashboard (no need to see login again)
-    next({ name: 'Dashboard' })
+  //User is logged in but trying to access login page
+  else if (destinationRouteName === 'Login' && isUserAuthenticated) {
+    proceedNavigation({ name: 'Dashboard' })
   }
-  // CASE 3: All other cases - allow navigation
+  // All other cases - allow navigation
   else {
-    next()
+    proceedNavigation()
   }
 })
 
