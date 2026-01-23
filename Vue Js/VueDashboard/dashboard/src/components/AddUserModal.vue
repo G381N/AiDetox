@@ -44,7 +44,7 @@
           v-bind:id="'input-name'"
           v-model="formData.nameValue"
           v-bind:type="'text'"
-          v-bind:placeholder="'Enter user name'"
+          placeholder="Enter user name"
           v-bind:required="true"
         ></b-form-input>
       </b-form-group>
