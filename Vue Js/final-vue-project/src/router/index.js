@@ -3,11 +3,11 @@ import Router from 'vue-router'
 
 
 // Importing all the pages  in order of User Flow
-import Login from '@/pages/Login.vue'
-import Dashboard from '@/pages/Dashboard.vue'
-import UserListPage from '@/pages/UserListPage.vue'
-import UserDetailsPage from '@/pages/UserDetailsPage.vue'
-import NotFound from '@/pages/NotFound.vue'
+import Login from '@/pages/login-page.vue'
+import Dashboard from '@/pages/dashboard-page.vue'
+import UserListPage from '@/pages/user-list-page.vue'
+import UserDetailsPage from '@/pages/user-details-page.vue'
+import NotFound from '@/pages/not-found-page.vue'
 
 vue.use(Router)// Telling Vue to use the Router plugin
 
