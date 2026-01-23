@@ -1,18 +1,7 @@
-// ============================================
-// AXIOS API SERVICE - services/api.js
-// Reusable Axios instance for all API calls
-// ============================================
-
 import axios from 'axios'
 import store from '../store'
 
-// ============================================
-// CREATE AXIOS INSTANCE
-// Base configuration for all API requests
-// ============================================
 const apiClient = axios.create({
-  // Base URL for the public API (JSONPlaceholder)
-  // All requests will be prefixed with this URL
   baseURL: 'https://jsonplaceholder.typicode.com',
   
   // Request timeout (10 seconds)
@@ -27,12 +16,11 @@ const apiClient = axios.create({
 // ============================================
 // REQUEST INTERCEPTOR
 // Runs BEFORE every request is sent
-// Used to attach auth token to requests
 // ============================================
+
 apiClient.interceptors.request.use(
   // Success handler - modify config before request
   (config) => {
-    // Get token from Vuex store
     const authToken = store.getters.authToken
 
     // If token exists, add it to Authorization header
@@ -43,6 +31,7 @@ apiClient.interceptors.request.use(
     return config
   },
   // Error handler - request failed to send
+
   (error) => {
     return Promise.reject(error)
   }
@@ -53,14 +42,16 @@ apiClient.interceptors.request.use(
 // Runs AFTER every response is received
 // Used for global error handling
 // ============================================
+
+
 apiClient.interceptors.response.use(
   // Success handler - return response data
   (response) => {
     return response
   },
-  // Error handler - handle API errors
+
+
   (error) => {
-    // Check if error is 401 (Unauthorized)
     if (error.response && error.response.status === 401) {
       // Token expired or invalid - log out user
       store.dispatch('logout')
@@ -74,15 +65,15 @@ apiClient.interceptors.response.use(
 // Reusable functions for common API calls
 // ============================================
 
-// Fetch all users from API
-// Returns: Array of user objects
+
+
+//Obj
 export function fetchAllUsers() {
   return apiClient.get('/users')
 }
 
-// Fetch single user by ID
-// Param: userId - The ID of the user to fetch
-// Returns: Single user object
+
+//ID
 export function fetchUserById(userId) {
   return apiClient.get(`/users/${userId}`)
 }

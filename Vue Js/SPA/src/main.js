@@ -1,8 +1,3 @@
-// ============================================
-// MAIN ENTRY POINT - main.js
-// This file initializes the Vue application
-// ============================================
-
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
