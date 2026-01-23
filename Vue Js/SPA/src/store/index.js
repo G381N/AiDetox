@@ -1,18 +1,12 @@
-// ============================================
-// VUEX STORE - store/index.js
-// Centralized state management for the app
-// ============================================
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 
 // Tell Vue to use Vuex
 Vue.use(Vuex)
 
-// ============================================
+
 // HELPER: Load saved auth state from localStorage
-// This keeps user logged in after page refresh
-// ============================================
+
 function loadSavedAuthState() {
   const savedToken = localStorage.getItem('authToken')
   const savedUser = localStorage.getItem('authUser')
@@ -25,26 +19,20 @@ function loadSavedAuthState() {
   }
 }
 
-// Get initial state from localStorage (if any)
 const savedState = loadSavedAuthState()
 
 // Create and export the Vuex store
 export default new Vuex.Store({
-  // ============================================
-  // STATE - The application data
-  // ============================================
   state: {
     // Currently logged in user object
     user: savedState.user,
-    // Authentication token (JWT or similar)
+    // Authentication token
     token: savedState.token,
     // Boolean flag for quick auth checks
     isAuthenticated: savedState.isAuthenticated
   },
 
-  // ============================================
   // GETTERS - Computed properties for state
-  // ============================================
   getters: {
     // Returns true if user is logged in
     isAuthenticated(state) {
@@ -60,10 +48,8 @@ export default new Vuex.Store({
     }
   },
 
-  // ============================================
   // MUTATIONS - Synchronous state changes
   // These are the ONLY way to change state
-  // ============================================
   mutations: {
     // SET_USER - Updates the user object in state
     SET_USER(state, userObject) {
@@ -85,20 +71,13 @@ export default new Vuex.Store({
     }
   },
 
-  // ============================================
   // ACTIONS - Async operations that commit mutations
-  // ============================================
   actions: {
     // LOGIN ACTION
     // Called when user submits login form
     // Params: credentials = { email, password }
     login({ commit }, credentials) {
-      return new Promise((resolve, reject) => {
-        // ----------------------------------------
-        // DUMMY LOGIN LOGIC (for demo purposes)
-        // In real app, this would call your auth API
-        // ----------------------------------------
-        
+      return new Promise((resolve, reject) => {       
         // Simulate API delay
         setTimeout(() => {
           // Simple validation (any email with password "password123")
