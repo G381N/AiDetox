@@ -64,36 +64,35 @@ export default {
 
 <style scoped>
 .task-card {
-  background: linear-gradient(145deg, #ffffff, #f7fafc);
-  border-radius: 12px;
+  background: #FFFFFF;
+  border-radius: 0;
   padding: 16px;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
+  box-shadow: 4px 4px 0 #000000;
+  border: 3px solid #000000;
+  transition: all 0.2s ease;
   margin-bottom: 12px;
-  border-left: 4px solid #e2e8f0;
+  border-left: 8px solid #000000;
 }
 
 .task-card:hover {
-  transform: translateX(4px);
-  box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000000;
 }
 
 .task-todo {
-  border-left-color: #a0aec0;
+  border-left-color: #FFE951;
+  background: #FFFEF0;
 }
 
 .task-in-progress {
-  border-left-color: #4299e1;
+  border-left-color: #00F5FF;
+  background: #F0FEFF;
 }
 
 .task-done {
-  border-left-color: #48bb78;
-  opacity: 0.8;
+  border-left-color: #8338EC;
+  opacity: 0.7;
+  background: #F5F0FF;
 }
 
 .task-header {
@@ -113,9 +112,10 @@ export default {
 
 .task-title {
   font-size: 16px;
-  font-weight: 600;
-  color: #2d3748;
+  font-weight: 900;
+  color: #000000;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .task-done .task-title {
@@ -124,30 +124,28 @@ export default {
 }
 
 .task-priority {
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 0;
+  font-size: 10px;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border: 2px solid #000000;
 }
 
 .priority-high {
-  background: linear-gradient(145deg, #fc8181, #f56565);
+  background: #FF006E;
   color: white;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .priority-medium {
-  background: linear-gradient(145deg, #fbd38d, #f6ad55);
-  color: #744210;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: #FFE951;
+  color: #000000;
 }
 
 .priority-low {
-  background: linear-gradient(145deg, #90cdf4, #63b3ed);
-  color: #2c5282;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: #00F5FF;
+  color: #000000;
 }
 
 .task-actions {
@@ -156,37 +154,35 @@ export default {
 }
 
 .action-btn {
-  width: 28px;
-  height: 28px;
-  border: none;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #000000;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+  box-shadow: 3px 3px 0 #000000;
 }
 
 .edit-btn {
-  background: linear-gradient(145deg, #4299e1, #3182ce);
+  background: #00F5FF;
 }
 
 .edit-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 3px 8px rgba(66, 153, 225, 0.4);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000000;
 }
 
 .delete-btn {
-  background: linear-gradient(145deg, #fc8181, #f56565);
+  background: #FF006E;
 }
 
 .delete-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 3px 8px rgba(245, 101, 101, 0.4);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000000;
 }
 
 .task-footer {
@@ -197,22 +193,21 @@ export default {
 .status-select {
   max-width: 180px;
   font-size: 13px;
-  font-weight: 600;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: #fff;
-  box-shadow: 
-    inset 0 1px 2px rgba(0, 0, 0, 0.05),
-    0 1px 0 rgba(255, 255, 255, 0.8);
-  padding: 6px 10px;
-  transition: all 0.3s ease;
+  font-weight: 900;
+  border-radius: 0;
+  border: 3px solid #000000;
+  background: #FFE951;
+  box-shadow: 3px 3px 0 #000000;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
 }
 
 .status-select:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 
-    inset 0 1px 2px rgba(102, 126, 234, 0.1),
-    0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #000000;
+  box-shadow: 5px 5px 0 #000000;
+  transform: translate(-2px, -2px);
+  background: #00F5FF;
 }
 </style>

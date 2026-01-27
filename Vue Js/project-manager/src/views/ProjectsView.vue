@@ -154,7 +154,7 @@ export default {
 .projects-view {
   padding: 30px;
   min-height: calc(100vh - 80px);
-  background: #00F5FF;
+  background: #8338EC;
 }
 
 .projects-header {

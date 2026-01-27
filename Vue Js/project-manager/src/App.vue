@@ -7,6 +7,14 @@
           <h1 class="brand-title">📊 Project Manager</h1>
         </div>
         
+        <div class="navbar-marquee">
+          <div class="marquee-content">
+            <span>✦ MANAGE YOUR PROJECTS LIKE A PRO ✦</span>
+            <span>✦ DEADLINES ARE NOT SUGGESTIONS ✦</span>
+            <span>✦ STAY ON TRACK ✦</span>
+          </div>
+        </div>
+        
         <div class="navbar-menu">
           <router-link to="/dashboard" class="nav-link" active-class="nav-link-active">
             🏠 Dashboard
@@ -219,10 +227,40 @@ body {
   letter-spacing: -1px;
 }
 
+.navbar-marquee {
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #FFE951;
+  border: 3px solid #000000;
+  padding: 8px 0;
+  color: #000000;
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-content span {
+  margin-right: 50px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .navbar-menu {
   display: flex;
   gap: 12px;
-  flex: 1;
 }
 
 .nav-link {
@@ -419,21 +457,20 @@ main.with-navbar {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 16px;
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(145deg, #f7fafc, #e2e8f0);
-  border-radius: 10px;
+  background: #FFE951;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(145deg, #cbd5e0, #a0aec0);
-  border-radius: 10px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: #000000;
+  border-radius: 0;
+  border: 4px solid #FFE951;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(145deg, #a0aec0, #718096);
+  background: #8338EC;
 }
 </style>

@@ -139,6 +139,36 @@ export default {
   padding: 30px;
   min-height: calc(100vh - 80px);
   background: #FFE951;
+  overflow: hidden;
+  position: relative;
+}
+
+.dashboard-view::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0,0,0,0),
+    rgba(0,0,0,0) 20px,
+    rgba(0,0,0,0.1) 20px,
+    rgba(0,0,0,0.1) 40px
+  );
+  animation: slide 60s linear infinite;
+  z-index: 0;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.dashboard-header, .stats-row, .mt-4 {
+  position: relative;
+  z-index: 1;
 }
 
 .dashboard-header {
@@ -253,49 +283,45 @@ export default {
 }
 
 .skeu-button-sm {
-  background: linear-gradient(145deg, #667eea, #5a67d8);
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 600;
+  background: #8338EC;
+  border: 3px solid #000000;
+  border-radius: 0;
+  padding: 8px 20px;
+  font-weight: 900;
+  box-shadow: 4px 4px 0 #000000;
+  text-transform: uppercase;
   color: white;
-  box-shadow: 
-    0 2px 8px rgba(102, 126, 234, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  font-size: 14px;
 }
 
 .skeu-button-sm:hover {
-  background: linear-gradient(145deg, #5a67d8, #4c51bf);
-  transform: translateY(-2px);
-  box-shadow: 
-    0 4px 12px rgba(102, 126, 234, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: #FF006E;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000000;
 }
 
 .projects-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .project-item {
   background: #FFE951;
-  border-radius: 0;
-  padding: 16px;
+  border: 4px solid #000000;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 4px 4px 0 #000000;
-  border: 3px solid #000000;
-  transition: all 0.2s ease;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 8px 8px 0 #000000;
 }
 
 .project-item:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #000000;
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #000000;
+  background: #00F5FF;
 }
 
 .project-info {
@@ -303,89 +329,84 @@ export default {
 }
 
 .project-name {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 900;
-  color: #000000;
   margin: 0 0 4px 0;
   text-transform: uppercase;
+  color: #000000;
 }
 
 .project-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: #000000;
   margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   font-weight: 600;
 }
 
 .project-meta {
   display: flex;
-  gap: 12px;
   align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  margin-left: 20px;
 }
 
 .project-status {
-  padding: 6px 14px;
-  border-radius: 0;
-  font-size: 12px;
+  padding: 6px 12px;
+  border: 3px solid #000000;
   font-weight: 900;
-  white-space: nowrap;
-  border: 2px solid #000000;
+  font-size: 12px;
   text-transform: uppercase;
-}
-
-.status-in-progress {
-  background: #00F5FF;
-  color: #000000;
-}
-
-.status-planning {
-  background: #FFE951;
-  color: #000000;
-}
-
-.status-todo {
   background: #FFFFFF;
   color: #000000;
 }
 
-.status-completed {
-  background: #8338EC;
-  color: #FFFFFF;
+.project-status.status-in-progress {
+  background: #00F5FF;
+  box-shadow: 4px 4px 0 #000000;
 }
 
 .project-tasks {
-  font-size: 13px;
-  color: #718096;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  font-weight: 700;
+  color: #000000;
+  background: #FFFFFF;
+  border: 4px solid #000000;
 }
 
 .quick-actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .action-button {
+  width: 100%;
+  padding: 20px;
+  border: 4px solid #000000;
+  border-radius: 0;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  border: 3px solid #000000;
-  border-radius: 0;
-  font-size: 15px;
+  gap: 16px;
+  font-size: 18px;
   font-weight: 900;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 4px 4px 0 #000000;
-  text-transform: uppercase;
+  box-shadow: 8px 8px 0 #000000;
 }
 
 .action-button:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 #000000;
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #000000;
 }
 
 .action-button:active {
@@ -393,38 +414,34 @@ export default {
   box-shadow: 2px 2px 0 #000000;
 }
 
-.action-primary {
-  background: #8338EC;
-  color: white;
+.action-icon {
+  font-size: 24px;
 }
 
-.action-secondary {
+.action-primary {
+  background: #FF006E;
+  color: #FFFFFF;
+}
+.action-primary:hover {
   background: #00F5FF;
   color: #000000;
 }
 
+.action-secondary {
+  background: #8338EC;
+  color: #FFFFFF;
+}
+.action-secondary:hover {
+  background: #FFE951;
+  color: #000000;
+}
+
 .action-info {
+  background: #00F5FF;
+  color: #000000;
+}
+.action-info:hover {
   background: #FF006E;
-  color: white;
-}
-
-.action-icon {
-  font-size: 20px;
-}
-
-.action-text {
-  flex: 1;
-  text-align: left;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: #a0aec0;
-}
-
-.empty-state p {
-  margin: 0;
-  font-size: 15px;
+  color: #FFFFFF;
 }
 </style>

@@ -294,47 +294,55 @@ export default {
 .project-detail-view {
   padding: 30px;
   min-height: calc(100vh - 80px);
+  background: #8338EC;
 }
 
-.project-header {
-  background: linear-gradient(145deg, #ffffff, #f7fafc);
-  border-radius: 16px;
+.project-header,
+.tasks-section {
+  background: #FFE951;
+  border: 5px solid #000000;
+  box-shadow: 12px 12px 0 #000000;
   padding: 30px;
   margin-bottom: 30px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .back-btn {
-  color: #667eea;
-  font-weight: 600;
-  padding: 0;
+  color: #000000;
+  font-weight: 900;
+  padding: 8px 16px;
   margin-bottom: 16px;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  background: #8338EC;
+  color: #FFFFFF;
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0 #000000;
+  text-transform: uppercase;
 }
 
 .back-btn:hover {
-  color: #5a67d8;
-  transform: translateX(-4px);
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000000;
+  background: #00F5FF;
 }
 
 .project-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #2d3748;
+  font-size: 40px;
+  font-weight: 900;
+  color: #000000;
   margin-bottom: 12px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: -2px;
 }
 
 .project-description {
   font-size: 16px;
-  color: #718096;
+  color: #000000;
   margin-bottom: 20px;
   line-height: 1.6;
+  font-weight: 700;
 }
 
 .project-meta {
@@ -397,13 +405,11 @@ export default {
 }
 
 .tasks-section {
-  background: linear-gradient(145deg, #ffffff, #f7fafc);
-  border-radius: 16px;
+  background: #FFFFFF;
+  border-radius: 0;
   padding: 30px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 8px 8px 0 #000000;
+  border: 4px solid #000000;
 }
 
 .section-header {
@@ -416,36 +422,34 @@ export default {
 }
 
 .section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2d3748;
+  font-size: 32px;
+  font-weight: 900;
+  color: #000000;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .skeu-button {
-  background: linear-gradient(145deg, #667eea, #5a67d8);
-  border: none;
-  border-radius: 12px;
-  padding: 12px 24px;
+  background: #FF006E;
+  border: 4px solid #000000;
+  border-radius: 0;
+  padding: 14px 28px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 900;
   color: white;
-  box-shadow: 
-    0 4px 12px rgba(102, 126, 234, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 6px 6px 0 #000000;
+  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-transform: uppercase;
 }
 
 .skeu-button:hover {
-  background: linear-gradient(145deg, #5a67d8, #4c51bf);
-  transform: translateY(-2px);
-  box-shadow: 
-    0 6px 16px rgba(102, 126, 234, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: #00F5FF;
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #000000;
 }
 
 .btn-icon {

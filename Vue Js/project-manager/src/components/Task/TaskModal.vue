@@ -158,81 +158,83 @@ export default {
 
 <style>
 .task-modal .modal-content {
-  border-radius: 16px;
-  border: none;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+  border: 5px solid #000000;
+  box-shadow: 12px 12px 0 #000000;
 }
 
 .task-modal .modal-header {
-  background: linear-gradient(145deg, #48bb78, #38a169);
-  color: white;
-  border-radius: 16px 16px 0 0;
-  border-bottom: none;
+  background: #00F5FF;
+  color: #000000;
+  border-radius: 0;
+  border-bottom: 4px solid #000000;
 }
 
 .task-modal .modal-title {
-  font-weight: 700;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .task-modal .modal-body {
   padding: 24px;
+  background: #FFFFFF;
 }
 
 .task-modal .modal-footer {
-  border-top: 1px solid #e2e8f0;
+  border-top: 4px solid #000000;
   padding: 16px 24px;
+  background: #FFFFFF;
 }
 
 .task-modal .btn-primary {
-  background: linear-gradient(145deg, #48bb78, #38a169);
-  border: none;
-  border-radius: 8px;
-  padding: 8px 20px;
-  font-weight: 600;
-  box-shadow: 
-    0 4px 12px rgba(72, 187, 120, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: #FF006E;
+  border: 3px solid #000000;
+  border-radius: 0;
+  padding: 10px 24px;
+  font-weight: 900;
+  box-shadow: 4px 4px 0 #000000;
+  text-transform: uppercase;
 }
 
 .task-modal .btn-primary:hover {
-  background: linear-gradient(145deg, #38a169, #2f855a);
-  box-shadow: 
-    0 6px 16px rgba(72, 187, 120, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: #8338EC;
+  color: #FFFFFF;
+  box-shadow: 6px 6px 0 #000000;
+  transform: translate(-2px, -2px);
 }
 
 .task-modal .btn-secondary {
-  background: linear-gradient(145deg, #e2e8f0, #cbd5e0);
-  border: none;
-  border-radius: 8px;
-  padding: 8px 20px;
-  font-weight: 600;
-  color: #2d3748;
-  box-shadow: 
-    0 2px 6px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  border-radius: 0;
+  padding: 10px 24px;
+  font-weight: 900;
+  color: #000000;
+  box-shadow: 4px 4px 0 #000000;
+  text-transform: uppercase;
 }
 
 .task-modal .btn-secondary:hover {
-  background: linear-gradient(145deg, #cbd5e0, #a0aec0);
+  background: #FFE951;
+  box-shadow: 6px 6px 0 #000000;
+  transform: translate(-2px, -2px);
 }
 
 .task-modal .skeu-input {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  background: #FFE951;
+  border: 3px solid #000000;
+  border-radius: 0;
   padding: 10px 14px;
-  box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.05),
-    0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
+  box-shadow: none;
+  transition: all 0.2s ease;
+  font-weight: 700;
 }
 
 .task-modal .skeu-input:focus {
   outline: none;
-  border-color: #48bb78;
-  box-shadow: 
-    inset 0 2px 4px rgba(72, 187, 120, 0.1),
-    0 0 0 3px rgba(72, 187, 120, 0.1);
+  border-color: #000000;
+  background: #00F5FF;
+  box-shadow: 4px 4px 0 #000000;
+  transform: translate(-2px, -2px);
 }
 </style>
