@@ -13,4 +13,9 @@ Simple goal: do one problem today. Repeat tomorrow. 🚀
 
 Hope this goes well ...🤞 will be solving problems from hacker rank, codedex and leet code.
 
+## Learning Documentation
+Detailed documentation for concepts learned through Codedex.
 
+- **[HTML Documentation](./Documentation/HTML/HTML_Guide.md)**: Structure, Elements, Forms, and more.
+- **[CSS Documentation](./Documentation/CSS/CSS_Guide.md)**: Styling, Layouts, Box Model.
+- **[JavaScript Documentation](./Documentation/JavaScript/JS_Guide.md)**: Basics, Control Flow, Objects, DOM.
