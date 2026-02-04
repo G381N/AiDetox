@@ -1,0 +1,87 @@
+/* Modern clean font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center; /* Vertically center the app content */
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom Card Styling */
+.custom-card {
+  border: none;
+  border-radius: 16px !important;
+  background: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.custom-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Form inputs */
+.form-control {
+  border-radius: 8px !important;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background-color: white;
+}
+
+/* Custom Button with Gradient */
+.btn-primary-custom {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  font-weight: 600;
+  border-radius: 8px !important;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary-custom:active {
+  transform: translateY(1px);
+}
+
+/* Links */
+a {
+  color: #667eea;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Dashboard welcome style */
+.welcome-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
