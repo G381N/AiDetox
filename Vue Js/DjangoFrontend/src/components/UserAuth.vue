@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import authApi from '@/api/auth';
 
 export default {
   name: 'UserAuth',
@@ -99,8 +99,6 @@ export default {
       this.isLoginMode = !this.isLoginMode;
       this.errorMessage = '';
       this.successMessage = '';
-      // Optional: clear form or keep it
-      // this.form.email = '';
       this.form.password = '';
     },
     async handleSubmit() {
@@ -108,18 +106,15 @@ export default {
       this.errorMessage = '';
       this.successMessage = '';
 
-      const url = this.isLoginMode 
-        ? 'http://127.0.0.1:8000/api/login/' 
-        : 'http://127.0.0.1:8000/api/signup/';
-
       try {
-        const response = await axios.post(url, this.form);
-
+        let response;
         if (this.isLoginMode) {
+          response = await authApi.login(this.form);
           // Emit success to parent to handle state change
           this.$emit('auth-success', response.data);
         } else {
-          // Signup Success - Stay here and show message, or auto login
+          response = await authApi.signup(this.form);
+          // Signup Success
           this.successMessage = 'Account created successfully! Please login.';
           this.isLoginMode = true; 
           this.form.password = '';
@@ -138,8 +133,6 @@ export default {
             this.errorMessage = data.detail;
         } else {
             // Join all error messages
-            // Some Django errors come as { field: ["error"] }
-            // JSON.stringify can be too raw, let's try to flatten it
             try {
                 const messages = [];
                 for (const key in data) {
