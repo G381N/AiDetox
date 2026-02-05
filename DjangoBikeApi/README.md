@@ -1,43 +1,201 @@
+# Django Bike API with MongoDB
 
-$ python -m venv venv
+## Setup
 
-$ source venv/Scripts/activate
+```bash
+python -m venv venv
+source venv/Scripts/activate  # Windows: venv\Scripts\activate
+pip install django djangorestframework mongoengine django-rest-framework-mongoengine
+django-admin startproject BikeApiBackend .
+python manage.py startapp CrudHandler
+```
 
-$ pip install django djangorestframework mongoengine
+## 1. Configure settings.py
 
-$ pip list
+Add to `INSTALLED_APPS`:
+```python
+INSTALLED_APPS = [
+    'rest_framework',
+    'CrudHandler',
+    # ... default apps
+]
+```
 
-$ django-admin startproject BikeApiBackend .
-
-$ python manage.py startapp CrudHandler
-
-
-Now go in to the settings folder of the project and then setting 
-Basically the installed apps needs to be updated 
-
-we basically add these 2 in the installed app section which is nothing but the rest framework and the app name that we created.
-
-'rest_framework',  
-'CrudHandler',
-
-after this i went ahead to the Project Dir and in the bottom of the settings folder i added the below code for my django to connect to mongoDB and also it can be done by creating a folder called db.py as well.. 
-
-//database name & connection string 
+Add MongoDB connection at the bottom:
+```python
 from mongoengine import connect
+
 connect(
     db="bike_db",
-    host="mongodb+srv://gebingeorge_db_user:GiEavpF6Lpv4morE@cluster0.vdafbjx.mongodb.net/"
+    host="your-mongodb-connection-string"
 )
+```
 
+## 2. Create Model (CrudHandler/models.py)
+# Django Bike API with MongoDB
 
-after that you go ahead and type code in the model folder of the app and then code
+## Setup
 
-from mongoengine Document, StringField, IntField, FloatField
+```bash
+python -m venv venv
+source venv/Scripts/activate  # Windows: venv\Scripts\activate
+pip install django djangorestframework mongoengine django-rest-framework-mongoengine
+django-admin startproject BikeApiBackend .
+python manage.py startapp CrudHandler
+```
 
-class Bikes(Document):
+Explanation:
+- `python -m venv venv`: create an isolated Python virtual environment named `venv`.
+- `source venv/Scripts/activate`: activate the virtual environment (Windows path shown); this makes installed packages local to the env.
+- `pip install ...`: install Django, DRF, MongoEngine, and the MongoEngine DRF bridge.
+- `django-admin startproject...`: scaffold a new Django project in the current folder.
+- `python manage.py startapp CrudHandler`: create a new Django app called `CrudHandler`.
 
-    bikename=StringField(required=True,max_length=50)
-    bikeclass=StringField(required=True,max_length=50)
-    bikeCC=IntField(required=True)
-    bikeprice=FloatField(required=True)
+## 1. Configure `settings.py`
+
+Add to `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    'rest_framework',
+    'CrudHandler',
+    # ... default Django apps like 'django.contrib.admin', etc.
+]
+```
+
+Explanation:
+- `'rest_framework'`: enables Django REST Framework features (serializers, views, etc.).
+- `'CrudHandler'`: registers your app so Django loads its models, views, and urls.
+
+Add MongoDB connection at the bottom (or in a separate `db.py`):
+
+```python
+from mongoengine import connect
+
+connect(
+    db="bike_db",
+    host="your-mongodb-connection-string"
+)
+```
+
+Explanation:
+- `from mongoengine import connect`: imports the connection helper from MongoEngine.
+- `connect(...)`: establishes a connection to your MongoDB instance using the database name and connection string. Keep credentials out of VCS.
+
+## 2. Create Model (`CrudHandler/models.py`)
+
+```python
+from mongoengine import Document, StringField, IntField, FloatField
+
+class Bike(Document):
+    bikename = StringField(required=True, max_length=100)
+    bikecc = IntField(required=True)
+    bikecategory = StringField(required=True, max_length=50)
+    bikeprice = FloatField(required=True)
+```
+
+Explanation (line-by-line):
+- `from mongoengine import ...`: import base Document and field types from MongoEngine.
+- `class Bike(Document):`: define a MongoEngine document (equivalent to a collection schema).
+- `bikename = StringField(...)`: string field for the bike name; `required=True` forces a value.
+- `bikecc = IntField(...)`: integer field for engine CC.
+- `bikecategory = StringField(...)`: category/class of the bike.
+- `bikeprice = FloatField(...)`: numeric price field.
+
+## 3. Create Serializer (`CrudHandler/serializers.py`)
+
+```python
+from rest_framework_mongoengine.serializers import DocumentSerializer
+from .models import Bike
+
+class BikeSerializer(DocumentSerializer):
+    class Meta:
+        model = Bike
+        fields = '__all__'
+```
+
+Explanation:
+- `DocumentSerializer`: DRF-compatible serializer for MongoEngine `Document` objects.
+- `model = Bike`: serializer will map all fields from the `Bike` document.
+- `fields = '__all__'`: include every field on the model in API representation.
+
+## 4. Create Views (`CrudHandler/views.py`)
+
+```python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Bike
+from .serializers import BikeSerializer
+
+class BikeCRUDHandler(APIView):
+    def get(self, request):
+        bikes = Bike.objects.all()
+        serializer = BikeSerializer(bikes, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = BikeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+```
+
+Explanation (line-by-line):
+- `from rest_framework.views import APIView`: base class for class-based API views.
+- `from rest_framework.response import Response`: helper to return HTTP responses with data.
+- `bikes = Bike.objects.all()`: fetch all Bike documents from MongoDB.
+- `serializer = BikeSerializer(bikes, many=True)`: serialize multiple objects.
+- `return Response(serializer.data)`: return serialized data as JSON.
+- `serializer = BikeSerializer(data=request.data)`: create serializer instance from incoming JSON for validation.
+- `serializer.is_valid() / serializer.save()`: validate and persist the document to MongoDB.
+
+## 5. Configure URLs
+
+`CrudHandler/urls.py`:
+
+```python
+from django.urls import path
+from .views import BikeCRUDHandler
+
+urlpatterns = [
+    path("bikes/", BikeCRUDHandler.as_view()),
+]
+```
+
+Explanation:
+- `path("bikes/", ...)`: route requests under `/bikes/` to the handler view.
+
+`BikeApiBackend/urls.py`:
+
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    path("api/", include("CrudHandler.urls")),
+]
+```
+
+Explanation:
+- `path("api/", include(...))`: mount the app's URLs under the `/api/` prefix, so endpoints become `/api/bikes/`.
+
+## 6. Run Server
+
+```bash
+python manage.py runserver
+```
+
+Explanation:
+- `python manage.py runserver`: start Django's development server (default http://127.0.0.1:8000).
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/bikes/` | List all bikes |
+| POST | `/api/bikes/` | Create a new bike |
+
+Explanation:
+- `GET /api/bikes/`: returns JSON array of bikes.
+- `POST /api/bikes/`: accepts JSON body matching `BikeSerializer` fields to create a bike.
 
