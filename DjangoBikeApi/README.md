@@ -36,8 +36,8 @@ from mongoengine Document, StringField, IntField, FloatField
 
 class Bikes(Document):
 
-bike-name: StringField(required=True,max_length=50)
-bike-class: StringField(required=True,max_length=50)
-bike-CC: IntField(required=True)
-bike-price: FloatField(required=True)
+    bikename=StringField(required=True,max_length=50)
+    bikeclass=StringField(required=True,max_length=50)
+    bikeCC=IntField(required=True)
+    bikeprice=FloatField(required=True)
 
