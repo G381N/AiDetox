@@ -5,7 +5,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 INSTALLED_APPS = [
-    'Appp',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -98,3 +97,5 @@ connect(
     db="ExamDb",
     host="mongodb+srv://gebingeorge_db_user:GiEavpF6Lpv4morE@cluster0.vdafbjx.mongodb.net/"
 )
+
+# alias 
