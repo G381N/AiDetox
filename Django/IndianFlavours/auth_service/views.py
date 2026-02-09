@@ -22,12 +22,17 @@ def register(request):
             {"error":"All fields are Required..."},
             status=status.HTTP_400_BAD_REQUEST
         )
-    
+        
     if request_password != request_conf_password:
         return Response(
             {"error":"Passwords do not match ..."},
             status=status.HTTP_400_BAD_REQUEST
-        )  
+        )
+    if len(request_password) < 10: 
+        return Response(
+            {"error":"Password is too short ..."},
+            status=status.HTTP_400_BAD_REQUEST
+        )     
     if User.objects(email=request_email).first():
         return Response(
             {"error":"email already has been used try different email ..."},
@@ -92,9 +97,10 @@ def login(request):
 
     return Response(
         {
-            "message": "Login successful ...",
-            "username": user.username,
-            "email": user.email
+            "message": "Login successful ..."
         },
         status=status.HTTP_200_OK
     )
+    
+    
+    

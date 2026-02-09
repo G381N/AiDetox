@@ -1,22 +1,27 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from menu_service.models import Menu
-from menu_service.serializer import MenuSerializer
+from menu_service.models import Menu, Category
+from menu_service.serializer import MenuSerializer, CategorySerializer
 
 class MenuView(APIView):
 
     # GET function 
-    def get(self,request):
-        request_id_for_menu  =  request.GET.get("id")
+    def get(self, request):
+        request_id_for_menu = request.GET.get("id")
+        
         if request_id_for_menu:
             extracted_menu_object = Menu.objects(id=request_id_for_menu).first()
-            if not menu:
+            if not extracted_menu_object:
                 return Response(
-                    {"error","This menu item is not found ..."},
+                    {"error": "This menu item is not found ..."},
                     status=status.HTTP_404_NOT_FOUND
                 )
-            return Response(MenuSerializer(extracted_menu_object, many=True).data)
+            return Response(MenuSerializer(extracted_menu_object).data)
+        
+        # Return all menus if no ID provided
+        menus = Menu.objects.all()
+        return Response(MenuSerializer(menus, many=True).data)
         
     # POST function   
     def post(self,request):
@@ -58,4 +63,16 @@ class MenuView(APIView):
             ) 
         serialized_object_from_menu.save()
         return Response(serialized_object_from_menu.data)   
+                
+class CategoryView(APIView):
+    def post(self, request):
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request):
+        categories = Category.objects.all()
+        return Response(CategorySerializer(categories, many=True).data)
                 
