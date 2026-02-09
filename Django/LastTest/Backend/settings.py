@@ -94,7 +94,8 @@ STATIC_URL = 'static/'
 from mongoengine import connect
 
 connect(
-    db="ExamDb",
+    db="FoodMenu",
+    alias="Foodmenu",
     host="mongodb+srv://gebingeorge_db_user:GiEavpF6Lpv4morE@cluster0.vdafbjx.mongodb.net/"
 )
 
