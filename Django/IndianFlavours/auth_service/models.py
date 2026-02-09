@@ -1,3 +1,5 @@
-from django.db import models
+from mongoengine import Document, StringField, DateField
+from DateField import datetime
 
-# Create your models here.
+class User(Document):
+    username=StringField(required=True,unique=True)
