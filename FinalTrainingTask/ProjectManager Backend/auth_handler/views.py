@@ -58,6 +58,4 @@ class LoginAPIView(APIView):
             },
             status=status.HTTP_200_OK,
         )
-from django.shortcuts import render
-
-# Create your views here.
+ 
