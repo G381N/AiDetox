@@ -123,6 +123,15 @@ SIMPLE_JWT = {
 # CORS
 CORS_ALLOWED_ORIGINS = [FRONTEND_ORIGIN]
 
+# Initialize MongoEngine DB connections early so aliases exist during
+# Django setup (tests import settings and need the `auth_db` alias).
+try:
+    from .db import init_db
+    init_db()
+except Exception:
+    # If init fails, let runtime code handle it; tests will surface errors.
+    pass
+
 # keep DB connection logic in ProjectManagerCore/db.py
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
