@@ -59,6 +59,7 @@ class MenuView(APIView):
         if not serialized_object_from_menu.is_valid():
             return Response(
                 serialized_object_from_menu.errors,
+      
                 status=status.HTTP_400_BAD_REQUEST
             ) 
         serialized_object_from_menu.save()
