@@ -7,14 +7,14 @@ from rest_framework.exceptions import ValidationError
 class UserSerializer(DocumentSerializer):
     class Meta:
         model = User
-        fields = ("id", "email", "created_at")
+        fields = ("id", "username", "email", "created_at")
 
 
 # minimal registration serializer using DocumentSerializer only
 class RegisterSerializer(DocumentSerializer):
     class Meta:
         model = User
-        fields = ("id", "email", "password", "created_at")
+        fields = ("id", "username", "email", "password", "created_at")
         read_only_fields = ("id", "created_at")
         extra_kwargs = {"password": {"write_only": True}}
 
@@ -29,6 +29,11 @@ class RegisterSerializer(DocumentSerializer):
     def validate_email(self, value):
         if User.objects(email=value).first():
             raise ValidationError("This email is already registered")
+        return value
+
+    def validate_username(self, value):
+        if User.objects(username=value).first():
+            raise ValidationError("This username is already taken")
         return value
 
     def create(self, validated_data):

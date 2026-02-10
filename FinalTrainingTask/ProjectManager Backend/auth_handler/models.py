@@ -5,8 +5,9 @@ from datetime import datetime
 # User document stored in the auth_db alias
 class User(Document):
 	meta = {"collection": "users", "db_alias": "auth_db"}
-	email = EmailField(required=True, unique=True)  
-	password = StringField(required=True)  
+	username = StringField(required=True, unique=True)
+	email = EmailField(required=True, unique=True)
+	password = StringField(required=True)
 	created_at = DateTimeField(default=datetime.utcnow)
 
 	def set_password(self, raw_password):
@@ -17,7 +18,12 @@ class User(Document):
 
 	def to_safe_dict(self):
 		# return a dict safe for JSON responses (no password)
-		return {"id": str(self.id), "email": self.email, "created_at": self.created_at}
+		return {
+			"id": str(self.id),
+			"username": getattr(self, "username", None),
+			"email": self.email,
+			"created_at": self.created_at,
+		}
 
 
 
