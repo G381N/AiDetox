@@ -109,7 +109,7 @@ class LoginAPIView(APIView):
 
         return Response(
             {
-                "user": UserSerializer(user).data,
+                "user": UserSerializer(user).data, 
                 "access": str(refresh.access_token),
                 "refresh": str(refresh),
             },
