@@ -1,36 +1,38 @@
 <template>
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card border-black shadow-hard p-4">
-          <div class="card-header bg-secondary border-black text-center mb-4">
-              <h2 class="font-weight-black m-0 p-2 text-white">REGISTER</h2>
+      <div class="col-md-5">
+        <div class="card p-0" style="border: 3px solid #000; box-shadow: 8px 8px 0 #000;">
+          <div class="card-header border-bottom-0 text-center py-4" style="background-color: #FAFF00; border-bottom: 3px solid #000 !important;">
+              <h2 class="font-weight-black m-0 p-0 text-uppercase" style="letter-spacing: -1px; font-size: 2.5rem;">NEW USER PROTOCOL</h2>
           </div>
           
-          <b-form @submit.prevent="onSubmit">
-            <b-form-group label="Username" class="font-weight-bold">
-              <b-form-input v-model="form.username" required placeholder="Choose a username" class="border-black p-3"></b-form-input>
-            </b-form-group>
-            
-            <b-form-group label="Email" class="font-weight-bold">
-              <b-form-input type="email" v-model="form.email" required placeholder="Enter your email" class="border-black p-3"></b-form-input>
-            </b-form-group>
-            
-            <b-form-group label="Password" class="font-weight-bold">
-              <b-form-input type="password" v-model="form.password" required placeholder="Choose a password" class="border-black p-3"></b-form-input>
-            </b-form-group>
+          <div class="card-body p-4 bg-white">
+            <b-form @submit.prevent="onSubmit">
+              <b-form-group label="CHOOSE IDENTIFIER" class="font-weight-bold">
+                <b-form-input v-model="form.username" required placeholder="USERNAME" class="py-2" style="border: 2px solid #000; background: #fff;"></b-form-input>
+              </b-form-group>
+              
+              <b-form-group label="EMAIL ADDRESS" class="font-weight-bold">
+                <b-form-input type="email" v-model="form.email" required placeholder="CONTACT EMAIL" class="py-2" style="border: 2px solid #000; background: #fff;"></b-form-input>
+              </b-form-group>
+              
+              <b-form-group label="SECURITY CODE" class="font-weight-bold">
+                <b-form-input type="password" v-model="form.password" required placeholder="********" class="py-2" style="border: 2px solid #000; background: #fff;"></b-form-input>
+              </b-form-group>
 
-            <b-form-group label="Confirm Password" class="font-weight-bold">
-               <b-form-input type="password" v-model="form.password_confirm" required placeholder="Confirm password" class="border-black p-3"></b-form-input>
-            </b-form-group>
+              <b-form-group label="CONFIRM CODE" class="font-weight-bold">
+                 <b-form-input type="password" v-model="form.password_confirm" required placeholder="********" class="py-2" style="border: 2px solid #000; background: #fff;"></b-form-input>
+              </b-form-group>
 
-            <b-alert v-if="error" show variant="danger" class="mt-3 border-black font-weight-bold">{{ error }}</b-alert>
-            
-            <b-button type="submit" variant="success" block size="lg" class="mt-4">Create Account</b-button>
-          </b-form>
+              <b-alert v-if="error" show variant="danger" class="border-black font-weight-bold">{{ error }}</b-alert>
+              
+              <b-button type="submit" variant="primary" block size="lg" class="mt-4 border-0" style="background: #000; color: #FAFF00;">ESTABLISH ACCOUNT</b-button>
+            </b-form>
 
-           <div class="text-center mt-3">
-              <router-link to="/login" class="font-weight-bold text-dark" style="text-decoration: underline;">Already have an account? Login here.</router-link>
+             <div class="text-center mt-4">
+                <router-link to="/login" class="font-weight-bold text-dark text-uppercase" style="text-decoration: underline;">Return to Login</router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -69,16 +71,7 @@ export default {
 </script>
 
 <style scoped>
-.border-black {
-    border: 4px solid #000 !important;
-}
-.shadow-hard {
-    box-shadow: 12px 12px 0 #000 !important;
-}
 .font-weight-black {
     font-weight: 900;
-}
-.bg-secondary {
-    background-color: #ff006e !important; /* Pink for variety */
 }
 </style>

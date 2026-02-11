@@ -1,28 +1,30 @@
 <template>
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card border-black shadow-hard p-4">
-          <div class="card-header bg-warning border-black text-center mb-4">
-              <h2 class="font-weight-black m-0 p-2">LOGIN</h2>
+      <div class="col-md-5">
+        <div class="card p-0" style="border: 3px solid #000; box-shadow: 8px 8px 0 #000;">
+          <div class="card-header border-bottom-0 text-center py-4" style="background-color: #FAFF00; border-bottom: 3px solid #000 !important;">
+              <h2 class="font-weight-black m-0 p-0 text-uppercase" style="letter-spacing: -1px; font-size: 2.5rem;">ACCESS PROTOCOL</h2>
           </div>
           
-          <b-form @submit.prevent="onSubmit">
-            <b-form-group label="Username or Email" class="font-weight-bold">
-              <b-form-input v-model="form.first_credential" required placeholder="Enter username or email" class="border-black p-3"></b-form-input>
-            </b-form-group>
-            
-            <b-form-group label="Password" class="font-weight-bold">
-              <b-form-input type="password" v-model="form.password" required placeholder="Enter password" class="border-black p-3"></b-form-input>
-            </b-form-group>
+          <div class="card-body p-4 bg-white">
+            <b-form @submit.prevent="onSubmit">
+              <b-form-group label="USER IDENTIFIER" class="font-weight-bold">
+                <b-form-input v-model="form.first_credential" required placeholder="USERNAME / EMAIL" class="py-2" style="border: 2px solid #000; background: #fff;"></b-form-input>
+              </b-form-group>
+              
+              <b-form-group label="SECURITY CODE" class="font-weight-bold">
+                <b-form-input type="password" v-model="form.password" required placeholder="********" class="py-2" style="border: 2px solid #000; background: #fff;"></b-form-input>
+              </b-form-group>
 
-            <b-alert v-if="error" show variant="danger" class="border-black font-weight-bold">{{ error }}</b-alert>
-            
-            <b-button type="submit" variant="primary" block size="lg" class="mt-4">Login Now</b-button>
-          </b-form>
+              <b-alert v-if="error" show variant="danger" class="border-black font-weight-bold">{{ error }}</b-alert>
+              
+              <b-button type="submit" variant="primary" block size="lg" class="mt-4 border-0" style="background: #000; color: #FAFF00;">INITIATE LOGIN</b-button>
+            </b-form>
 
-           <div class="text-center mt-3">
-              <router-link to="/register" class="font-weight-bold text-dark" style="text-decoration: underline;">Don't have an account? Register here.</router-link>
+             <div class="text-center mt-4">
+                <router-link to="/register" class="font-weight-bold text-dark text-uppercase" style="text-decoration: underline;">Create New User Record</router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -56,16 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.border-black {
-    border: 4px solid #000 !important;
-}
-.shadow-hard {
-    box-shadow: 12px 12px 0 #000 !important;
-}
 .font-weight-black {
     font-weight: 900;
-}
-.bg-warning {
-    background-color: #ffbe0b !important;
 }
 </style>

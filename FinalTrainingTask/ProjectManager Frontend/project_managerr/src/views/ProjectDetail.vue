@@ -1,74 +1,76 @@
 <template>
-  <div class="project-detail container mt-4">
+  <div class="project-detail container mt-5">
     <div v-if="loading" class="text-center">
-      <b-spinner label="Loading..."></b-spinner>
+      <b-spinner label="Loading..." type="grow"></b-spinner>
     </div>
 
     <div v-else-if="error" class="text-center text-danger">
       <b-alert show variant="danger" class="border-black shadow-hard">{{ error }}</b-alert>
-      <b-button to="/dashboard" variant="outline-primary">Back to Dashboard</b-button>
+      <b-button to="/dashboard" variant="outline-dark">Return to Dashboard</b-button>
     </div>
 
     <div v-else>
-      <div class="mb-5 p-4 bg-white border-black shadow-hard">
-        <div class="d-flex justify-content-between align-items-start">
+      <div class="mb-5">
+        <b-button to="/dashboard" variant="link" class="text-dark font-weight-bold mb-3 pl-0 text-uppercase" style="text-decoration: none;">&larr; Back to Base</b-button>
+        <div class="d-flex justify-content-between align-items-start border-bottom pb-4" style="border-bottom: 3px solid #000 !important;">
             <div>
-                <b-button to="/dashboard" variant="outline-dark" size="sm" class="mb-3 font-weight-bold">&larr; Back</b-button>
-                <h1 class="font-weight-black text-uppercase display-4">{{ project.name }}</h1>
-                <p class="lead font-weight-bold">{{ project.description }}</p>
+                <h1 class="font-weight-black text-uppercase display-3" style="letter-spacing: -2px;">{{ project.name }}</h1>
+                <p class="lead font-weight-bold" style="font-family: monospace;">{{ project.description }}</p>
             </div>
-            <b-button variant="danger" @click="deleteProject">Delete Project</b-button>
+            <b-button variant="danger" @click="deleteProject">DELETE PROJECT</b-button>
         </div>
       </div>
 
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="font-weight-black text-uppercase bg-warning p-2 border-black inline-block">Tasks</h2>
-        <b-button @click="openCreateTaskModal" variant="success" size="lg">Add Task +</b-button>
+        <h2 class="font-weight-black text-uppercase text-outline" style="font-size: 3rem;">TASKS</h2>
+        <b-button @click="openCreateTaskModal" variant="success" size="lg">ADD TASK +</b-button>
       </div>
 
       <!-- Task Lists -->
-      <div v-if="tasks.length === 0" class="p-5 text-center bg-white border-black shadow-hard">
-          <h4 class="font-weight-bold">No tasks yet. Get back to work!</h4>
+      <div v-if="tasks.length === 0" class="p-5 text-center bg-white" style="border: 3px solid #000; box-shadow: 6px 6px 0 #000;">
+          <h4 class="font-weight-bold">NO TASKS IN QUEUE.</h4>
       </div>
       
-      <b-list-group v-else class="shadow-hard border-black">
+      <b-list-group v-else class="retro-list">
         <b-list-group-item 
           v-for="task in tasks" 
           :key="task.id" 
-          class="d-flex justify-content-between align-items-center border-bottom-black p-4"
-          style="border-bottom: 4px solid #000;"
+          class="d-flex justify-content-between align-items-center border-bottom-black p-4 mb-3 bg-white"
+          style="border: 3px solid #000; box-shadow: 4px 4px 0 #000;"
         >
           <div>
-            <h4 class="mb-1 font-weight-bold">{{ task.title }}</h4>
-            <p class="mb-0 text-muted font-weight-bold">{{ task.description }}</p>
+            <h4 class="mb-1 font-weight-bold text-uppercase">{{ task.title }}</h4>
+            <div class="d-flex align-items-center">
+                <b-badge :variant="getStatusVariant(task.status)" class="mr-3">{{ task.status }}</b-badge>
+                <small class="text-muted" style="font-family: monospace;">{{ task.description }}</small>
+            </div>
           </div>
           <div class="d-flex align-items-center">
-            <b-badge :variant="getStatusVariant(task.status)" class="mr-3 p-2" style="font-size: 1rem;">{{ task.status }}</b-badge>
             
             <!-- Status Dropdown -->
-            <b-dropdown size="sm" variant="outline-dark" text="Status" class="mr-2 border-2">
+            <b-dropdown size="sm" variant="outline-dark" text="UPDATE STATUS" class="mr-2">
               <b-dropdown-item @click="updateStatus(task, 'Todo')">Todo</b-dropdown-item>
               <b-dropdown-item @click="updateStatus(task, 'In Progress')">In Progress</b-dropdown-item>
               <b-dropdown-item @click="updateStatus(task, 'Done')">Done</b-dropdown-item>
             </b-dropdown>
 
             <b-button variant="outline-primary" size="sm" class="mr-2" @click="openEditTaskModal(task)">Edit</b-button>
-            <b-button variant="danger" size="sm" @click="deleteTask(task.id)">Bin</b-button>
+            <b-button variant="outline-danger" size="sm" @click="deleteTask(task.id)">X</b-button>
           </div>
         </b-list-group-item>
       </b-list-group>
     </div>
 
     <!-- Modal use global styles now -->
-    <b-modal id="modal-task" :title="isEditingTask ? 'Edit Task' : 'Add New Task'" @ok="handleTaskSubmit" @hidden="resetTaskModal">
-      <b-form-group label="Task Title" class="font-weight-bold">
-        <b-form-input v-model="taskForm.title" required class="border-black"></b-form-input>
+    <b-modal id="modal-task" :title="isEditingTask ? 'EDIT TASK' : 'NEW TASK'" @ok="handleTaskSubmit" @hidden="resetTaskModal">
+      <b-form-group label="TASK TITLE" class="font-weight-bold">
+        <b-form-input v-model="taskForm.title" required class="py-2"></b-form-input>
       </b-form-group>
-      <b-form-group label="Description" class="font-weight-bold">
-        <b-form-textarea v-model="taskForm.description" rows="3" class="border-black"></b-form-textarea>
+      <b-form-group label="DETAILS" class="font-weight-bold">
+        <b-form-textarea v-model="taskForm.description" rows="3" class="py-2"></b-form-textarea>
       </b-form-group>
-      <b-form-group label="Status" class="font-weight-bold">
-        <b-form-select v-model="taskForm.status" :options="['Todo', 'In Progress', 'Done']" class="border-black"></b-form-select>
+      <b-form-group label="STATUS" class="font-weight-bold">
+        <b-form-select v-model="taskForm.status" :options="['Todo', 'In Progress', 'Done']"></b-form-select>
       </b-form-group>
     </b-modal>
 
@@ -218,16 +220,11 @@ export default {
 </script>
 
 <style scoped>
-.border-black {
-    border: 4px solid #000;
-}
-.shadow-hard {
-    box-shadow: 8px 8px 0 #000;
-}
 .font-weight-black {
     font-weight: 900;
 }
-.bg-warning {
-    background-color: #ffbe0b !important;
+.text-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #000;
 }
 </style>

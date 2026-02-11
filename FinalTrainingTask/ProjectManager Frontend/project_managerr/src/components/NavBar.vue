@@ -46,20 +46,24 @@ export default {
 
 <style scoped>
 .nb-navbar {
-    border-bottom: 4px solid #000;
+    border-bottom: 3px solid #000;
     padding: 1rem;
-    background-color: #ffbe0b !important; /* Yellow */
+    background-color: #ffffff !important; /* White background */
+    box-shadow: 0 4px 0 #000;
 }
 
 .nb-nav-link a {
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
     color: #000 !important;
+    position: relative;
+    z-index: 10;
 }
 
 .nb-nav-link a:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
+    text-decoration: none;
+    background-color: #FAFF00; /* Neon Yellow Highlight */
+    box-shadow: 2px 2px 0 #000;
 }
 
 .border-black {
