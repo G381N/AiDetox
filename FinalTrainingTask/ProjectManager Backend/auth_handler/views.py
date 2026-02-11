@@ -2,8 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from rest_framework.permissions import AllowAny
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError, AccessToken
 
 from auth_handler.models import User
 from auth_handler.serializers import UserSerializer
@@ -115,4 +115,95 @@ class LoginAPIView(APIView):
             },
             status=status.HTTP_200_OK,
         )
- 
+
+
+# Refresh an expired access token using a valid refresh token.
+
+class TokenRefreshAPIView(APIView):
+    """
+    Takes a valid refresh token and returns a new access token.
+    The refresh token itself remains valid until it expires (7 days).
+    """
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        # Variables---------------------------------------------------------------------------------------------------
+        data = request.data or {}
+
+        # Checking if refresh token is provided----------------------------------------------------------------------
+        refresh_token = data.get("refresh")
+        if not refresh_token:
+            return Response({"detail": "Refresh token is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Attempting to generate new access token from the refresh token---------------------------------------------
+        try:
+            refresh = RefreshToken(refresh_token)
+            new_access = str(refresh.access_token)
+        except TokenError as e:
+            return Response(
+                {"detail": "Invalid or expired refresh token", "error": str(e)},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        return Response(
+            {
+                "access": new_access,
+                "message": "Token refreshed successfully ..."
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+# Verify if a given token (access or refresh) is still valid.
+
+class TokenVerifyAPIView(APIView):
+    """
+    Takes a token and returns whether it is valid.
+    Useful for the frontend to check before making API calls.
+    """
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        # Variables---------------------------------------------------------------------------------------------------
+        data = request.data or {}
+        token = data.get("token")
+
+        if not token:
+            return Response({"detail": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Try to decode the token to check validity------------------------------------------------------------------
+        try:
+            AccessToken(token)
+            return Response({"valid": True, "message": "Token is valid"}, status=status.HTTP_200_OK)
+        except TokenError:
+            pass
+
+        # If not a valid access token, try as refresh token----------------------------------------------------------
+        try:
+            RefreshToken(token)
+            return Response({"valid": True, "message": "Token is valid"}, status=status.HTTP_200_OK)
+        except TokenError:
+            return Response(
+                {"valid": False, "detail": "Token is invalid or expired"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+
+# Get current logged-in user information.
+
+class MeAPIView(APIView):
+    """
+    Returns the profile of the currently authenticated user.
+    Requires a valid access token in the Authorization header.
+    """
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        return Response(
+            {
+                "user": UserSerializer(user).data,
+            },
+            status=status.HTTP_200_OK,
+        )
+

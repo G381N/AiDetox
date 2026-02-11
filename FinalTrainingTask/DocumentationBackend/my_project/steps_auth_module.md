@@ -2,7 +2,7 @@
 
 Build the entire authentication system — User model, serializers, views, custom JWT backend, and URLs.
 
-> **By the end of this step:** Working `/api/auth/register/` and `/api/auth/login/` endpoints returning JWT tokens.
+> **By the end of this step:** Working `/api/auth/register/`, `/api/auth/login/`, `/api/auth/token/refresh/`, `/api/auth/token/verify/`, and `/api/auth/me/` endpoints with full JWT lifecycle.
 
 ---
 
@@ -12,7 +12,7 @@ Build the entire authentication system — User model, serializers, views, custo
 |------|---------|
 | `models.py` | User document with password hashing |
 | `serializers.py` | Validation for registration |
-| `views.py` | Register and Login endpoints |
+| `views.py` | Register, Login, Token Refresh, Token Verify, Me endpoints |
 | `backends.py` | Custom JWT authentication for MongoDB |
 | `urls.py` | URL routing |
 
@@ -137,8 +137,8 @@ class RegisterSerializer(DocumentSerializer):
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError, AccessToken
 from auth_handler.models import User
 from auth_handler.serializers import UserSerializer
 
@@ -242,6 +242,71 @@ class LoginAPIView(APIView):
 
 > **Why `first_credential`?** Users can log in with **email OR username** — the view tries email first, then falls back to username.
 
+### TokenRefreshAPIView
+
+> 📖 Prereq: [JWT Authentication — Full Lifecycle](../learning/jwt_explained.md)
+
+```python
+class TokenRefreshAPIView(APIView):
+    """Get a new access token using a valid refresh token."""
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        data = request.data or {}
+        refresh_token = data.get("refresh")
+        if not refresh_token:
+            return Response({"detail": "Refresh token is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            new_access = str(refresh.access_token)
+        except TokenError as e:
+            return Response(
+                {"detail": "Invalid or expired refresh token", "error": str(e)},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        return Response({"access": new_access, "message": "Token refreshed successfully ..."}, status=status.HTTP_200_OK)
+```
+
+**The flow:** Takes the refresh token → verifies its signature and expiry → creates a new access token from the same `user_id` payload → returns the new access token.
+
+### TokenVerifyAPIView
+
+```python
+class TokenVerifyAPIView(APIView):
+    """Check if a given token is still valid."""
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        token = (request.data or {}).get("token")
+        if not token:
+            return Response({"detail": "Token is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            AccessToken(token)
+            return Response({"valid": True}, status=status.HTTP_200_OK)
+        except TokenError:
+            pass
+
+        try:
+            RefreshToken(token)
+            return Response({"valid": True}, status=status.HTTP_200_OK)
+        except TokenError:
+            return Response({"valid": False, "detail": "Token is invalid or expired"}, status=status.HTTP_401_UNAUTHORIZED)
+```
+
+### MeAPIView
+
+```python
+class MeAPIView(APIView):
+    """Return the current logged-in user's profile."""
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        return Response({"user": UserSerializer(request.user).data}, status=status.HTTP_200_OK)
+```
+
 ---
 
 ## 4.4 Custom JWT Backend (`backends.py`)
@@ -276,11 +341,17 @@ class MongoJWTAuthentication(JWTAuthentication):
 
 ```python
 from django.urls import path
-from auth_handler.views import RegisterAPIView, LoginAPIView
+from auth_handler.views import (
+    RegisterAPIView, LoginAPIView,
+    TokenRefreshAPIView, TokenVerifyAPIView, MeAPIView
+)
 
 urlpatterns = [
     path("register/", RegisterAPIView.as_view(), name="auth-register"),
     path("login/", LoginAPIView.as_view(), name="auth-login"),
+    path("token/refresh/", TokenRefreshAPIView.as_view(), name="auth-token-refresh"),
+    path("token/verify/", TokenVerifyAPIView.as_view(), name="auth-token-verify"),
+    path("me/", MeAPIView.as_view(), name="auth-me"),
 ]
 ```
 
@@ -314,6 +385,40 @@ curl -X POST http://127.0.0.1:8000/api/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"first_credential":"john@email.com","password":"secret123"}'
 ```
+
+**Refresh token** (use the refresh token from login response):
+```bash
+curl -X POST http://127.0.0.1:8000/api/auth/token/refresh/ \
+  -H "Content-Type: application/json" \
+  -d '{"refresh":"<REFRESH_TOKEN_FROM_LOGIN>"}'
+```
+
+**Verify a token:**
+```bash
+curl -X POST http://127.0.0.1:8000/api/auth/token/verify/ \
+  -H "Content-Type: application/json" \
+  -d '{"token":"<ANY_TOKEN>"}'
+```
+
+**Get current user:**
+```bash
+curl http://127.0.0.1:8000/api/auth/me/ \
+  -H "Authorization: Bearer <ACCESS_TOKEN>"
+```
+
+---
+
+## ✅ Full Auth Endpoint Map
+
+| Endpoint | Method | Auth? | Purpose |
+|----------|--------|-------|---------|
+| `/api/auth/register/` | POST | ❌ | Create account, get tokens |
+| `/api/auth/login/` | POST | ❌ | Log in, get tokens |
+| `/api/auth/token/refresh/` | POST | ❌ | Get new access token |
+| `/api/auth/token/verify/` | POST | ❌ | Check if token is valid |
+| `/api/auth/me/` | GET | ✅ | Get current user profile |
+
+> 📖 See **[JWT Authentication — Fully Explained](../learning/jwt_explained.md)** for the complete token lifecycle.
 
 ---
 
