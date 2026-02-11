@@ -80,6 +80,15 @@ class ProjectDetailAPIView(APIView):
 	def get_object(self, project_id):
 		return Project.objects.filter(id=project_id).first()
 
+	# retrieve a single project
+	def get(self, request, project_id):
+		project = self.get_object(project_id)
+		if not project:
+			return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
+		if project.owner != request.user:
+			return Response({"detail": "Forbidden"}, status=status.HTTP_403_FORBIDDEN)
+		return Response(ProjectSerializer(project).data, status=status.HTTP_200_OK)
+
 	# updates an existing project's name/description, only if the requesting user is the owner
 	def put(self, request, project_id):
 		# Variables---------------------------------------------------------------------------------------------------

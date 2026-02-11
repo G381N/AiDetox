@@ -14,6 +14,7 @@
         <b-button to="/dashboard" variant="outline-secondary" size="sm" class="mb-2">&larr; Back</b-button>
         <h2>{{ project.name }}</h2>
         <p class="text-muted">{{ project.description }}</p>
+        <b-button variant="danger" size="sm" @click="deleteProject">Delete Project</b-button>
       </div>
 
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -137,6 +138,15 @@ export default {
         this.tasks = this.tasks.filter(t => t.id !== taskId);
       } catch (err) {
         alert('Failed to delete task');
+      }
+    },
+    async deleteProject() {
+      if(!confirm("Are you sure you want to delete this project? This cannot be undone.")) return;
+      try {
+        await axios.delete(`/projects/${this.project.id}/`);
+        this.$router.push('/dashboard');
+      } catch (err) {
+        alert('Failed to delete project');
       }
     },
     getStatusVariant(status) {
