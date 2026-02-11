@@ -5,61 +5,70 @@
     </div>
 
     <div v-else-if="error" class="text-center text-danger">
-      <p>{{ error }}</p>
+      <b-alert show variant="danger" class="border-black shadow-hard">{{ error }}</b-alert>
       <b-button to="/dashboard" variant="outline-primary">Back to Dashboard</b-button>
     </div>
 
     <div v-else>
-      <div class="mb-4">
-        <b-button to="/dashboard" variant="outline-secondary" size="sm" class="mb-2">&larr; Back</b-button>
-        <h2>{{ project.name }}</h2>
-        <p class="text-muted">{{ project.description }}</p>
-        <b-button variant="danger" size="sm" @click="deleteProject">Delete Project</b-button>
+      <div class="mb-5 p-4 bg-white border-black shadow-hard">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <b-button to="/dashboard" variant="outline-dark" size="sm" class="mb-3 font-weight-bold">&larr; Back</b-button>
+                <h1 class="font-weight-black text-uppercase display-4">{{ project.name }}</h1>
+                <p class="lead font-weight-bold">{{ project.description }}</p>
+            </div>
+            <b-button variant="danger" @click="deleteProject">Delete Project</b-button>
+        </div>
       </div>
 
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4>Tasks</h4>
-        <b-button v-b-modal.modal-create-task variant="success" size="sm">Add Task</b-button>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="font-weight-black text-uppercase bg-warning p-2 border-black inline-block">Tasks</h2>
+        <b-button @click="openCreateTaskModal" variant="success" size="lg">Add Task +</b-button>
       </div>
 
-      <!-- Task Lists grouped by status (optional) or just a single list -->
-      <b-list-group>
-        <b-list-group-item v-if="tasks.length === 0">No tasks yet.</b-list-group-item>
+      <!-- Task Lists -->
+      <div v-if="tasks.length === 0" class="p-5 text-center bg-white border-black shadow-hard">
+          <h4 class="font-weight-bold">No tasks yet. Get back to work!</h4>
+      </div>
+      
+      <b-list-group v-else class="shadow-hard border-black">
         <b-list-group-item 
           v-for="task in tasks" 
           :key="task.id" 
-          class="d-flex justify-content-between align-items-center"
+          class="d-flex justify-content-between align-items-center border-bottom-black p-4"
+          style="border-bottom: 4px solid #000;"
         >
           <div>
-            <h5 class="mb-1">{{ task.title }}</h5>
-            <small class="text-muted">{{ task.description }}</small>
+            <h4 class="mb-1 font-weight-bold">{{ task.title }}</h4>
+            <p class="mb-0 text-muted font-weight-bold">{{ task.description }}</p>
           </div>
           <div class="d-flex align-items-center">
-            <b-badge :variant="getStatusVariant(task.status)" class="mr-3">{{ task.status }}</b-badge>
+            <b-badge :variant="getStatusVariant(task.status)" class="mr-3 p-2" style="font-size: 1rem;">{{ task.status }}</b-badge>
             
             <!-- Status Dropdown -->
-            <b-dropdown size="sm" variant="outline-secondary" text="Status" class="mr-2">
+            <b-dropdown size="sm" variant="outline-dark" text="Status" class="mr-2 border-2">
               <b-dropdown-item @click="updateStatus(task, 'Todo')">Todo</b-dropdown-item>
               <b-dropdown-item @click="updateStatus(task, 'In Progress')">In Progress</b-dropdown-item>
               <b-dropdown-item @click="updateStatus(task, 'Done')">Done</b-dropdown-item>
             </b-dropdown>
 
+            <b-button variant="outline-primary" size="sm" class="mr-2" @click="openEditTaskModal(task)">Edit</b-button>
             <b-button variant="danger" size="sm" @click="deleteTask(task.id)">Bin</b-button>
           </div>
         </b-list-group-item>
       </b-list-group>
     </div>
 
-    <!-- Modal for Creating Task -->
-    <b-modal id="modal-create-task" title="Add New Task" @ok="createTask">
-      <b-form-group label="Task Title">
-        <b-form-input v-model="newTask.title" required></b-form-input>
+    <!-- Modal use global styles now -->
+    <b-modal id="modal-task" :title="isEditingTask ? 'Edit Task' : 'Add New Task'" @ok="handleTaskSubmit" @hidden="resetTaskModal">
+      <b-form-group label="Task Title" class="font-weight-bold">
+        <b-form-input v-model="taskForm.title" required class="border-black"></b-form-input>
       </b-form-group>
-      <b-form-group label="Description">
-        <b-form-textarea v-model="newTask.description" rows="3"></b-form-textarea>
+      <b-form-group label="Description" class="font-weight-bold">
+        <b-form-textarea v-model="taskForm.description" rows="3" class="border-black"></b-form-textarea>
       </b-form-group>
-      <b-form-group label="Status">
-        <b-form-select v-model="newTask.status" :options="['Todo', 'In Progress', 'Done']"></b-form-select>
+      <b-form-group label="Status" class="font-weight-bold">
+        <b-form-select v-model="taskForm.status" :options="['Todo', 'In Progress', 'Done']" class="border-black"></b-form-select>
       </b-form-group>
     </b-modal>
 
@@ -68,6 +77,7 @@
 
 <script>
 import axios from 'axios';
+import { EventBus } from '../bus/event-bus';
 
 export default {
   data() {
@@ -76,7 +86,9 @@ export default {
       tasks: [],
       loading: true,
       error: null,
-      newTask: {
+      isEditingTask: false,
+      editingTaskId: null,
+      taskForm: {
         title: '',
         description: '',
         status: 'Todo'
@@ -107,26 +119,56 @@ export default {
         this.loading = false;
       }
     },
-    async createTask(bvModalEvt) {
-      if (!this.newTask.title) {
+    openCreateTaskModal() {
+        this.isEditingTask = false;
+        this.resetTaskModal();
+        this.$bvModal.show('modal-task');
+    },
+    openEditTaskModal(task) {
+        this.isEditingTask = true;
+        this.editingTaskId = task.id;
+        this.taskForm.title = task.title;
+        this.taskForm.description = task.description;
+        this.taskForm.status = task.status;
+        this.$bvModal.show('modal-task');
+    },
+    resetTaskModal() {
+        this.taskForm.title = '';
+        this.taskForm.description = '';
+        this.taskForm.status = 'Todo';
+        this.editingTaskId = null;
+    },
+    async handleTaskSubmit(bvModalEvt) {
+      if (!this.taskForm.title) {
         alert('Task title is required');
         bvModalEvt.preventDefault();
         return;
       }
       try {
-        await axios.post(`/projects/${this.$route.params.id}/tasks/`, this.newTask);
-        await this.fetchTasks(); // Refresh list
-        this.newTask.title = '';
-        this.newTask.description = '';
-        this.newTask.status = 'Todo';
+        if (this.isEditingTask) {
+             const response = await axios.put(`/projects/tasks/${this.editingTaskId}/`, this.taskForm);
+             const updatedTask = response.data;
+             // Update local list directly or fetch
+             const index = this.tasks.findIndex(t => t.id === this.editingTaskId);
+             if (index !== -1) {
+                 this.$set(this.tasks, index, updatedTask);
+             }
+             EventBus.$emit('task-updated', updatedTask);
+        } else {
+             await axios.post(`/projects/${this.$route.params.id}/tasks/`, this.taskForm);
+             await this.fetchTasks(); 
+        }
+        this.resetTaskModal();
       } catch (err) {
-        alert('Failed to create task');
+        alert('Failed to save task');
+        console.error(err);
       }
     },
     async updateStatus(task, newStatus) {
       try {
         await axios.put(`/projects/tasks/${task.id}/`, { ...task, status: newStatus });
         task.status = newStatus;
+        EventBus.$emit('task-updated', task);
       } catch (err) {
         alert('Failed to update status');
       }
@@ -136,6 +178,7 @@ export default {
       try {
         await axios.delete(`/projects/tasks/${taskId}/`);
         this.tasks = this.tasks.filter(t => t.id !== taskId);
+        EventBus.$emit('task-updated', { title: 'Task Deleted' }); // Reusing task-updated for generic notification or create a new one
       } catch (err) {
         alert('Failed to delete task');
       }
@@ -144,6 +187,7 @@ export default {
       if(!confirm("Are you sure you want to delete this project? This cannot be undone.")) return;
       try {
         await axios.delete(`/projects/${this.project.id}/`);
+        EventBus.$emit('project-deleted');
         this.$router.push('/dashboard');
       } catch (err) {
         alert('Failed to delete project');
@@ -157,6 +201,33 @@ export default {
         default: return 'light';
       }
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    if (this.taskForm.title || this.taskForm.description) {
+      const answer = window.confirm('Do you really want to leave? You have unsaved changes in the task form.')
+      if (answer) {
+        next()
+      } else {
+        next(false)
+      }
+    } else {
+      next()
+    }
   }
 }
 </script>
+
+<style scoped>
+.border-black {
+    border: 4px solid #000;
+}
+.shadow-hard {
+    box-shadow: 8px 8px 0 #000;
+}
+.font-weight-black {
+    font-weight: 900;
+}
+.bg-warning {
+    background-color: #ffbe0b !important;
+}
+</style>
