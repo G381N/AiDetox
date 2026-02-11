@@ -1,7 +1,7 @@
 {
     "info": {
-        "name": "ProjectManager API",
-        "description": "Test collection for ProjectManager Backend (Gebin & Bob scenario)",
+        "name": "ProjectManager API (Simple)",
+        "description": "Manual test collection. Copy tokens and IDs manually.",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -39,19 +39,6 @@
                 },
                 {
                     "name": "Login Gebin",
-                    "event": [
-                        {
-                            "listen": "test",
-                            "script": {
-                                "exec": [
-                                    "var jsonData = pm.response.json();",
-                                    "pm.environment.set('token_gebin', jsonData.access);",
-                                    "console.log('Gebin Token Saved');"
-                                ],
-                                "type": "text/javascript"
-                            }
-                        }
-                    ],
                     "request": {
                         "method": "POST",
                         "header": [
@@ -115,19 +102,6 @@
                 },
                 {
                     "name": "Login Bob",
-                    "event": [
-                        {
-                            "listen": "test",
-                            "script": {
-                                "exec": [
-                                    "var jsonData = pm.response.json();",
-                                    "pm.environment.set('token_bob', jsonData.access);",
-                                    "console.log('Bob Token Saved');"
-                                ],
-                                "type": "text/javascript"
-                            }
-                        }
-                    ],
                     "request": {
                         "method": "POST",
                         "header": [
@@ -162,19 +136,6 @@
             "item": [
                 {
                     "name": "Create Project 1",
-                    "event": [
-                        {
-                            "listen": "test",
-                            "script": {
-                                "exec": [
-                                    "var jsonData = pm.response.json();",
-                                    "pm.environment.set('project_id_gebin', jsonData.project.id);",
-                                    "console.log('Project ID Saved: ' + jsonData.project.id);"
-                                ],
-                                "type": "text/javascript"
-                            }
-                        }
-                    ],
                     "request": {
                         "method": "POST",
                         "header": [
@@ -184,7 +145,7 @@
                             },
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "body": {
@@ -216,7 +177,7 @@
                             },
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "body": {
@@ -244,7 +205,7 @@
                         "header": [
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "url": {
@@ -277,7 +238,7 @@
                             },
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_bob}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "body": {
@@ -305,7 +266,7 @@
                         "header": [
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_bob}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "url": {
@@ -329,18 +290,6 @@
             "item": [
                 {
                     "name": "Create Task T1 (Todo)",
-                    "event": [
-                        {
-                            "listen": "test",
-                            "script": {
-                                "exec": [
-                                    "var jsonData = pm.response.json();",
-                                    "pm.environment.set('task_id_gebin', jsonData.task.id);"
-                                ],
-                                "type": "text/javascript"
-                            }
-                        }
-                    ],
                     "request": {
                         "method": "POST",
                         "header": [
@@ -350,7 +299,7 @@
                             },
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "body": {
@@ -358,14 +307,14 @@
                             "raw": "{\n  \"title\": \"Design UI\",\n  \"description\": \"Figma mockups\",\n  \"status\": \"Todo\"\n}"
                         },
                         "url": {
-                            "raw": "http://127.0.0.1:8000/api/projects/{{project_id_gebin}}/tasks/",
+                            "raw": "http://127.0.0.1:8000/api/projects/<PASTE_PROJECT_ID_HERE>/tasks/",
                             "host": [
                                 "http://127.0.0.1:8000"
                             ],
                             "path": [
                                 "api",
                                 "projects",
-                                "{{project_id_gebin}}",
+                                "<PASTE_PROJECT_ID_HERE>",
                                 "tasks",
                                 ""
                             ]
@@ -384,7 +333,7 @@
                             },
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "body": {
@@ -392,14 +341,14 @@
                             "raw": "{\n  \"title\": \"Setup Redux\",\n  \"status\": \"In Progress\"\n}"
                         },
                         "url": {
-                            "raw": "http://127.0.0.1:8000/api/projects/{{project_id_gebin}}/tasks/",
+                            "raw": "http://127.0.0.1:8000/api/projects/<PASTE_PROJECT_ID_HERE>/tasks/",
                             "host": [
                                 "http://127.0.0.1:8000"
                             ],
                             "path": [
                                 "api",
                                 "projects",
-                                "{{project_id_gebin}}",
+                                "<PASTE_PROJECT_ID_HERE>",
                                 "tasks",
                                 ""
                             ]
@@ -414,18 +363,18 @@
                         "header": [
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "url": {
-                            "raw": "http://127.0.0.1:8000/api/projects/{{project_id_gebin}}/tasks/",
+                            "raw": "http://127.0.0.1:8000/api/projects/<PASTE_PROJECT_ID_HERE>/tasks/",
                             "host": [
                                 "http://127.0.0.1:8000"
                             ],
                             "path": [
                                 "api",
                                 "projects",
-                                "{{project_id_gebin}}",
+                                "<PASTE_PROJECT_ID_HERE>",
                                 "tasks",
                                 ""
                             ]
@@ -440,18 +389,18 @@
                         "header": [
                             {
                                 "key": "Authorization",
-                                "value": "Bearer {{token_gebin}}"
+                                "value": "Bearer <PASTE_TOKEN_HERE>"
                             }
                         ],
                         "url": {
-                            "raw": "http://127.0.0.1:8000/api/projects/{{project_id_gebin}}/tasks/?status=In Progress",
+                            "raw": "http://127.0.0.1:8000/api/projects/<PASTE_PROJECT_ID_HERE>/tasks/?status=In Progress",
                             "host": [
                                 "http://127.0.0.1:8000"
                             ],
                             "path": [
                                 "api",
                                 "projects",
-                                "{{project_id_gebin}}",
+                                "<PASTE_PROJECT_ID_HERE>",
                                 "tasks",
                                 ""
                             ],
@@ -466,55 +415,6 @@
                     "response": []
                 }
             ]
-        },
-        {
-            "name": "6. Security Check (Bob attacking Gebin)",
-            "item": [
-                {
-                    "name": "Bob tries to access Gebin's Project",
-                    "event": [
-                        {
-                            "listen": "test",
-                            "script": {
-                                "exec": [
-                                    "pm.test('Should be Forbidden', function () { pm.response.to.have.status(403); });"
-                                ],
-                                "type": "text/javascript"
-                            }
-                        }
-                    ],
-                    "request": {
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer {{token_bob}}"
-                            }
-                        ],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/projects/{{project_id_gebin}}/tasks/",
-                            "host": [
-                                "http://127.0.0.1:8000"
-                            ],
-                            "path": [
-                                "api",
-                                "projects",
-                                "{{project_id_gebin}}",
-                                "tasks",
-                                ""
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        }
-    ],
-    "variable": [
-        {
-            "key": "base_url",
-            "value": "http://127.0.0.1:8000",
-            "type": "string"
         }
     ]
 }
