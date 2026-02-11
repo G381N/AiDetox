@@ -8,6 +8,7 @@ class MongoJWTAuthentication(JWTAuthentication):
     """Custom JWT authentication that resolves SimpleJWT tokens to
     MongoEngine `User` documents instead of Django ORM users.
     """
+    user_id_claim = "user_id"
 
     def get_user(self, validated_token):
         # Extract user id claim from token (default 'user_id')

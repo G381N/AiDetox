@@ -10,6 +10,10 @@ class User(Document):
 	password = StringField(required=True)
 	created_at = DateTimeField(default=datetime.utcnow)
 
+	@property
+	def is_authenticated(self):
+		return True
+
 	def set_password(self, raw_password):
 		self.password = generate_password_hash(raw_password)
 
