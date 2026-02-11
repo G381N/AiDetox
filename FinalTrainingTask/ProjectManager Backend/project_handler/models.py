@@ -18,15 +18,3 @@ class Task(Document):
 	project = ReferenceField(Project, required=True)
 	created_at = DateTimeField(default=datetime.utcnow)
 
-
-# This is how i understood the flow :
-# Create Project:
-
-# Step 1 : user sends name + optional description
-# Step 2 : view sets owner = request.user
-# Step 3 : project.save() stores it in project_db
-
-# Create Task:
-# Step 1 : user sends title + optional description/status
-# Step 2 : view verifies project ownership (project.owner == request.user)
-# Step 3 : task.project = project, task.save()
