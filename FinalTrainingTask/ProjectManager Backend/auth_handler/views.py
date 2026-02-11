@@ -77,29 +77,34 @@ class LoginAPIView(APIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
-        # normalize input (trim strings)
-        raw = request.data or {}
-        data = {k: (v.strip() if isinstance(v, str) else v) for k, v in raw.items()}
+        # Variables---------------------------------------------------------------------------------------------------
+        data = request.data or {}
 
-        # required keys check
-        req = ("email", "password")
+        # Checking if any field is empty------------------------------------------------------------------------------
+        req = ("first_credential", "password")  #RequiredList
         missing_resp = validate_keys(data, req)
+        # if there is any field missing missing_response wont be empty and will print the response
         if missing_resp:
             return missing_resp
 
-        email = (data.get("email") or "").strip().lower()
+        first_credential = (data.get("first_credential") or "").strip().lower()
         password = data.get("password")
 
-        # empty value checks
-        if not email:
-            return Response({"detail": "email is required"}, status=status.HTTP_400_BAD_REQUEST)
+        # empty value checks------------------------------------------------------------------------------------------
+        if not first_credential:
+            return Response({"detail": "first_credential is required"}, status=status.HTTP_400_BAD_REQUEST)
         if not password:
             return Response({"detail": "password is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-        user = User.objects(email=email).first()
+        # first_credential could be email or username, try email first then username----------------------------------
+        user = User.objects(email=first_credential).first()
+        if not user:
+            user = User.objects(username=first_credential).first()
+
         if not user or not user.check_password(password):
             return Response({"detail": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
+        # JWT is getting created--------------------------------------------------------------------------------------
         refresh = RefreshToken.for_user(user)
 
         return Response(

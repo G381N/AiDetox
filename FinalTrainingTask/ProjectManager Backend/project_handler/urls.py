@@ -8,7 +8,7 @@ from project_handler.views import (
 
 urlpatterns = [
 	path("", ProjectListCreateAPIView.as_view(), name="project-list-create"),
-	path("<str:pk>/", ProjectDetailAPIView.as_view(), name="project-detail"),
+	path("<str:project_id>/", ProjectDetailAPIView.as_view(), name="project-detail"),
 	path("<str:project_id>/tasks/", TaskListCreateAPIView.as_view(), name="task-list-create"),
-	path("tasks/<str:pk>/", TaskDetailAPIView.as_view(), name="task-detail"),
+	path("tasks/<str:task_id>/", TaskDetailAPIView.as_view(), name="task-detail"),
 ]

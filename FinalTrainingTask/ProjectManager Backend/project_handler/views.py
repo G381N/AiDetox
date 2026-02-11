@@ -9,6 +9,7 @@ from project_handler.models import Project, Task
 from project_handler.serializers import ProjectSerializer, TaskSerializer
 
 
+# checks if all required keys are present in the request data, returns 400 response if any are missing
 def validate_keys(data, required_keys):
 	missing_keys = [key for key in required_keys if key not in data]
 	if missing_keys:
@@ -26,30 +27,31 @@ def validate_keys(data, required_keys):
 class ProjectListCreateAPIView(APIView):
 	permission_classes = (IsAuthenticated,)
 
+	# returns a list of all projects owned by the currently logged-in user
 	def get(self, request):
 		# Variables---------------------------------------------------------------------------------------------------
 		user = request.user
 		# Fetching projects owned by user-----------------------------------------------------------------------------
-		qs = Project.objects(owner=user)
-		data = ProjectSerializer(qs, many=True).data
+		projects_under_user = Project.objects.filter(owner=user)
+		data = ProjectSerializer(projects_under_user, many=True).data
 		return Response({"results": data}, status=status.HTTP_200_OK)
 
+	# creates a new project with the current user automatically set as the owner
 	def post(self, request):
 		# Variables---------------------------------------------------------------------------------------------------
-		raw = request.data or {}
-		data = {k: (v.strip() if isinstance(v, str) else v) for k, v in raw.items()}
-		# Checking if any field is empty------------------------------------------------------------------------------
+		data = request.data or {}
+		name = data.get("name")
+		description = data.get("description")
+
+		# Checking if any field is empty------------------------------------------------------------------------------		
 		req = ("name",)  #RequiredList
 		missing = validate_keys(data, req)
 		# if there is any field missing missing_response wont be empty and will print the response
 		if missing:
 			return missing
 
-		name = data.get("name")
-		description = data.get("description")
-
 		# all validations passed now we create project object and save once-------------------------------------------
-		user = request.user
+		user = request.user #getting form backend.py i.e the jwt handler
 		project = Project()
 		try:
 			project.name = name
@@ -58,7 +60,7 @@ class ProjectListCreateAPIView(APIView):
 			project.owner = user
 			project.save()
 		except Exception:
-			return Response({"detail": "Failed to create project"}, status=status.HTTP_400_BAD_REQUEST)
+			return Response({"detail": "Failed to create project ..."}, status=status.HTTP_400_BAD_REQUEST)
 
 		return Response(
 			{
@@ -74,12 +76,14 @@ class ProjectListCreateAPIView(APIView):
 class ProjectDetailAPIView(APIView):
 	permission_classes = (IsAuthenticated,)
 
-	def get_object(self, pk):
-		return Project.objects(id=pk).first()
+	# helper to fetch a single project by its id, returns None if not found
+	def get_object(self, project_id):
+		return Project.objects.filter(id=project_id).first()
 
-	def put(self, request, pk):
+	# updates an existing project's name/description, only if the requesting user is the owner
+	def put(self, request, project_id):
 		# Variables---------------------------------------------------------------------------------------------------
-		project = self.get_object(pk)
+		project = self.get_object(project_id)
 		# Checking if project exists----------------------------------------------------------------------------------
 		if not project:
 			return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -97,9 +101,10 @@ class ProjectDetailAPIView(APIView):
 		project.save()
 		return Response(ProjectSerializer(project).data, status=status.HTTP_200_OK)
 
-	def delete(self, request, pk):
+	# deletes a project permanently, only if the requesting user is the owner
+	def delete(self, request, project_id):
 		# Variables---------------------------------------------------------------------------------------------------
-		project = self.get_object(pk)
+		project = self.get_object(project_id)
 		# Checking if project exists----------------------------------------------------------------------------------
 		if not project:
 			return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -115,9 +120,10 @@ class ProjectDetailAPIView(APIView):
 class TaskListCreateAPIView(APIView):
 	permission_classes = (IsAuthenticated,)
 
+	# lists all tasks under a project, supports optional ?status= query param for filtering
 	def get(self, request, project_id):
 		# Variables---------------------------------------------------------------------------------------------------
-		project = Project.objects(id=project_id).first()
+		project = Project.objects.filter(id=project_id).first()
 		# Checking if project exists----------------------------------------------------------------------------------
 		if not project:
 			return Response({"detail": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -125,16 +131,17 @@ class TaskListCreateAPIView(APIView):
 		if project.owner != request.user:
 			return Response({"detail": "Forbidden"}, status=status.HTTP_403_FORBIDDEN)
 		# Filtering by status (optional)------------------------------------------------------------------------------
-		status_filter = request.query_params.get("status")
-		qs = Task.objects(project=project)
+		status_filter = request.query_params.get("status") # in param we can pass status=Done, Todo, In Progress
+		tasks_in_project = Task.objects.filter(project=project)
 		if status_filter:
-			qs = qs.filter(status=status_filter)
-		data = TaskSerializer(qs, many=True).data
+			tasks_in_project = tasks_in_project.filter(status=status_filter)
+		data = TaskSerializer(tasks_in_project, many=True).data
 		return Response({"results": data}, status=status.HTTP_200_OK)
 
+	# creates a new task under the given project, only if the requesting user owns the project
 	def post(self, request, project_id):
 		# Variables---------------------------------------------------------------------------------------------------
-		project = Project.objects(id=project_id).first()
+		project = Project.objects.filter(id=project_id).first()
 		# Checking if project exists----------------------------------------------------------------------------------
 		if not project:
 			return Response({"detail": "Project not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -179,12 +186,14 @@ class TaskListCreateAPIView(APIView):
 class TaskDetailAPIView(APIView):
 	permission_classes = (IsAuthenticated,)
 
-	def get_object(self, pk):
-		return Task.objects(id=pk).first()
+	# helper to fetch a single task by its id, returns None if not found
+	def get_object(self, task_id):
+		return Task.objects.filter(id=task_id).first()
 
-	def put(self, request, pk):
+	# updates an existing task's title/description/status, only if the user owns the parent project
+	def put(self, request, task_id):
 		# Variables---------------------------------------------------------------------------------------------------
-		task = self.get_object(pk)
+		task = self.get_object(task_id)
 		# Checking if task exists-------------------------------------------------------------------------------------
 		if not task:
 			return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -205,9 +214,10 @@ class TaskDetailAPIView(APIView):
 		task.save()
 		return Response(TaskSerializer(task).data, status=status.HTTP_200_OK)
 
-	def delete(self, request, pk):
+	# deletes a task permanently, only if the user owns the parent project
+	def delete(self, request, task_id):
 		# Variables---------------------------------------------------------------------------------------------------
-		task = self.get_object(pk)
+		task = self.get_object(task_id)
 		# Checking if task exists-------------------------------------------------------------------------------------
 		if not task:
 			return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
