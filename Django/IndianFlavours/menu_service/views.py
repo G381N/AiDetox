@@ -9,7 +9,6 @@ class MenuView(APIView):
     # GET function 
     def get(self, request):
         request_id_for_menu = request.GET.get("id")
-        
         if request_id_for_menu:
             extracted_menu_object = Menu.objects(id=request_id_for_menu).first()
             if not extracted_menu_object:
